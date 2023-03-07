@@ -10,19 +10,19 @@ In total, there are 28 emotions.
 ### Shape of data files:
 ```
 train_data   :   (51975, 48, 48, 3) 
-train_labels :   (51975, 2)
+train_labels :   (51975,)
 test_data    :   (10493, 48, 48, 3) 
-test_labels  :   (10493, 2)
+test_labels  :   (10493,)
 ```
 
 
 ### How to load the datasets
 
 Download the following datasets:
-- [`train_data`](https://drive.google.com/file/d/12QDb71SQnwhGzMomq2PHXaTFtb8SW3CH/view?usp=sharing)
-- [`train_labels`](https://drive.google.com/file/d/1fXeNpeEwm9vSEWlln8Fgte4vz2-fL7qY/view?usp=sharing)
-- [`test_data`](https://drive.google.com/file/d/1GeD7xCBOCFEbDc8Ly-Bc9TWAiD-jCEQg/view?usp=sharing)
-- [`test_labels`](https://drive.google.com/file/d/1Q0xs_LpzsPHFib5vlBuA8owtc-2w9bCi/view?usp=sharing)
+- [`train_data`](https://drive.google.com/file/d/1i2jtb_qB7lU_q1wY92LdHxY2KueWIZGR/view?usp=sharing)
+- [`train_labels`](https://drive.google.com/file/d/1wWGWjUqYe483GSULzRGE7Bp2iD9BUsv4/view?usp=sharing)
+- [`test_data`](https://drive.google.com/file/d/1gx1xulZUNzYMWoFcdpNYKwLXoBclme25/view?usp=sharing)
+- [`test_labels`](https://drive.google.com/file/d/1LmztIEkIW4gpPW-r6Nr7rIVdogPca7p1/view?usp=sharing)
 
 Example of loading data:
 
@@ -31,4 +31,4 @@ X_train = np.load('data_train.npy)
 t_train = np.load('labels_train.npy)
 ```
 
-`t_train[0]` returns an array of size 2 that corresponds to the first image in `X_train`, where `t_train[0][0]` is the label and `t_train[0][1]` is the valence.
+`t_train[0]` returns an array of size 1 that corresponds to the first image in `X_train`, where `t_train[0][0]` is the label corresponding to the emotion.
