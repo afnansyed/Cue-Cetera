@@ -32,3 +32,35 @@ t_train = np.load('labels_train.npy)
 ```
 
 `t_train[0]` returns an array of size 1 that corresponds to the first image in `X_train`, where `t_train[0][0]` is the label corresponding to the emotion.
+
+
+### Valence mapping of 28 Emotions:
+For each emotion, we mapped the valence, which is a value between 0-9 that represents the positive/negative scale of each emotion (9 being the most positive and 0 being the most negative).
+- `Affection`: 8
+- `Anger`: 3
+- `Annoyance`: 3
+- `Anticipation`: 6
+- `Aversion`: 5
+- `Confidence`: 6
+- `Disapproval`: 3
+- `Disconnection`: 5
+- `Disquietment`: 5
+- `Doubt/Confusion`: 5
+- `Embarrassment`: 5
+- `Engagement`: 7
+- `Esteem`: 6  
+- `Excitement`: 7
+- `Fatigue`: 5
+- `Fear`: 5
+- `Happiness`: 9
+- `Pain`: 3
+- `Peace`: 6
+- `Pleasure`: 6
+- `Saddness`: 4
+- `Sensitivity`: 6
+- `Suffering`: 5
+- `Surprise`: 6
+- `Sympathy`: 7
+- `Yearning`: 6
+- `Disgust`: 4
+- `Neutral`: 5
