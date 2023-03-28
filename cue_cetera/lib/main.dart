@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:video_player/video_player.dart';
 
 void main() => runApp(MyApp());
 
@@ -37,7 +41,13 @@ class MyHomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const videoUpload()),
+                    );
+                  },
                   child: Text("UPLOAD VIDEO"),
                   style: ElevatedButton.styleFrom(
                     fixedSize: Size(250, 110),
@@ -94,5 +104,131 @@ class videoRecord extends StatelessWidget {
       ),
       body: Container(),
     );
+  }
+}
+
+class videoUpload extends StatelessWidget {
+  const videoUpload({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Color(0xffc9b6b9),
+      appBar: AppBar(
+        backgroundColor: Color(0xff1e133d),
+        toolbarHeight: 100,
+        title: Center(
+          child: Text("CUE-CETERA"),
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(25.0),
+              bottomRight: Radius.circular(25.0)),
+        ),
+      ),
+      body: Container(
+
+          alignment: Alignment.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              ElevatedButton(
+                  onPressed: () async {
+                    var picked = await FilePicker.platform.pickFiles();
+
+                    if (picked != null) {
+                      print(picked.files.first.size/(1024*1024));
+                      if(picked.files.first.size/(1024*1024) > 50){
+                        print('File size cannot exceed 50 MB');
+                      }else{
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>  Test(picked.files.first.path.toString())),
+                        );
+                      }
+                    }
+                  },
+                  child: Text("SELECT"),
+                  style: ElevatedButton.styleFrom(
+                    fixedSize: Size(250, 110),
+                    textStyle:
+                    TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    primary: Color(0xffc9b6b9),
+                    onPrimary: Color(0xff1e133d),
+                    elevation: 20,
+                    shadowColor: Color(0xff1e133d),
+                    shape: StadiumBorder(),
+                  )),
+            ],
+          )
+      ),
+    );
+  }
+}
+
+class Test extends StatefulWidget {
+  String filePath;
+  Test(this.filePath);
+
+  @override
+  State<Test> createState() => playVideo(filePath);
+}
+class playVideo extends State<Test> {
+  String filePath;
+  playVideo(this.filePath);
+  VideoPlayerController? _videoPlayerController;
+  loadVideoPlayer(File file) {
+    if(_videoPlayerController != null) {
+      _videoPlayerController!.dispose();
+    }
+
+    _videoPlayerController = VideoPlayerController.file(file);
+    _videoPlayerController!.initialize().then((value) {
+      setState(() {});
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Color(0xffc9b6b9),
+      appBar: AppBar(
+        backgroundColor: Color(0xff1e133d),
+        toolbarHeight: 100,
+        title: Center(
+          child: Text("CUE-CETERA"),
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(25.0),
+              bottomRight: Radius.circular(25.0)),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: selectVideo,
+        child: Icon(
+          Icons.play_circle_outline_outlined,
+        ),
+      ),
+      body: Center(
+        child: Stack(
+          children: [
+            if (_videoPlayerController != null) ...[
+              AspectRatio(
+                aspectRatio: _videoPlayerController!.value.aspectRatio,
+                child: VideoPlayer(_videoPlayerController!),
+              ),
+            ]
+          ],
+        ),
+      ),
+    );
+  }
+
+  void selectVideo() async {
+    setState(() {
+      File file = File(filePath);
+      loadVideoPlayer(file);
+    });
   }
 }
