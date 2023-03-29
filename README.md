@@ -36,31 +36,31 @@ t_train = np.load('labels_train.npy)
 
 ### Valence mapping of 28 Emotions:
 For each emotion, we mapped the valence, which is a value between 0-9 that represents the positive/negative scale of each emotion (9 being the most positive and 0 being the most negative).
-- `Affection`: 8
-- `Anger`: 3
-- `Annoyance`: 3
-- `Anticipation`: 6
-- `Aversion`: 5
-- `Confidence`: 6
-- `Disapproval`: 3
-- `Disconnection`: 5
-- `Disquietment`: 5
-- `Doubt/Confusion`: 5
-- `Embarrassment`: 5
-- `Engagement`: 7
-- `Esteem`: 6  
-- `Excitement`: 7
-- `Fatigue`: 5
-- `Fear`: 5
-- `Happiness`: 9
-- `Pain`: 3
-- `Peace`: 6
-- `Pleasure`: 6
-- `Saddness`: 4
-- `Sensitivity`: 6
-- `Suffering`: 5
-- `Surprise`: 6
-- `Sympathy`: 7
-- `Yearning`: 6
-- `Disgust`: 4
-- `Neutral`: 5
+- `0. Affection`: 8
+- `1. Anger`: 3
+- `2. Annoyance`: 3
+- `3. Anticipation`: 6
+- `4. Aversion`: 5
+- `5. Confidence`: 6
+- `6. Disapproval`: 3
+- `7. Disconnection`: 5
+- `8. Disquietment`: 5
+- `9. Doubt/Confusion`: 5
+- `10. Embarrassment`: 5
+- `11. Engagement`: 7
+- `12. Esteem`: 6  
+- `13. Excitement`: 7
+- `14. Fatigue`: 5
+- `15. Fear`: 5
+- `16. Happiness`: 9
+- `17. Pain`: 3
+- `18. Peace`: 6
+- `19. Pleasure`: 6
+- `20. Saddness`: 4
+- `21. Sensitivity`: 6
+- `22. Suffering`: 5
+- `23. Surprise`: 6
+- `24. Sympathy`: 7
+- `25. Yearning`: 6
+- `26. Disgust`: 4
+- `27. Neutral`: 5
