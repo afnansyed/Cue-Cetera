@@ -2,6 +2,7 @@
 
 ## Training structure
 The following structure is used:
+![file_structure](https://github.com/dianas11xx/Cue-Cetera/blob/main/ModelControl/train_file_strcutrue.png)
 
 ## Pre-requesties to run
 Before running the training folder, make sure you have the train datasets downloaded and put into a folder called `datasets` alongside the training.ipynb notebook (as shown in the file structure image above):
