@@ -31,7 +31,8 @@ Using an epoch of 25, each taking around 25 minutes, and a patience of 10, the m
 Using the test datasets and labels, we applied the test data to the model and it converged with:
 - 48.30% accuracy in testing
 
-This value is close to the validation accuracy score, meaning that the model is not overfitting. Here is a summary of its perforamnce:
+This value is close to the validation accuracy score, meaning that the model is not overfitting. Here is a summary of its performance:
+
 ![test_info](https://github.com/dianas11xx/Cue-Cetera/blob/main/ModelControl/readme_imgs/test_performance.PNG)
 
 ### Model observations
