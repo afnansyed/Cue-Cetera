@@ -16,8 +16,8 @@
 | 3/7 | Amani | Started training ML model with pre-processed datasets | 2 hrs |
 | 3/7 | Afnan and Shravya | Familiarize with running app using Flutter and writing in Dart | 2 hrs
 | 3/8 | Shravya | Work on homepage for front end | 1 hr
-| 3/9 | Afnan | Homepage for front-end complete + 'upload video' and 'use video camera' page set up | 3 hrs
-| 3/21 | Afnan | Work on accessing devideo camera to take video for 'use video camera' page | 3 hrs
+| 3/9 | Afnan | Homepage for front-end complete + 'upload video' and 'use video camera' page set up | 2.5 hrs
+| 3/21 | Afnan | Work on accessing device video camera to take video for 'use video camera' page | 3 hrs
 | 3/21 | Amani | Rudimentary hyper-parameter tuning on model to increase accuracy | 3 hrs |
 | 3/22 | Shravya | Research + work on video player page | 3.5 hr
 | 3/23 | Afnan | Research + set up how to use physical android device as emulator | 2 hrs
