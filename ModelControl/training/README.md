@@ -3,7 +3,7 @@
 ## Training structure
 The following structure is used:
 
-![file_structure](https://github.com/dianas11xx/Cue-Cetera/blob/main/ModelControl/readme_imgs/file_structure.jpg)
+![file_structure](https://github.com/dianas11xx/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/file_structure.jpg)
 
 ## Pre-requisites to run
 Before running the training folder, make sure you have the train datasets downloaded and put into a folder called `datasets` alongside the training.ipynb notebook (as shown in the file structure image above):
@@ -18,13 +18,13 @@ The model that performed the best out of all 5 was model 3, so it was saved as a
 
 Our current model (Model 3) is a convolution neural network, created using the sequential API, to classify images into one of 28 categories of emotions. The CNN consists of an input layer, hidden layers, and an output layer. For the hidden layers, we used a series of 2D convolutional layers to perform elementwise multiplication and then normalized the output of each layer by re-scaling and re-centering using batch normalization. After this, MaxPooling was used to downsample the images in order to extract the most important features and then a dropout layer is used to prevent overfitting. In the output layer, in order to transition from the convolutional layers to the fully connected layer, we used the Flatten method where all the dimensions are kept and put into one vector. The output layer has 28 neurons, since there are 28 classes of emotions, with a softmax activation. We decided to use Adam as the optimizer with a learning rate of 0.0001. We also used sparse categorical cross-entropy as our loss function since there are 28 label classes. A summary of the model, along with its layers is displayed in the following table:
 
-![model_summary](https://github.com/dianas11xx/Cue-Cetera/blob/main/ModelControl/readme_imgs/full_ms.PNG)
+![model_summary](https://github.com/dianas11xx/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/full_ms.PNG)
 
 Using an epoch of 25, each taking around 25 minutes, and a patience of 10, the model converged with:
 - 54.22% accuracy in training
 - 50.14% accuracy in validation
 
-![learning_curve](https://github.com/dianas11xx/Cue-Cetera/blob/main/ModelControl/readme_imgs/learning_curve.PNG)
+![learning_curve](https://github.com/dianas11xx/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/learning_curve.PNG)
 
 ### Test performance
 
@@ -33,7 +33,7 @@ Using the test datasets and labels, we applied the test data to the model and it
 
 This value is close to the validation accuracy score, meaning that the model is not overfitting. Here is a summary of its performance:
 
-![test_info](https://github.com/dianas11xx/Cue-Cetera/blob/main/ModelControl/readme_imgs/test_performance.PNG)
+![test_info](https://github.com/dianas11xx/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/test_performance.PNG)
 
 ### Model observations
 
