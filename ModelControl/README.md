@@ -1,4 +1,4 @@
-# Training Notebook Informaation
+# Training Notebook Information
 
 ## Training structure
 The following structure is used:
