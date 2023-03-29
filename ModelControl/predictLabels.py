@@ -78,7 +78,7 @@ class Emotion_ML:
                24:'Sympathy', 25:'Yearning', 26:'Disgust', 27:'Neutral'}
 
     # import model
-    model3 = joblib.load('models/Model3_trained.pkl');
+    model3 = joblib.load('training/models/Model3_trained.pkl');
     img_dir = "imgs/"
     num_imgs = len([name for name in os.listdir(img_dir) if os.path.isfile(os.path.join(img_dir, name))])
     imgs = []
