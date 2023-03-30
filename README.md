@@ -64,3 +64,10 @@ For each emotion, we mapped the valence, which is a value between 0-9 that repre
 - `25. Yearning`: 6
 - `26. Disgust`: 4
 - `27. Neutral`: 5
+
+
+
+## Mockup of App Interface
+----
+
+![mock](https://user-images.githubusercontent.com/44105687/228713447-0aa8bc12-45b7-43fb-868b-49f98540b667.PNG)
