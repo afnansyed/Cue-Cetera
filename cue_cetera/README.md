@@ -1,7 +1,7 @@
 # cue_cetera
 
 Flutter project written using dart.
-Main code for the app written in '[cue_cetera/lib/main.dart]'
+Main code for the app written in 'cue_cetera/lib/main.dart'
 
 Comments / experimentation / failed attempts / difficulties:
 ---------------	
