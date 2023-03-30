@@ -23,12 +23,15 @@
 | 3/21 | Afnan | Work on accessing device video camera to take video for 'use video camera' page | 3 hrs
 | 3/21 | Amani | Rudimentary hyper-parameter tuning on model to increase accuracy | 3 hrs |
 | 3/21 | Diana | Performing hyperparameter tuning on with different models | 3 hrs |
+| 3/22 | Diana | Video to frames conversion & reshaping resulting array for model | 2 hrs |
 | 3/22 | Shravya | Research + work on video player page | 3.5 hr
 | 3/23 | Afnan | Research + set up how to use physical android device as emulator | 2 hrs
 | 3/26 | Shravya | Research on alternate videoplayer | 2 hr
 | 3/27 | Afnan | Work on video player page | 2.5 hrs
 | 3/27 | Amani | Hyper-parameter tuning on model for accuracy | 3 hrs |
 | 3/27 | Diana | Hyper-parameter tuning on models for accuracy | 3 hrs |
+| 3/27 | Diana | Testing CNN model | 1 hrs |
+| 3/27 | Diana | Testing video to frames conversion & model prediction from resulting array using CNN model | 2 hrs |
 | 3/28 | Afnan and Shravya | Setup flutter and Android studio on CpE Lab computer + working on fixing video player page | 2 hrs
 | 3/28 | Amani | Implementing REST API in Python with Flask to get written video path file from localhost | 3 hrs |
 | 3/28 | Afnan and Shrvya | Implementing REST API in Flutter to write video path file to localhost | 2 hrs
