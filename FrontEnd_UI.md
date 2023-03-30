@@ -1,4 +1,4 @@
-Comments / experimentation / failed attempts/ difficulties:
+Comments / experimentation / failed attempts / difficulties:
 ---------------	
 - Flutter and Android Studio are the platforms used for development of the app.
 - All members of the team have it installed on their personal computer devices.
