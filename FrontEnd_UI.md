@@ -1,3 +1,17 @@
+Comments / experimentation / failed attempts/ difficulties:
+---------------	
+- Flutter and Android Studio are the platforms used for development of the app.
+- All members of the team have it installed on their personal computer devices.
+- Installation and set up of Flutter + Android Studio took quite a while (~1.5 hrs) on the pc. 
+- First the homepage with the two buttons was setup. This was slightly confusing as we had to first familiarize ourselves with dart and the flutter environment. 
+- While doing this page, we run the emulator which was another one of our issues. When running an android device emulator, our personal laptops started freezing up and was really slow at loading. We used chrome web emulator as a temporary alternative. After this, the 'upload video' and the 'use video camera' pages where set up which could be access throught the corresponding button on the homepage. 
+- We installed Flutter and Android Studio on the CpE Lab Comupter which gives us a better access with Android device emulator. However, since this is a lab computer we had to gain administrative access for many steps from Instructor Carsten. We are setting up to testing with a physical android tablet to run our app as it might be more convenient and help with debugging such as catching gliches. We have access to a Samsung Galexy Tab 4. But since it is an older model we might run into some compatibility issues and so, we as a team will look into pitching in to invest in an android device.
+- The Upload video page and the play video page took quite a bit of research time as we had to access the device files which required use of different libraries.
+- Priority Issue to Fix: In the video player page, when clicking play, the video stops at the first frame. We haven't been able to fix this.
+- To send the video to the backend, we first thought of using Rest API where when video is played, the path url is sent to the http localhost. However, we first ran into issues with the python code for this where the localhost was giving a 404 error. We also try different methods of writing code with the dart to write the path out using Rest API. We decided to use firebase for now which is compatible with both python and flutter.
+- Emmulator used below: Google Pixel 6
+
+
 Current pages setup status:
 ---------------	
   
@@ -26,9 +40,3 @@ USE VIDEO CAMERA PAGE:
 ![26a0de84-8a93-4049-9cad-ce714d25bc6f](https://user-images.githubusercontent.com/44105687/228425838-c4f263a6-ab91-4f3a-899e-c6ccdcd03c8c.jpg)
 
 
-
-Comments:
----------------	
-1. Issue: In the video player page, when clicking play, the video stops at the first frame. 
-2. When video is played, the path url is sent to backend through use of Rest API.
-3. Emmulator used: Google Pixel 6
