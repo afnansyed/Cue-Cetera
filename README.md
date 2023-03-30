@@ -91,3 +91,14 @@ For each emotion, we mapped the valence, which is a value between 0-9 that repre
 ----
 
 ![mock](https://user-images.githubusercontent.com/44105687/228713447-0aa8bc12-45b7-43fb-868b-49f98540b667.PNG)
+
+
+## Google Firebase Database
+----
+The database storing the filepath for each video uploaded by the user
+
+![fire1](https://github.com/AmaniN16/Cue-Cetera/blob/main/readme_imgs/firebase_img_1.png)
+
+The database storing the video itself for each video uploaded by the user
+
+![fire2](https://github.com/AmaniN16/Cue-Cetera/blob/main/readme_imgs/firebase_img_2.png)
