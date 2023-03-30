@@ -20,6 +20,11 @@ Comments / experimentation / failed attempts / difficulties:
 
 
 - To send the video to the backend, we first thought of using Rest API where when video is played, the path url is sent to the http localhost. However, we first ran into issues with the python code for this where the localhost was giving a 404 error. We also try different methods of writing code with the dart to write the path out using Rest API. We decided to use firebase for now which is compatible with both python and flutter. We had issues with flutter uploading the video file to the database. As no errors were being generated and the logic that we are apply with code seemed correct, its was harder to debug the issue. However,, we got it to successfully work.
+
+<img width="958" alt="firebase_img_1" src="https://user-images.githubusercontent.com/44105687/228723575-a9668f42-4381-4d1d-bc18-4369388e2bde.png">
+
+<img width="954" alt="firebase_img_2" src="https://user-images.githubusercontent.com/44105687/228723596-fdaaa734-ae09-4b74-89fb-3d3591c6da87.png">
+
 - We installed Flutter and Android Studio on the CpE Lab Comupter which gives us a better access with Android device emulator. However, since this is a lab computer we had to gain administrative access for many steps from Instructor Carsten. We are setting up to testing with a physical android tablet to run our app as it might be more convenient and help with debugging such as catching gliches. We have access to a Samsung Galexy Tab 4. But since it is an older model we might run into some compatibility issues and so, we as a team will look into pitching in to invest in an android device.
 - Emmulator used below: Google Pixel 6
 
