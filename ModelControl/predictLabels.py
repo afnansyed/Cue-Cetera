@@ -9,11 +9,55 @@ import os
 import time
 import datetime
 
+import firebase_admin
+from firebase_admin import db,  storage
+
 class Emotion_ML:
   def __init__(self):
     self.file_name = ""
     self.labels = []
     self.images = []
+
+  def dbObj(self):
+      cred_obj = firebase_admin.credentials.Certificate("cue-cetera-726df-firebase-adminsdk-z8vba-e4c583ce09.json")
+      databaseURL = 'https://cue-cetera-726df-default-rtdb.firebaseio.com/'
+      bucket = 'cue-cetera-726df.appspot.com'
+      default_app = firebase_admin.initialize_app(cred_obj, {
+          'databaseURL': databaseURL,
+          'storageBucket': bucket
+      })
+
+  def pull_from_dB(self):
+      dbObj()
+      ref = ref = db.reference("Videos/paths")
+      path = ref.order_by_child('Path').get()
+      currPath = path['Path']
+
+      source_blob_name = currPath
+
+      # The path to which the video should be downloaded
+      destination_file_name = r"videoAnalysis.mp4"
+
+      bucket = storage.bucket()
+      blob = bucket.blob(source_blob_name)
+      blob.download_to_filename(destination_file_name)
+
+      return currPath
+
+  def delete_db(self):
+      for key, val in data.items():
+          delete_user_ref = ref.child(key)
+          delete_user_ref.delete()
+
+  def upload_img(self, file_name):
+      bucket = storage.bucket()
+      blob = bucket.blob(fileName)
+      blob.upload_from_filename(fileName)
+      return blob
+
+  def delete_img(self, blobs):
+      for blob_item in blobs:
+        blob_item.delete()
 
   def vid_to_imgs(self, file_name):
     self.file_name = file_name
@@ -79,13 +123,17 @@ class Emotion_ML:
 
     # import model
     model3 = joblib.load('training/models/Model3_trained.pkl');
-    img_dir = "imgs/"
     num_imgs = len([name for name in os.listdir(img_dir) if os.path.isfile(os.path.join(img_dir, name))])
     imgs = []
     for image in os.listdir(img_dir):
         img = cv2.imread(os.path.join(img_dir, image))
         arr = cv2.resize(img, (48, 48), interpolation=cv2.INTER_CUBIC)
         imgs.append(arr)
+
+        curr_img = img_dir + image
+        blobs = []
+        curr_blob = upload_img(curr_img)
+        blobs.append(curr_blob)
     
     self.images = imgs
     # reshape image
@@ -104,6 +152,7 @@ class Emotion_ML:
 
 if __name__ == "__main__":
     model = Emotion_ML()
-    #model.vid_to_imgs('vid_to_frames/emotions_vid.mp4')
-    #model.predict_emotions("imgs/")
-    #labels = model.labels
+    fileName = pullFromDB()
+    model.vid_to_imgs(fileName)
+    model.predict_emotions("imgs/")
+    labels = model.labels
