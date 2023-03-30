@@ -30,8 +30,8 @@
 | 3/27 | Afnan | Work on video player page | 2.5 hrs
 | 3/27 | Amani | Hyper-parameter tuning on model for accuracy | 3 hrs |
 | 3/27 | Diana | Hyper-parameter tuning on models for accuracy | 3 hrs |
-| 3/27 | Diana | Testing CNN model | 1 hrs |
-| 3/27 | Diana | Testing video to frames conversion & model prediction from resulting array using CNN model | 2 hrs |
+| 3/27 | Diana | Testing CNN model | 2 hrs |
+| 3/28 | Diana | Testing video to frames conversion & model prediction from resulting array using CNN model | 2 hrs |
 | 3/28 | Afnan and Shravya | Setup flutter and Android studio on CpE Lab computer + working on fixing video player page | 2 hrs
 | 3/28 | Amani | Implementing REST API in Python with Flask to get written video path file from localhost | 3 hrs |
 | 3/28 | Afnan and Shrvya | Implementing REST API in Flutter to write video path file to localhost | 2 hrs
