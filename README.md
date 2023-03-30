@@ -15,6 +15,8 @@ More information about the CNN Model and training methods used for the model can
  
 More information about the Flutter Application can be found [here](https://github.com/AmaniN16/Cue-Cetera/tree/main/cue_cetera)
 
+We logged each of our contributions in the following [table](https://github.com/AmaniN16/Cue-Cetera/blob/main/TeamContibutionsLog.md)
+
 
 ## Datasets
 ----
