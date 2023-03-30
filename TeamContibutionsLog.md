@@ -33,3 +33,5 @@
 | 3/28 | Amani | Implementing REST API in Python with Flask to get written video path file from localhost | 3 hrs |
 | 3/28 | Afnan and Shrvya | Implementing REST API in Flutter to write video path file to localhost | 2 hrs
 | 3/28 | Shravya | Work on select page UI + REST API | 1 hr
+| 3/29 | Afnan, Amani, Diana | Trying to fix Rest API in Flutter and Python | 2 hrs
+| 3/29 | Amani | Use firebase to pull and upload video to cloud | 4 hrs
