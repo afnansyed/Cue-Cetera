@@ -4,7 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:video_player/video_player.dart';
 
-void main() => runApp(MyApp());
+import 'package:flutter/widgets.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -52,7 +65,7 @@ class MyHomePage extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     fixedSize: Size(250, 110),
                     textStyle:
-                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     primary: Color(0xffc9b6b9),
                     onPrimary: Color(0xff1e133d),
                     elevation: 20,
@@ -71,7 +84,7 @@ class MyHomePage extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     fixedSize: Size(250, 110),
                     textStyle:
-                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     primary: Color(0xffc9b6b9),
                     onPrimary: Color(0xff1e133d),
                     elevation: 20,
@@ -175,10 +188,13 @@ class Test extends StatefulWidget {
 }
 class playVideo extends State<Test> {
   String filePath;
+
   playVideo(this.filePath);
+
   VideoPlayerController? _videoPlayerController;
+
   loadVideoPlayer(File file) {
-    if(_videoPlayerController != null) {
+    if (_videoPlayerController != null) {
       _videoPlayerController!.dispose();
     }
 
@@ -226,8 +242,27 @@ class playVideo extends State<Test> {
   }
 
   void selectVideo() async {
+    //send file name to db
+    DatabaseReference ref = FirebaseDatabase.instance.ref("Videos");
+
+    ref.child('paths').push().set({
+      "Path": filePath,
+    });
+
+    //send video itself to storage
+    final storage = FirebaseStorage.instance.ref();
+
+    final storRef = storage.child(filePath);
+
+    File file = File(filePath);
+
+    try {
+      await storRef.putFile(file);
+    } on FirebaseException catch (e) {
+      throw Exception('Failed to save video');
+    }
+
     setState(() {
-      File file = File(filePath);
       loadVideoPlayer(file);
     });
   }
