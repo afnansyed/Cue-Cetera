@@ -12,7 +12,7 @@ Before running the training folder, make sure you have the train datasets downlo
 
 The models created will be saved as a pickle file inside of a folder called `models` alongside the training.ipynb notebook (as shown in the file structure image above).
 The model that performed the best out of all 5 was model 3, so it was saved as a pickle file called `Model3_trained.pkl`, which is available to download below:
-- [`Model3_trained.pkl`](https://drive.google.com/file/d/1UzJZCJAuHcSxOCfhjRrInMVtZSn-7g0W/view?usp=sharing)
+- [`Model3_trained_updated.pkl`](https://drive.google.com/file/d/1XbufH2792lZ75aY89dz-tkPS0UfF9A_H/view?usp=sharing)
 
 ## CNN Model 
 
