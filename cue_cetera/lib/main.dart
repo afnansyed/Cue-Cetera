@@ -2,28 +2,18 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:open_file/open_file.dart';
 import 'package:video_player/video_player.dart';
+import 'package:camera/camera.dart';
 
-import 'package:flutter/widgets.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'firebase_options.dart';
-
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-
-  runApp(const MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'CUE-CETERA',
       theme: ThemeData(
         primaryColor: Color(0xff1e133d),
@@ -40,12 +30,14 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffc9b6b9),
+      backgroundColor: Color(0xff1e133d),
       appBar: AppBar(
         backgroundColor: Color(0xff1e133d),
         toolbarHeight: 100,
+        elevation: 0,
+
         title: Center(
-          child: Text(title),
+            child: Text(title,style: TextStyle(color: Color(0xffc9b6b9), fontSize: 30))
         ),
       ),
       body: Container(
@@ -97,28 +89,70 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
-class videoRecord extends StatelessWidget {
+class videoRecord extends StatefulWidget {
   const videoRecord({super.key});
   @override
+  State<videoRecord> createState() => _videoRecord();
+}
+
+//class _videoRecord written using code from: https://bettercoding.dev/flutter/tutorial-video-recording-and-replay/
+//code references in class _videoRecord also from:
+// https://pub.dev/packages/camera/example
+//https://stackoverflow.com/questions/64070044/how-to-record-a-video-with-camera-plugin-in-flutter
+class _videoRecord extends State<videoRecord> {
+  late CameraController controllers;
+  bool startRecordSetup = true;
+
+  @override
+  void initState() {
+    cameraSetup();
+    super.initState();
+  }
+
+  cameraSetup() async {
+    final cameras = await availableCameras();
+    controllers = CameraController(cameras[0], ResolutionPreset.max);
+    await controllers.initialize();
+
+    setState(() => startRecordSetup = false);
+  }
+
+  recordVideo() async {
+    if (!controllers.value.isRecordingVideo) {
+      await controllers.startVideoRecording();
+
+    }
+    else {
+      final file = await controllers.stopVideoRecording();
+      Navigator.push(context, MaterialPageRoute(builder: (context) =>  Test(file.path),));
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xffc9b6b9),
-      appBar: AppBar(
-        backgroundColor: Color(0xff1e133d),
-        toolbarHeight: 100,
-        title: Center(
-          child: Text("CUE-CETERA"),
+    if (startRecordSetup) {
+      return Container(
+        color: Color(0xffc9b6b9),
+      );
+    }
+    else {
+      return Center(
+        child: Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            CameraPreview(controllers),
+            FloatingActionButton(
+              backgroundColor: Color(0xffc9b6b9),
+              onPressed: () => recordVideo(),
+              child: Icon(Icons.circle),
+            ),
+          ],
         ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(25.0),
-              bottomRight: Radius.circular(25.0)),
-        ),
-      ),
-      body: Container(),
-    );
+      );
+    }
   }
 }
+
 
 class videoUpload extends StatelessWidget {
   const videoUpload({super.key});
@@ -156,7 +190,7 @@ class videoUpload extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>  Test(picked.files.first.path.toString())),
+                              builder: (context) =>  Test(picked.files.first.path!)),
                         );
                       }
                     }
@@ -176,6 +210,8 @@ class videoUpload extends StatelessWidget {
           )
       ),
     );
+
+
   }
 }
 
@@ -190,13 +226,14 @@ class playVideo extends State<Test> {
   String filePath;
 
   playVideo(this.filePath);
-
   VideoPlayerController? _videoPlayerController;
-
   loadVideoPlayer(File file) {
-    if (_videoPlayerController != null) {
+    if(_videoPlayerController != null) {
       _videoPlayerController!.dispose();
     }
+    print(filePath.toString() + " HII");
+
+    OpenFile.open(filePath!);
 
     _videoPlayerController = VideoPlayerController.file(file);
     _videoPlayerController!.initialize().then((value) {
@@ -242,27 +279,8 @@ class playVideo extends State<Test> {
   }
 
   void selectVideo() async {
-    //send file name to db
-    DatabaseReference ref = FirebaseDatabase.instance.ref("Videos");
-
-    ref.child('paths').push().set({
-      "Path": filePath,
-    });
-
-    //send video itself to storage
-    final storage = FirebaseStorage.instance.ref();
-
-    final storRef = storage.child(filePath);
-
-    File file = File(filePath);
-
-    try {
-      await storRef.putFile(file);
-    } on FirebaseException catch (e) {
-      throw Exception('Failed to save video');
-    }
-
     setState(() {
+      File file = File(filePath);
       loadVideoPlayer(file);
     });
   }
