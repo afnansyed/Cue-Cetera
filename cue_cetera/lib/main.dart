@@ -6,7 +6,23 @@ import 'package:open_file/open_file.dart';
 import 'package:video_player/video_player.dart';
 import 'package:camera/camera.dart';
 
-void main() => runApp(MyApp());
+import 'package:flutter/widgets.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'firebase_options.dart';
+
+import 'package:flutter/services.dart' show rootBundle;
+import 'package:chaquopy/chaquopy.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -222,12 +238,25 @@ class Test extends StatefulWidget {
   @override
   State<Test> createState() => playVideo(filePath);
 }
+
 class playVideo extends State<Test> {
   String filePath;
 
   playVideo(this.filePath);
   VideoPlayerController? _videoPlayerController;
-  loadVideoPlayer(File file) {
+  loadVideoPlayer(File file) async {
+    final storage = FirebaseStorage.instance.ref();
+
+    final storRef = storage.child(filePath);
+
+    File file = File(filePath);
+
+    try {
+      await storRef.putFile(file);
+    } on FirebaseException catch (e) {
+      throw Exception('Failed to save video');
+    }
+
     if(_videoPlayerController != null) {
       _videoPlayerController!.dispose();
     }
@@ -279,9 +308,47 @@ class playVideo extends State<Test> {
   }
 
   void selectVideo() async {
+    //send file name to db
+    DatabaseReference ref = FirebaseDatabase.instance.ref("Videos");
+
+    ref.child('paths').push().set({
+      "Path": filePath,
+    });
+
+    //send video itself to storage
+    final storage = FirebaseStorage.instance.ref();
+
+    final storRef = storage.child(filePath);
+
+    File file = File(filePath);
+
+    try {
+      await storRef.putFile(file);
+    } on FirebaseException catch (e) {
+      throw Exception('Failed to save video');
+    }
+
+       // final path = 'src/main/python/predictLabels.py';
+    // File backend = File(path);
+    String contents;
+
+      try {
+        // Read the file
+        contents = await loadAsset();
+      }
+      catch(e){
+        throw Exception('File not found');
+      }
+
+    Chaquopy.executeCode(contents);
+
     setState(() {
       File file = File(filePath);
       loadVideoPlayer(file);
     });
+  }
+
+  Future<String> loadAsset() async {
+    return await rootBundle.loadString('assets/predictLabels.py');
   }
 }
