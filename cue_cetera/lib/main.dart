@@ -6,7 +6,25 @@ import 'package:open_file/open_file.dart';
 import 'package:video_player/video_player.dart';
 import 'package:camera/camera.dart';
 
-void main() => runApp(MyApp());
+import 'package:flutter/widgets.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_ml_model_downloader/firebase_ml_model_downloader.dart';
+import 'firebase_options.dart';
+
+import 'package:flutter/services.dart' show rootBundle;
+import 'package:chaquopy/chaquopy.dart';
+import 'package:path_provider/path_provider.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -227,7 +245,19 @@ class playVideo extends State<Test> {
 
   playVideo(this.filePath);
   VideoPlayerController? _videoPlayerController;
-  loadVideoPlayer(File file) {
+  loadVideoPlayer(File file) async {
+    final storage = FirebaseStorage.instance.ref();
+
+    final storRef = storage.child(filePath);
+
+    File file = File(filePath);
+
+    try {
+      await storRef.putFile(file);
+    } on FirebaseException catch (e) {
+      throw Exception('Failed to save video');
+    }
+
     if(_videoPlayerController != null) {
       _videoPlayerController!.dispose();
     }
@@ -258,6 +288,7 @@ class playVideo extends State<Test> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Color(0xff1e133d),
         onPressed: selectVideo,
         child: Icon(
           Icons.play_circle_outline_outlined,
@@ -279,9 +310,59 @@ class playVideo extends State<Test> {
   }
 
   void selectVideo() async {
+    //send file name to db
+    DatabaseReference ref = FirebaseDatabase.instance.ref("Videos");
+
+    ref.child('paths').push().set({
+      "Path": filePath,
+    });
+
+    //send video itself to storage
+    final storage = FirebaseStorage.instance.ref();
+
+    final storRef = storage.child(filePath);
+
+    File file = File(filePath);
+
+    try {
+      await storRef.putFile(file);
+    } on FirebaseException catch (e) {
+      throw Exception('Failed to save video');
+    }
+
+    String contents;
+
+      try {
+        // Read the file
+        contents = await loadAsset();
+      }
+      catch(e){
+        throw Exception('File not found');
+      }
+
+    String _outputOrError = "";
+
+    final _result = await Chaquopy.executeCode(contents);
+    setState(() {
+      _outputOrError = _result['textOutputOrError'] ?? '';
+    });
+
+    final imgRef = storage.child("imgs");
+    final appDocDir = await getApplicationDocumentsDirectory();
+    final imgPath = "${appDocDir.absolute}/imgs";
+    final imgs = File(imgPath);
+
+    final downloadTask = imgRef.writeToFile(imgs);
+
+    // FirebaseModelDownloader.instance.getModel("cue-classifier");
+
     setState(() {
       File file = File(filePath);
       loadVideoPlayer(file);
     });
+  }
+
+  Future<String> loadAsset() async {
+    return await rootBundle.loadString('assets/predictLabels.txt');
   }
 }
