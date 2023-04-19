@@ -38,3 +38,15 @@
 | 3/28 | Shravya | Work on select page UI + REST API | 1 hr
 | 3/29 | Afnan, Amani, Diana | Trying to fix Rest API in Flutter and Python | 2 hrs
 | 3/29 | Amani | Use firebase to pull and upload video to cloud | 4 hrs
+| 4/10 | Amani | Configure HiPerGator and upload datasets | 1 hr
+| 4/11 | Amani | Alter Tensorflow Keras so that it uses GPU on HiPerGator | 3 hrs
+| 4/13 | Amani | Continue configuring GPU on HiPerGator | 1 hrs
+| 4/13 | All members | Work on Prototype Presentation | 2 hrs
+| 4/13 | Amani | Start implementing Python back-end on Flutter | 3 hrs
+| 4/15 | Amani | Continue connecting Python back-end on Flutter | 2 hrs
+| 4/16 | Amani | Add TensorFlow Lite model to Firebase | 1 hr
+| 4/16 | Amani | Alter back-end so model predictions are on front-end | 2 hrs
+| 4/17 | Amani | Debug Python implementation on front-end | 3 hrs
+| 4/18 | All members | Work on Prototype report | 3 hrs
+| 4/18 | Amani | Debug Firebase authorization errors | 2 hrs
+| 4/19 | Amani | Practice and make final prototype changes | 2 hrs
