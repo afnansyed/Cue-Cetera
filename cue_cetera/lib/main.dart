@@ -171,7 +171,9 @@ class _videoRecord extends State<videoRecord> {
   }
 }
 
-
+//class _videoUpload written referrencing code from: 
+//https://stackoverflow.com/questions/57869422/how-to-upload-a-video-from-gallery-in-flutter 
+//https://pub.dev/packages/file_picker
 class videoUpload extends StatelessWidget {
   const videoUpload({super.key});
   @override
@@ -240,6 +242,11 @@ class Test extends StatefulWidget {
   @override
   State<Test> createState() => playVideo(filePath);
 }
+
+//class _videoUpload written referrencing code from:
+//https://blog.logrocket.com/flutter-video-player/#creating-new-video-player
+//https://docs.flutter.dev/cookbook/plugins/play-video
+//https://pub.dev/packages/open_file/example
 class playVideo extends State<Test> {
   String filePath;
 
@@ -261,7 +268,6 @@ class playVideo extends State<Test> {
     if(_videoPlayerController != null) {
       _videoPlayerController!.dispose();
     }
-    print(filePath.toString() + " HII");
 
     OpenFile.open(filePath!);
 
