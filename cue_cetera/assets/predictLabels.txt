@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from tensorflow import keras
 import numpy as np
 import joblib 
@@ -7,6 +8,20 @@ import datetime
 
 import firebase_admin
 from firebase_admin import db, storage
+=======
+# from tensorflow import keras
+import numpy as np
+# import joblib
+import cv2 
+import os
+import datetime
+import ipywidgets
+
+import firebase_admin
+from firebase_admin import db, storage
+import firebase_admin.auth as auth
+
+>>>>>>> 99f6f05 (updated so chaquopy should work)
 
 class Emotion_ML:
   def __init__(self):
@@ -15,14 +30,30 @@ class Emotion_ML:
     self.images = []
 
   def dbObj(self):
+<<<<<<< HEAD
       cred_obj = firebase_admin.credentials.Certificate("cue-cetera-726df-firebase-adminsdk-z8vba-e4c583ce09.json")
       databaseURL = 'https://cue-cetera-726df-default-rtdb.firebaseio.com/'
       bucket = 'cue-cetera-726df.appspot.com'
       default_app = firebase_admin.initialize_app(cred_obj, {
+=======
+      authPath = os.path.join(os.path.dirname(__file__), "cue-cetera-726df-firebase-adminsdk-z8vba-e4c583ce09.json")
+      os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = authPath
+      databaseURL = 'https://cue-cetera-726df-default-rtdb.firebaseio.com/'
+      bucket = 'cue-cetera-726df.appspot.com'
+
+      firebase_admin.initialize_app(options={
+>>>>>>> 99f6f05 (updated so chaquopy should work)
           'databaseURL': databaseURL,
           'storageBucket': bucket
       })
 
+<<<<<<< HEAD
+=======
+      anonymous_user = auth.create_user()
+      uid = anonymous_user.uid
+      token = auth.create_custom_token(uid)
+
+>>>>>>> 99f6f05 (updated so chaquopy should work)
   def pull_from_dB(self):
       self.dbObj()
       ref = db.reference("Videos/paths")
@@ -47,6 +78,7 @@ class Emotion_ML:
 
       return currPath
 
+<<<<<<< HEAD
   def add_to_db(self, file_name, emotion, label):
     self.dbObj()
     ref = db.reference("Images")
@@ -55,6 +87,16 @@ class Emotion_ML:
         "Emotion": emotion,
         "Class": label
     })
+=======
+  # def add_to_db(self, file_name, emotion, label):
+  #   self.dbObj()
+  #   ref = db.reference("Images")
+  #   ref.child("Classification").push().set({
+  #       "Path": file_name,
+  #       "Emotion": emotion,
+  #       "Class": label
+  #   })
+>>>>>>> 99f6f05 (updated so chaquopy should work)
 
   def delete_db(self):
       ref = db.reference("/")
@@ -65,8 +107,13 @@ class Emotion_ML:
 
   def upload_img(self, file_name):
       bucket = storage.bucket()
+<<<<<<< HEAD
       blob = bucket.blob(fileName)
       blob.upload_from_filename(fileName)
+=======
+      blob = bucket.blob(file_name)
+      blob.upload_from_filename(file_name)
+>>>>>>> 99f6f05 (updated so chaquopy should work)
       return blob
 
   def delete_img(self, blobs):
@@ -76,8 +123,14 @@ class Emotion_ML:
   def vid_to_imgs(self, file_name):
     self.file_name = file_name
     # Create imgs folder
+<<<<<<< HEAD
     if not os.path.isdir("imgs"):
         os.mkdir("imgs")
+=======
+    osPath = os.path.join(os.path.dirname(__file__), "imgs")
+    if not os.path.isdir(osPath):
+        os.mkdir(osPath)
+>>>>>>> 99f6f05 (updated so chaquopy should work)
     FPS = 10
     # Read the video and its fps
     video = cv2.VideoCapture(file_name)
@@ -119,12 +172,17 @@ class Emotion_ML:
             except ValueError:
                 timeStamp = (timeStamp + ".00").replace(":", "-")
             # save image to folder
+<<<<<<< HEAD
             cv2.imwrite(os.path.join("imgs/", f"frame{timeStamp}.jpg"), image)
+=======
+            cv2.imwrite(os.path.join(osPath+'/', f"frame{timeStamp}.jpg"), image)
+>>>>>>> 99f6f05 (updated so chaquopy should work)
             curr_step +=1
         cnt +=1
         
   def predict_emotions(self, img_dir):
     # emotion map
+<<<<<<< HEAD
     emotions = {0:'Affection', 1:'Anger', 2:'Annoyance', 3:'Anticipation',
                4:'Aversion', 5:'Confidence',6:'Disapproval', 7:'Disconnection',
                8:'Disquietment', 9:'Doubt/Confusion', 10:'Embarrassment',
@@ -136,6 +194,19 @@ class Emotion_ML:
     # import model
     model3 = joblib.load('training/models/Model3_trained.pkl');
     num_imgs = len([name for name in os.listdir(img_dir) if os.path.isfile(os.path.join(img_dir, name))])
+=======
+    # emotions = {0:'Affection', 1:'Anger', 2:'Annoyance', 3:'Anticipation',
+    #            4:'Aversion', 5:'Confidence',6:'Disapproval', 7:'Disconnection',
+    #            8:'Disquietment', 9:'Doubt/Confusion', 10:'Embarrassment',
+    #            11:'Engagement',12:'Esteem', 13:'Excitement', 14:'Fatigue',
+    #            15:'Fear', 16:'Happiness', 17:'Pain', 18:'Peace', 19:'Pleasure',
+    #            20:'Sadness', 21:'Sensitivity', 22:'Suffering', 23:'Surprise',
+    #            24:'Sympathy', 25:'Yearning', 26:'Disgust', 27:'Neutral'}
+
+    # import model
+    # model3 = joblib.load('training/models/Model3_trained.pkl');
+    # num_imgs = len([name for name in os.listdir(img_dir) if os.path.isfile(os.path.join(img_dir, name))])
+>>>>>>> 99f6f05 (updated so chaquopy should work)
     imgs = []
     img_dirs = []
     blobs = []
@@ -144,11 +215,16 @@ class Emotion_ML:
         arr = cv2.resize(img, (48, 48), interpolation=cv2.INTER_CUBIC)
         imgs.append(arr)
 
+<<<<<<< HEAD
         curr_img = img_dir + image
+=======
+        curr_img = "imgs/" + image
+>>>>>>> 99f6f05 (updated so chaquopy should work)
         img_dirs.append(curr_img)
         curr_blob = self.upload_img(curr_img)
         blobs.append(curr_blob)
     
+<<<<<<< HEAD
     self.images = imgs
     # reshape image
     imgs = np.array(imgs).reshape(-1, 48, 48, 3)
@@ -163,10 +239,33 @@ class Emotion_ML:
     for i in range(len(y_imgs)):
         self.labels.append(emotions[y_imgs[i]])
         self.add_to_db(img_dirs[i], emotions[y_imgs[i]], np.random.randint(2)) # random number for classification
+=======
+    # self.images = imgs
+    # # reshape image
+    # imgs = np.array(imgs).reshape(-1, 48, 48, 3)
+    #
+    # # preprocess data for model
+    # imgs_rs = keras.applications.mobilenet_v2.preprocess_input(imgs)
+    #
+    # #predict labels
+    # y_imgs = np.argmax(model3.predict(imgs_rs), axis=1)
+    #
+    # self.labels = []
+    # for i in range(len(y_imgs)):
+    #     self.labels.append(emotions[y_imgs[i]])
+    #     self.add_to_db(img_dirs[i], emotions[y_imgs[i]], np.random.randint(2)) # random number for classification
+>>>>>>> 99f6f05 (updated so chaquopy should work)
 
 if __name__ == "__main__":
     model = Emotion_ML()
     fileName = model.pull_from_dB()
+<<<<<<< HEAD
     model.vid_to_imgs(fileName)
     model.predict_emotions("imgs/")
     labels = model.labels
+=======
+    model.vid_to_imgs("videoAnalysis.mp4")
+    osPath = os.path.join(os.path.dirname(__file__), "imgs/")
+    model.predict_emotions(osPath)
+    # labels = model.labels
+>>>>>>> 99f6f05 (updated so chaquopy should work)
