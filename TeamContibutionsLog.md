@@ -24,8 +24,9 @@
 | 3/21 | Amani | Rudimentary hyper-parameter tuning on model to increase accuracy | 3 hrs |
 | 3/21 | Diana | Performing hyperparameter tuning on with different models | 3 hrs |
 | 3/22 | Diana | Video to frames conversion & reshaping resulting array for model | 2 hrs |
-| 3/22 | Shravya | Research + work on video player page | 3.5 hr
+| 3/22 | Shravya | Research + work on video player page | 4 hr
 | 3/23 | Afnan | Research + set up how to use physical android device as emulator | 2 hrs
+| 3/25 | Shravya | Add error handling on video upload page | 2 hrs |
 | 3/26 | Shravya | Research on alternate videoplayer | 2 hr
 | 3/27 | Afnan | Work on video player page | 2.5 hrs
 | 3/27 | Amani | Hyper-parameter tuning on model for accuracy | 3 hrs |
@@ -41,12 +42,18 @@
 | 4/10 | Amani | Configure HiPerGator and upload datasets | 1 hr
 | 4/11 | Amani | Alter Tensorflow Keras so that it uses GPU on HiPerGator | 3 hrs
 | 4/13 | Amani | Continue configuring GPU on HiPerGator | 1 hrs
-| 4/13 | All members | Work on Prototype Presentation | 2 hrs
+| 4/13 | Shravya | Understand and fix firebase errors on frontend | 2 hrs 
+| 4/13 | Shravya | Research video player issue to work on web with firebase | 3 hrs
+| 4/13 | All members | Work on Prototype Presentation | 3 hrs
 | 4/13 | Amani | Start implementing Python back-end on Flutter | 3 hrs
+| 4/14 | Shravya | Research + work on video playback | 4 hrs 
 | 4/15 | Amani | Continue connecting Python back-end on Flutter | 2 hrs
+| 4/16 | Shravya | Changing homepage UI | 1 hr 
 | 4/16 | Amani | Add TensorFlow Lite model to Firebase | 1 hr
 | 4/16 | Amani | Alter back-end so model predictions are on front-end | 2 hrs
 | 4/17 | Amani | Debug Python implementation on front-end | 3 hrs
 | 4/18 | All members | Work on Prototype report | 3 hrs
+| 4/19 | Shravya | Research & brainstorm on packages to make UI more aesthetic | 2 hours
 | 4/18 | Amani | Debug Firebase authorization errors | 2 hrs
 | 4/19 | Amani | Practice and make final prototype changes | 2 hrs
+| 4/19 | Shravya | Practice presentation | 30 mins 
