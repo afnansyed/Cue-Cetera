@@ -35,6 +35,7 @@ dependencies:
   open_file: ^3.1.0
   camera: ^0.10.0
   path_provider:
+  path:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -44,6 +45,7 @@ dependencies:
   firebase_storage: ^11.0.16
   firebase_ml_model_downloader: ^0.2.1
   chaquopy: ^0.0.19
+  http: ^0.13.5
 
 dependency_overrides:
   ffi: ^2.0.1
@@ -71,7 +73,7 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/predictLabels.txt
+    - assets/predictLabels.py
 
   # To add assets to your application, add an assets section, like this:
   # assets:

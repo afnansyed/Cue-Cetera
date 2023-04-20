@@ -14,8 +14,8 @@ import 'package:firebase_ml_model_downloader/firebase_ml_model_downloader.dart';
 import 'firebase_options.dart';
 
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:chaquopy/chaquopy.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:http/http.dart' as http;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -171,8 +171,8 @@ class _videoRecord extends State<videoRecord> {
   }
 }
 
-//class _videoUpload written referrencing code from: 
-//https://stackoverflow.com/questions/57869422/how-to-upload-a-video-from-gallery-in-flutter 
+//class _videoUpload written referrencing code from:
+//https://stackoverflow.com/questions/57869422/how-to-upload-a-video-from-gallery-in-flutter
 //https://pub.dev/packages/file_picker
 class videoUpload extends StatelessWidget {
   const videoUpload({super.key});
@@ -336,31 +336,7 @@ class playVideo extends State<Test> {
       throw Exception('Failed to save video');
     }
 
-    String contents;
-
-      try {
-        // Read the file
-        contents = await loadAsset();
-      }
-      catch(e){
-        throw Exception('File not found');
-      }
-
-    String _outputOrError = "";
-
-    final _result = await Chaquopy.executeCode(contents);
-    setState(() {
-      _outputOrError = _result['textOutputOrError'] ?? '';
-    });
-
-    final imgRef = storage.child("imgs");
-    final appDocDir = await getApplicationDocumentsDirectory();
-    final imgPath = "${appDocDir.absolute}/imgs";
-    final imgs = File(imgPath);
-
-    final downloadTask = imgRef.writeToFile(imgs);
-
-    // FirebaseModelDownloader.instance.getModel("cue-classifier");
+    loadAsset();
 
     setState(() {
       File file = File(filePath);
@@ -368,7 +344,18 @@ class playVideo extends State<Test> {
     });
   }
 
-  Future<String> loadAsset() async {
-    return await rootBundle.loadString('assets/predictLabels.txt');
+  Future<void> loadAsset() async {
+    var client =http.Client();
+    var uri=Uri.parse("http://10.20.0.8:5000/call_db");
+    var response = await client.patch(uri);
+
+    uri=Uri.parse("http://10.20.0.8:5000/pull");
+    response = await client.get(uri);
+
+    uri=Uri.parse("http://10.20.0.8:5000/vid_to_img");
+    response = await client.get(uri);
+
+    uri=Uri.parse("http://10.20.0.8:5000/predict");
+    response = await client.get(uri);
   }
 }
