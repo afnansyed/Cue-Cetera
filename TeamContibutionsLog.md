@@ -46,14 +46,19 @@
 | 4/13 | Shravya | Research video player issue to work on web with firebase | 3 hrs
 | 4/13 | All members | Work on Prototype Presentation | 3 hrs
 | 4/13 | Amani | Start implementing Python back-end on Flutter | 3 hrs
+| 4/14 | Afnan | Work on Prototype Presentation | 0.5 hrs
 | 4/14 | Shravya | Research + work on video playback | 4 hrs 
+| 4/15 | Afnan | Research + implementation of camera access in flutter | 3 hrs
 | 4/15 | Amani | Continue connecting Python back-end on Flutter | 2 hrs
 | 4/16 | Shravya | Changing homepage UI | 1 hr 
 | 4/16 | Amani | Add TensorFlow Lite model to Firebase | 1 hr
 | 4/16 | Amani | Alter back-end so model predictions are on front-end | 2 hrs
 | 4/17 | Amani | Debug Python implementation on front-end | 3 hrs
+| 4/18 | Afnan | Testing app to run on Android device + implementing video capture on app | 4.5 hrs
 | 4/18 | All members | Work on Prototype report | 3 hrs
-| 4/19 | Shravya | Research on packages to make UI more aesthetic | 2 hrs
 | 4/18 | Amani | Debug Firebase authorization errors | 2 hrs
 | 4/19 | Amani | Practice and make final prototype changes | 2 hrs
 | 4/19 | Shravya | Practice presentation | 0.5 hrs 
+| 4/19 | Shravya | Research on packages to make UI more aesthetic | 2 hrs
+| 4/19 | Afnan | Integrating + testing video capture page into updated prototype code with firebase implementation | 1.5 hrs 
+| 4/19 | Afnan | Prototype report | 0.5 hrs
