@@ -53,7 +53,7 @@
 | 4/16 | Amani | Alter back-end so model predictions are on front-end | 2 hrs
 | 4/17 | Amani | Debug Python implementation on front-end | 3 hrs
 | 4/18 | All members | Work on Prototype report | 3 hrs
-| 4/19 | Shravya | Research & brainstorm on packages to make UI more aesthetic | 2 hours
+| 4/19 | Shravya | Research on packages to make UI more aesthetic | 2 hrs
 | 4/18 | Amani | Debug Firebase authorization errors | 2 hrs
 | 4/19 | Amani | Practice and make final prototype changes | 2 hrs
-| 4/19 | Shravya | Practice presentation | 30 mins 
+| 4/19 | Shravya | Practice presentation | 0.5 hrs 
