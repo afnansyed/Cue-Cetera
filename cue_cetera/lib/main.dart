@@ -346,16 +346,16 @@ class playVideo extends State<Test> {
 
   Future<void> loadAsset() async {
     var client =http.Client();
-    var uri=Uri.parse("http://10.20.0.8:5000/call_db");
+    var uri=Uri.parse("http://10.0.2.2:5000/call_db");
     var response = await client.patch(uri);
 
-    uri=Uri.parse("http://10.20.0.8:5000/pull");
+    uri=Uri.parse("http://10.0.2.2:5000/pull");
     response = await client.get(uri);
 
-    uri=Uri.parse("http://10.20.0.8:5000/vid_to_img");
+    uri=Uri.parse("http://10.0.2.2:5000/vid_to_img");
     response = await client.get(uri);
 
-    uri=Uri.parse("http://10.20.0.8:5000/predict");
+    uri=Uri.parse("http://10.0.2.2:5000/predict");
     response = await client.get(uri);
   }
 }

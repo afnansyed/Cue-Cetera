@@ -1,6 +1,6 @@
-# from tensorflow import keras
+from tensorflow import keras
 import numpy as np
-# import joblib
+import joblib
 import cv2
 import os
 import datetime
@@ -22,8 +22,8 @@ class Emotion_ML:
         self.images = []
 
 
-@app.route('/call_db', methods=['PUT', 'PATCH'])
-def dbObj(self):
+# @app.route('/call_db', methods=['PUT', 'PATCH'])
+def dbObj():
     authPath = os.path.join(os.path.dirname(__file__), "cue-cetera-726df-firebase-adminsdk-z8vba-e4c583ce09.json")
     cred_obj = firebase_admin.credentials.Certificate(authPath)
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = authPath
@@ -35,13 +35,13 @@ def dbObj(self):
         'storageBucket': bucket
     })
 
-    req = request.get_data()
-    print(req)
-    return jsonify(req)
+    # req = request.get_data()
+    # print(req)
+    # return jsonify(req)
 
 
-@app.route('/pull', methods=['PUT', 'PATCH'])
-def pull_from_dB(self):
+# @app.route('/pull', methods=['PUT', 'PATCH'])
+def pull_from_dB():
     ref = db.reference("Videos/paths")
     path = ref.order_by_child('Path').get()
     path_val = ""
@@ -62,45 +62,46 @@ def pull_from_dB(self):
     blob = bucket.blob(source_blob_name)
     blob.download_to_filename(destination_file_name)
 
-    req = request.get_data()
-    print(req)
-    return jsonify(req)
+    # req = request.get_data()
+    # print(req)
+    # return jsonify(req)
 
 
-def add_to_db(self, file_name):
+def add_to_db(file_name, emotion, label):
     ref = db.reference("Images")
     ref.child("Classification").push().set({
-        "Path": file_name
+        "Path": file_name,
+        "Emotion": emotion,
+        "Label": label,
     })
 
 
-def delete_db(self):
+def delete_db():
     ref = db.reference("/")
     data = ref.get()
     for key, val in data.items():
         delete_user_ref = ref.child(key)
         delete_user_ref.delete()
 
-def upload_img(self, file_name):
+def upload_img(file_name):
     bucket = storage.bucket()
     blob = bucket.blob(file_name)
     blob.upload_from_filename(file_name)
     return blob
 
 
-@app.route('/delete_img', methods=['PUT', 'PATCH'])
-def delete_img(self, blobs):
+# @app.route('/delete_img', methods=['PUT', 'PATCH'])
+def delete_img(blobs):
     for blob_item in blobs:
         blob_item.delete()
 
-    req = request.get_data()
-    print(req)
-    return jsonify(req)
+    # req = request.get_data()
+    # print(req)
+    # return jsonify(req)
 
 
-@app.route('/vid_to_img', methods=['PUT', 'PATCH'])
-def vid_to_imgs(self, file_name="videoAnalysis.mp4"):
-    self.file_name = file_name
+# @app.route('/vid_to_img', methods=['PUT', 'PATCH'])
+def vid_to_imgs(file_name="videoAnalysis.mp4"):
     # Create imgs folder
     osPath = os.path.join(os.path.dirname(__file__), "imgs")
     if not os.path.isdir(osPath):
@@ -150,13 +151,13 @@ def vid_to_imgs(self, file_name="videoAnalysis.mp4"):
             curr_step += 1
         cnt += 1
 
-    req = request.get_data()
-    print(req)
-    return jsonify(req)
+    # req = request.get_data()
+    # print(req)
+    # return jsonify(req)
 
 
-@app.route('/predict', methods=['POST', 'PATCH'])
-def predict_emotions(self, img_dir=os.path.join(os.path.dirname(__file__), "imgs/")):
+# @app.route('/predict', methods=['POST', 'PATCH'])
+def predict_emotions(img_dir=os.path.join(os.path.dirname(__file__), "imgs/")):
     # emotion map
     # emotions = {0:'Affection', 1:'Anger', 2:'Annoyance', 3:'Anticipation',
     #            4:'Aversion', 5:'Confidence',6:'Disapproval', 7:'Disconnection',
@@ -167,7 +168,7 @@ def predict_emotions(self, img_dir=os.path.join(os.path.dirname(__file__), "imgs
     #            24:'Sympathy', 25:'Yearning', 26:'Disgust', 27:'Neutral'}
 
     # import model
-    # model3 = joblib.load('training/models/Model3_trained.pkl');
+    model3 = joblib.load('Model3_trained_updated.pkl');
     # num_imgs = len([name for name in os.listdir(img_dir) if os.path.isfile(os.path.join(img_dir, name))])
     imgs = []
     img_dirs = []
@@ -182,41 +183,40 @@ def predict_emotions(self, img_dir=os.path.join(os.path.dirname(__file__), "imgs
         curr_blob = self.upload_img(curr_img)
         blobs.append(curr_blob)
 
-    for i in range(len(img_dirs)):
-        add_to_db(img_dirs[i])
+    # for i in range(len(img_dirs)):
+    #     add_to_db(img_dirs[i])
 
-    # self.images = imgs
-    # # reshape image
-    # imgs = np.array(imgs).reshape(-1, 48, 48, 3)
-    #
-    # # preprocess data for model
-    # imgs_rs = keras.applications.mobilenet_v2.preprocess_input(imgs)
-    #
-    # #predict labels
-    # y_imgs = np.argmax(model3.predict(imgs_rs), axis=1)
-    #
-    # self.labels = []
-    # for i in range(len(y_imgs)):
-    #     self.labels.append(emotions[y_imgs[i]])
-    #     self.add_to_db(img_dirs[i], emotions[y_imgs[i]], np.random.randint(2)) # random number for classification
+    # reshape image
+    imgs = np.array(imgs).reshape(-1, 48, 48, 3)
 
-    req = request.get_data()
-    print(req)
-    return jsonify(req)
+    # preprocess data for model
+    imgs_rs = keras.applications.mobilenet_v2.preprocess_input(imgs)
+
+    #predict labels
+    y_imgs = np.argmax(model3.predict(imgs_rs), axis=1)
+
+    labels = []
+    for i in range(len(y_imgs)):
+        labels.append(emotions[y_imgs[i]])
+        add_to_db(img_dirs[i], emotions[y_imgs[i]], np.random.randint(2)) # random number for classification
+
+    # req = request.get_data()
+    # print(req)
+    # return jsonify(req)
 
 
 if __name__ == "__main__":
-    #     model = Emotion_ML()
-    #
-    # # make anonymous user
-    # #     anonymous_user = auth.create_user()
-    # #     uid = anonymous_user.uid
-    # #     token = auth.create_custom_token(uid)
-    #
-    #     model.pull_from_dB()
-    #     model.vid_to_imgs("videoAnalysis.mp4")
-    #     osPath = os.path.join(os.path.dirname(__file__), "imgs/")
-    #     model.predict_emotions(osPath)
-    #     # labels = model.labels
+    model = Emotion_ML()
+    dbObj()
+# make anonymous user
+#     anonymous_user = auth.create_user()
+#     uid = anonymous_user.uid
+#     token = auth.create_custom_token(uid)
 
-    app.run(debug=True)
+    pull_from_dB()
+    vid_to_imgs("videoAnalysis.mp4")
+    osPath = os.path.join(os.path.dirname(__file__), "imgs/")
+    predict_emotions(osPath)
+    # labels = model.labels
+
+    # app.run(debug=True)
