@@ -41,18 +41,28 @@
 | 3/29 | Amani | Use firebase to pull and upload video to cloud | 4 hrs
 | 4/10 | Amani | Configure HiPerGator and upload datasets | 1 hr
 | 4/11 | Amani | Alter Tensorflow Keras so that it uses GPU on HiPerGator | 3 hrs
+| 4/12 | Diana | Attempt to re-train model 3 on HiperGator | 2 hrs 
+| 4/12 | Diana | Test Application on andriod tablet | 1 hrs 
+| 4/13 | Diana | Re-process training dataset for Convolutional Neural Network | 2 hr
+| 4/13 | Diana | Hyper-parameter tuning on CNN model | 3 hrs
 | 4/13 | Amani | Continue configuring GPU on HiPerGator | 1 hrs
 | 4/13 | Shravya | Understand and fix firebase errors on frontend | 2 hrs 
 | 4/13 | Shravya | Research video player issue to work on web with firebase | 3 hrs
 | 4/13 | All members | Work on Prototype Presentation | 3 hrs
 | 4/13 | Amani | Start implementing Python back-end on Flutter | 3 hrs
+| 4/13 | Diana |  Attempt 1 to re-train CNN model with new hyper-parameters (crashed)| 5 hrs
 | 4/14 | Afnan | Work on Prototype Presentation | 0.5 hrs
 | 4/14 | Shravya | Research + work on video playback | 4 hrs 
+| 4/14 | Diana |  Research of convolutional neural network optimization | 2 hrs
+| 4/14 | Diana |  Attempt 2 to re-train CNN model with new hyper-parameters | 5 hrs
 | 4/15 | Afnan | Research + implementation of camera access in flutter | 3 hrs
 | 4/15 | Amani | Continue connecting Python back-end on Flutter | 2 hrs
+| 4/14 | Diana |  Research of convolutional neural network optimization | 2 hrs
+| 4/15 | Diana |  Successful re-training of CNN model with more epochs| 6 hrs
 | 4/16 | Shravya | Changing homepage UI | 1 hr 
 | 4/16 | Amani | Add TensorFlow Lite model to Firebase | 1 hr
 | 4/16 | Amani | Alter back-end so model predictions are on front-end | 2 hrs
+| 4/16 | Diana |  Convert model prototype to tensorflow lite model for application | 1 hr
 | 4/17 | Amani | Debug Python implementation on front-end | 3 hrs
 | 4/18 | Afnan | Testing app to run on Android device + implementing video capture on app | 4.5 hrs
 | 4/18 | All members | Work on Prototype report | 3 hrs
