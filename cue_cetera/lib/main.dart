@@ -253,6 +253,12 @@ class playVideo extends State<Test> {
   playVideo(this.filePath);
   VideoPlayerController? _videoPlayerController;
   loadVideoPlayer(File file) async {
+    DatabaseReference ref = FirebaseDatabase.instance.ref("Videos");
+
+    ref.child('paths').push().set({
+      "Path": filePath,
+    });
+
     final storage = FirebaseStorage.instance.ref();
 
     final storRef = storage.child(filePath);
@@ -336,7 +342,7 @@ class playVideo extends State<Test> {
       throw Exception('Failed to save video');
     }
 
-    loadAsset();
+    // loadAsset();
 
     setState(() {
       File file = File(filePath);

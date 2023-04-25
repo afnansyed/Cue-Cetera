@@ -2,7 +2,7 @@
     package="com.example.cue_cetera">
    <application
         android:usesCleartextTraffic="true"
-        android:name="com.chaquo.python.android.PyApplication"
+        android:name="${applicationName}"
         android:label="cue_cetera"
         android:icon="@mipmap/ic_launcher">
         <activity

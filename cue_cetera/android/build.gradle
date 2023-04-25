@@ -2,14 +2,14 @@ buildscript {
     ext.kotlin_version = '1.7.10'
     repositories {
         mavenCentral()
-        maven { url "https://chaquo.com/maven" }
+//        maven { url "https://chaquo.com/maven" }
         google()
     }
 
     dependencies {
         classpath 'com.android.tools.build:gradle:7.1.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "com.chaquo.python:gradle:12.0.1"
+//        classpath "com.chaquo.python:gradle:12.0.1"
     }
 }
 
