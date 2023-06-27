@@ -6,6 +6,9 @@ import 'package:open_file/open_file.dart';
 import 'package:video_player/video_player.dart';
 import 'package:camera/camera.dart';
 
+import 'package:cue_cetera/pages/result_display.dart';
+import 'package:cue_cetera/services/screen_size.dart';
+
 import 'package:flutter/widgets.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -34,9 +37,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'CUE-CETERA',
       theme: ThemeData(
+        //primaryColor: Color(0xff1e133d),
         primaryColor: Color(0xff1e133d),
       ),
       home: MyHomePage(title: 'CUE-CETERA'),
+      //home: const ResultDisplay(),
     );
   }
 }
@@ -81,7 +86,8 @@ class MyHomePage extends StatelessWidget {
                     elevation: 20,
                     shadowColor: Color(0xff1e133d),
                     shape: StadiumBorder(),
-                  )),
+                  )
+              ),
               ElevatedButton(
                   onPressed: () {
                     Navigator.push(
@@ -142,7 +148,8 @@ class _videoRecord extends State<videoRecord> {
     }
     else {
       final file = await controllers.stopVideoRecording();
-      Navigator.push(context, MaterialPageRoute(builder: (context) =>  Test(file.path),));
+      //Navigator.push(context, MaterialPageRoute(builder: (context) =>  Test(file.path),));
+      Navigator.push(context, MaterialPageRoute(builder: (context) =>  ResultDisplay(),));
     }
   }
 
@@ -210,7 +217,8 @@ class videoUpload extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>  Test(picked.files.first.path!)),
+                              //builder: (context) =>  Test(picked.files.first.path!)),
+                              builder: (context) => ResultDisplay()),
                         );
                       }
                     }
