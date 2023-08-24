@@ -42,3 +42,5 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+cue_cetera/assets/cue-cetera-726df-firebase-adminsdk-z8vba-e4c583ce09.json
