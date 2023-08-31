@@ -73,3 +73,5 @@
 | 4/19 | Afnan | Integrating + testing video capture page into updated prototype code with firebase implementation | 1.5 hrs 
 | 4/19 | Afnan | Prototype report | 0.5 hrs
 | 8/27 | Amani | HiPerGator GPU configuration and testing | 3 hrs
+| 8/29 | Diana |  Manually clean Fer-2013 dataset + manipulate images | 2.5 hrs
+| 8/30 | Diana |  Clean + reshape emotic dataset  | 3 hrs
