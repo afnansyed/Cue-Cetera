@@ -4,34 +4,75 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:chewie/chewie.dart';
 import 'package:cue_cetera/classes/timestamp.dart';
 import 'package:cue_cetera/widgets/timestamp_card.dart';
+import 'dart:io';
+import 'package:open_file/open_file.dart';
 import 'package:cue_cetera/services/screen_size.dart';
 
 class ResultDisplay extends StatefulWidget {
-  const ResultDisplay({Key? key}) : super(key: key);
+  String filePath;
+  ResultDisplay(this.filePath, {Key? key}) : super(key: key);
 
   @override
-  State<ResultDisplay> createState() => _ResultDisplayState();
+  State<ResultDisplay> createState() => _ResultDisplayState(filePath);
 }
 
 // TODO: make current timestamp search use binary search algorithm,
-// TODO: change emotion symbols to just be blue or red thumbs
-// TODO: implement a blank emotion that indicates no emotion being displayed
-//        basically just means we need a third option with our red and blue thumbs
 
 class _ResultDisplayState extends State<ResultDisplay> {
+  String filePath;
+  _ResultDisplayState(this.filePath);
+
+  // there is probably a way to not define these sets twice
+  List<int> positiveEmotions = [
+    0,
+    3,
+    5,
+    11,
+    12,
+    13,
+    16,
+    18,
+    19,
+    24,
+    25
+  ];
+
+  List<int> negativeEmotions = [
+    1,
+    2,
+    4,
+    6,
+    7,
+    8,
+    9,
+    10,
+    14,
+    15,
+    17,
+    20,
+    21,
+    22,
+    26
+  ];
+
+  // dont actually need this list with current implementation, but makes it clear
+  List<int> neutralEmotions = [
+    23,
+    27
+  ];
 
   // would be best to already get our timestamp info in chronological order
   // if in chronological order, we can use binary search to find our current emotion
   List<Timestamp> timestamps = [
-    Timestamp(timeMs: 0, emotion: 5),
+    Timestamp(timeMs: 0, emotion: 0),
     Timestamp(timeMs: 1000, emotion: 1),
-    Timestamp(timeMs: 2000, emotion: 8),
-    Timestamp(timeMs: 3000, emotion: 0),
-    Timestamp(timeMs: 5000, emotion: 4),
-    Timestamp(timeMs: 8000, emotion: 3),
-    Timestamp(timeMs: 13000, emotion: 7),
-    Timestamp(timeMs: 21000, emotion: 2),
-    Timestamp(timeMs: 34000, emotion: 6),
+    Timestamp(timeMs: 2000, emotion: 3),
+    Timestamp(timeMs: 3000, emotion: 5),
+    Timestamp(timeMs: 5000, emotion: 23),
+    Timestamp(timeMs: 8000, emotion: 2),
+    Timestamp(timeMs: 13000, emotion: 4),
+    Timestamp(timeMs: 21000, emotion: 27),
+    Timestamp(timeMs: 34000, emotion: 25),
   ];
 
   int currentTimestampIndex = 0;
@@ -44,7 +85,10 @@ class _ResultDisplayState extends State<ResultDisplay> {
   // Chewie implementation derived from: https://www.youtube.com/watch?v=dvDTmYlJ1b0&ab_channel=eclectifyUniversity-Flutter
 
   videoInit() async {
-    videoController = VideoPlayerController.asset("assets/videos/circuits.mp4");
+    //videoController = VideoPlayerController.asset("assets/videos/circuits.mp4");
+    //using the same logic as in "Test(): function in main
+    File file = File(filePath);
+    videoController = VideoPlayerController.file(file);
     await videoController!.initialize();
 
     chewieController = ChewieController(
@@ -60,7 +104,7 @@ class _ResultDisplayState extends State<ResultDisplay> {
     setState(() {});
   }
 
-  setCurrentTimestampIndex() {
+  setCurrentTimestampIndexLinear() {
     // O(N) linear search to find which timestamp we currently lie within
     // assumes the first timestamp will always be at 0 ms
     // ASSUMES LIST IN ASCENDING ORDER!!!
@@ -86,49 +130,51 @@ class _ResultDisplayState extends State<ResultDisplay> {
     return;
   }
 
-  // EDIT: change and rename this to get thumb path
-  String getEmotionImagePath(int emotion) {
-    String emotionString = "";
-    switch(emotion) {
-      case 0:
-        emotionString = "anger";
-        break;
-      case 1:
-        emotionString = "embarrassment";
-        break;
-      case 2:
-        emotionString = "fear";
-        break;
-      case 3:
-        emotionString = "happiness";
-        break;
-      case 4:
-        emotionString = "joy";
-        break;
-      case 5:
-        emotionString = "proud";
-        break;
-      case 6:
-        emotionString = "sadness";
-        break;
-      case 7:
-        emotionString = "upset";
-        break;
-      case 8:
-        emotionString = "worry";
-        break;
-      default: // we ideally never want this to happen
-        print("Invalid emotion value");
-        emotionString = "anger";
-        break;
+  setCurrentTimestampIndexBinary() {
+    // O(log(N)) binary search to find which timestamp we currently lie within
+    // assumes the first timestamp will always be at 0 ms
+    // ASSUMES LIST IN ASCENDING ORDER!!!
+    if (videoController == null) {
+      currentTimestampIndex = 0;
+      return;
     }
-    return "assets/imgs/emotions/$emotionString.png";
+    int currentTime = videoController!.value.position.inMilliseconds;
+    int searchIndex = 0;
+    while (currentTime > timestamps[searchIndex].timeMs!) {
+      if (searchIndex < timestamps.length - 1) {
+        if (currentTime < timestamps[searchIndex + 1].timeMs!) {
+          break;
+        }
+        searchIndex++;
+      }
+      else {
+        break;
+      }
+    }
+    currentTimestampIndex = searchIndex;
+    return;
   }
 
-  String updateAndGetEmotionImagePath() {
-    setCurrentTimestampIndex();
+  String getThumbPath(int emotion) {
+    String thumbString = "";
+    if (positiveEmotions.contains(emotion)) {
+      thumbString = "blueThumb";
+    }
+    else if (negativeEmotions.contains(emotion)) {
+      thumbString = "redThumb";
+    }
+    else {
+      thumbString = "neutralThumb";
+    }
+
+    // use the three block if/else using three dictionaries
+    return "assets/imgs/thumbs/$thumbString.png";
+  }
+
+  String updateAndGetThumbPath() {
+    setCurrentTimestampIndexLinear();
     //currentTimestampIndex = 0;
-    return getEmotionImagePath(timestamps[currentTimestampIndex].emotion!);
+    return getThumbPath(timestamps[currentTimestampIndex].emotion!);
   }
 
   jump(int time) {
@@ -196,7 +242,7 @@ class _ResultDisplayState extends State<ResultDisplay> {
                           // will either be green thumb, red thumb, or no thumb (use a function to return the correct
                           // asset path
                           //"assets/imgs/thumbs/greenThumb.png",
-                          updateAndGetEmotionImagePath(),
+                          updateAndGetThumbPath(),
                           scale: 6,
                           // found this trick for image opacity here: https://stackoverflow.com/questions/73490832/change-image-asset-opacity-using-opacity-parameter-in-image-widget
                           opacity: const AlwaysStoppedAnimation(.75),
