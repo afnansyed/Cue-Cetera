@@ -149,7 +149,7 @@ class _videoRecord extends State<videoRecord> {
     else {
       final file = await controllers.stopVideoRecording();
       //Navigator.push(context, MaterialPageRoute(builder: (context) =>  Test(file.path),));
-      Navigator.push(context, MaterialPageRoute(builder: (context) =>  ResultDisplay(),));
+      Navigator.push(context, MaterialPageRoute(builder: (context) =>  ResultDisplay(file.path),));
     }
   }
 
@@ -218,7 +218,7 @@ class videoUpload extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               //builder: (context) =>  Test(picked.files.first.path!)),
-                              builder: (context) => ResultDisplay()),
+                              builder: (context) => ResultDisplay(picked.files.first.path!)),
                         );
                       }
                     }

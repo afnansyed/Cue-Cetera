@@ -5,33 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="34f2ed93-a068-41e3-b83c-766de9aabb24" name="Changes" comment="Changes">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cue_cetera/assets/imgs/emotions/anger.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cue_cetera/assets/imgs/emotions/embarrassment.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cue_cetera/assets/imgs/emotions/fear.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cue_cetera/assets/imgs/emotions/happiness.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cue_cetera/assets/imgs/emotions/joy.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cue_cetera/assets/imgs/emotions/proud.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cue_cetera/assets/imgs/emotions/sadness.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cue_cetera/assets/imgs/emotions/upset.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cue_cetera/assets/imgs/emotions/worry.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cue_cetera/assets/videos/song.mp4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cue-Cetera.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Cue-Cetera.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cue_cetera/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/cue_cetera/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cue_cetera/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/cue_cetera/android/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cue_cetera/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/cue_cetera/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cue_cetera/linux/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/cue_cetera/linux/flutter/generated_plugin_registrant.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cue_cetera/linux/flutter/generated_plugin_registrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/cue_cetera/linux/flutter/generated_plugin_registrant.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cue_cetera/linux/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cue_cetera/linux/flutter/generated_plugins.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cue_cetera/lib/pages/result_display.dart" beforeDir="false" afterPath="$PROJECT_DIR$/cue_cetera/lib/pages/result_display.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cue_cetera/lib/widgets/timestamp_card.dart" beforeDir="false" afterPath="$PROJECT_DIR$/cue_cetera/lib/widgets/timestamp_card.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cue_cetera/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/cue_cetera/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cue_cetera/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/cue_cetera/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cue_cetera/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/cue_cetera/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cue_cetera/windows/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/cue_cetera/windows/flutter/generated_plugin_registrant.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cue_cetera/windows/flutter/generated_plugin_registrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/cue_cetera/windows/flutter/generated_plugin_registrant.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cue_cetera/windows/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cue_cetera/windows/flutter/generated_plugins.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,6 +65,7 @@
       <recent name="D:\Users\nepat\AndroidStudioProjects\Cue-Cetera\cue_cetera\assets\imgs\emotions" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Users\nepat\AndroidStudioProjects\Cue-Cetera\cue_cetera\assets\imgs\thumbs" />
       <recent name="D:\Users\nepat\AndroidStudioProjects\Cue-Cetera\cue_cetera\assets\videos" />
       <recent name="D:\Users\nepat\AndroidStudioProjects\Cue-Cetera\cue_cetera\assets\fonts" />
       <recent name="D:\Users\nepat\AndroidStudioProjects\Cue-Cetera\cue_cetera\lib\pages" />
