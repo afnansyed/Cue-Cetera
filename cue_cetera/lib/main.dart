@@ -82,7 +82,7 @@ class MyHomePage extends StatelessWidget {
             children: <Widget>[
               Container(
                 alignment: Alignment.center,
-                padding: EdgeInsets.only(top: 80),
+                padding: EdgeInsets.only(top: 30),
                 child: Text(
                   'Choose an Option',
                   style: TextStyle(
