@@ -68,13 +68,8 @@ class MyHomePage extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(20),
-          child: SizedBox(),
-        ),
       ),
       body: Container(
-        margin: EdgeInsets.only(top: 20),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.vertical(
             top: Radius.circular(50),
@@ -82,127 +77,130 @@ class MyHomePage extends StatelessWidget {
           color: Color.fromARGB(255, 66, 39, 39),
         ),
         alignment: Alignment.center,
-        child: Column(
-          children: <Widget>[
-            Container(
-              alignment: Alignment.center,
-              padding: EdgeInsets.only(top: 80),
-              child: Text(
-                'Choose an Option',
-                style: TextStyle(
-                  fontFamily: 'Lusteria',
-                  color: Color.fromARGB(255, 212, 195, 195),
-                  fontSize: 37,
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Container(
+                alignment: Alignment.center,
+                padding: EdgeInsets.only(top: 80),
+                child: Text(
+                  'Choose an Option',
+                  style: TextStyle(
+                    fontFamily: 'Lusteria',
+                    color: Color.fromARGB(255, 212, 195, 195),
+                    fontSize: 37,
+                  ),
                 ),
               ),
-            ),
-            Container(
-              alignment: Alignment.center,
-              padding: EdgeInsets.only(top: 30),
-              child: Text(
-                'Begin your exploration',
-                style: TextStyle(
-                  fontFamily: 'OpenSans',
-                  color: Color.fromARGB(255, 172, 158, 158),
-                  fontSize: 15,
-                  fontStyle: FontStyle.italic,
+              Container(
+                alignment: Alignment.center,
+                padding: EdgeInsets.only(top: 30),
+                child: Text(
+                  'Begin your exploration',
+                  style: TextStyle(
+                    fontFamily: 'OpenSans',
+                    color: Color.fromARGB(255, 172, 158, 158),
+                    fontSize: 15,
+                    fontStyle: FontStyle.italic,
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: 60),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const videoUpload()),
-                    );
-                  },
-                  child: Center(
-                    child: Text("UPLOAD VIDEO"),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    fixedSize: Size(250, 100),
-                    textStyle: TextStyle(
-                      fontFamily: 'OpenSans',
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
+              SizedBox(height: 60),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const videoUpload()),
+                      );
+                    },
+                    child: Center(
+                      child: Text("UPLOAD VIDEO"),
                     ),
-                    primary: Color.fromARGB(255, 212, 195, 195),
-                    onPrimary: Color.fromARGB(255, 66, 39, 39),
-                    elevation: 0,
-                    shadowColor: Color.fromARGB(255, 66, 39, 39),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 40),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const videoRecord()),
-                    );
-                  },
-                  child: Center(
-                    child: Text("USE VIDEO CAMERA"),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    fixedSize: Size(250, 100),
-                    textStyle: TextStyle(
-                      fontFamily: 'OpenSans',
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    primary: Color.fromARGB(255, 212, 195, 195),
-                    onPrimary: Color.fromARGB(255, 66, 39, 39),
-                    elevation: 0,
-                    shadowColor: Color.fromARGB(255, 66, 39, 39),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
+                    style: ElevatedButton.styleFrom(
+                      fixedSize: Size(250, 100),
+                      textStyle: TextStyle(
+                        fontFamily: 'OpenSans',
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      primary: Color.fromARGB(255, 212, 195, 195),
+                      onPrimary: Color.fromARGB(255, 66, 39, 39),
+                      elevation: 0,
+                      shadowColor: Color.fromARGB(255, 66, 39, 39),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(height: 60),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const infoPage()),
-                    );
-                  },
-                  child: Center(
-                    child: Text("INFO"),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    fixedSize: Size(150, 50),
-                    textStyle: TextStyle(
-                      fontFamily: 'OpenSans',
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
+                  SizedBox(height: 40),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const videoRecord()),
+                      );
+                    },
+                    child: Center(
+                      child: Text("USE VIDEO CAMERA"),
                     ),
-                    primary: Color.fromARGB(255, 35, 23, 23),
-                    onPrimary: Color.fromARGB(255, 158, 144, 144),
-                    elevation: 0,
-                    shadowColor: Color.fromARGB(255, 66, 39, 39),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
+                    style: ElevatedButton.styleFrom(
+                      fixedSize: Size(250, 100),
+                      textStyle: TextStyle(
+                        fontFamily: 'OpenSans',
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      primary: Color.fromARGB(255, 212, 195, 195),
+                      onPrimary: Color.fromARGB(255, 66, 39, 39),
+                      elevation: 0,
+                      shadowColor: Color.fromARGB(255, 66, 39, 39),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+              SizedBox(height: 60),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const infoPage()),
+                      );
+                    },
+                    child: Center(
+                      child: Text("INFO"),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      fixedSize: Size(150, 50),
+                      textStyle: TextStyle(
+                        fontFamily: 'OpenSans',
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      primary: Color.fromARGB(255, 35, 23, 23),
+                      onPrimary: Color.fromARGB(255, 158, 144, 144),
+                      elevation: 0,
+                      shadowColor: Color.fromARGB(255, 66, 39, 39),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -229,75 +227,73 @@ class infoPage extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(20),
-          child: SizedBox(),
-        ),
       ),
       body: Container(
         alignment: Alignment.center,
-        child: Column(
-          children: <Widget>[
-            Container(
-              alignment: Alignment.centerLeft,
-              padding: EdgeInsets.only(left: 30, top: 30),
-              child: Text(
-                'ABOUT',
-                style: TextStyle(
-                  fontFamily: 'Lusteria',
-                  color: Color.fromARGB(255, 35, 23, 23),
-                  fontSize: 37,
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Container(
+                alignment: Alignment.centerLeft,
+                padding: EdgeInsets.only(left: 30, top: 30),
+                child: Text(
+                  'ABOUT',
+                  style: TextStyle(
+                    fontFamily: 'Lusteria',
+                    color: Color.fromARGB(255, 35, 23, 23),
+                    fontSize: 37,
+                  ),
                 ),
               ),
-            ),
-            Container(
+              Container(
+                  alignment: Alignment.centerLeft,
+                  padding:
+                      EdgeInsets.only(left: 30, right: 30, top: 15, bottom: 15),
+                  child: Text(
+                      'Cue-Cetera is an application that can be used to detect and classify visual facial cues by the means of Machine Learning. Our goal is to have a social impact by giving access to a learning tool and hence, bringing awareness to related communities.',
+                      style: TextStyle(
+                        fontFamily: 'OpenSans',
+                        color: Color.fromARGB(255, 222, 215, 215),
+                        fontSize: 12,
+                      ),
+                      textAlign: TextAlign.justify),
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 66, 39, 39),
+                  )),
+              Container(
                 alignment: Alignment.centerLeft,
-                padding:
-                    EdgeInsets.only(left: 30, right: 30, top: 15, bottom: 15),
+                padding: EdgeInsets.only(left: 30, top: 20),
                 child: Text(
-                    'Cue-Cetera is an application that can be used to detect and classify visual facial cues by the means of Machine Learning. Our goal is to have a social impact by giving access to a learning tool and hence, bringing awareness to related communities.',
+                  'How To Use',
+                  style: TextStyle(
+                    fontFamily: 'Lusteria',
+                    color: Color.fromARGB(255, 35, 23, 23),
+                    fontSize: 37,
+                  ),
+                ),
+              ),
+              Container(
+                  alignment: Alignment.centerLeft,
+                  padding:
+                      EdgeInsets.only(left: 30, right: 30, top: 20, bottom: 20),
+                  child: Text(
+                    '1. Choose between '
+                    'Upload Video'
+                    ' or '
+                    'Use Video Camera'
+                    ' option on the homepage. \n2. Choose or take a video that is less that 30s long. \n3. Make sure the faces are clearly visible in the video. \n \n Results may take up to 1 minute to load. Emotions will be catogorized a POSITIVE, NEGATIVE, or NEUTRAL. Clicking on the catogorized results will show you the specific video frame.',
                     style: TextStyle(
                       fontFamily: 'OpenSans',
                       color: Color.fromARGB(255, 222, 215, 215),
                       fontSize: 12,
                     ),
-                    textAlign: TextAlign.justify),
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 66, 39, 39),
-                )),
-            Container(
-              alignment: Alignment.centerLeft,
-              padding: EdgeInsets.only(left: 30, top: 20),
-              child: Text(
-                'How To Use',
-                style: TextStyle(
-                  fontFamily: 'Lusteria',
-                  color: Color.fromARGB(255, 35, 23, 23),
-                  fontSize: 37,
-                ),
-              ),
-            ),
-            Container(
-                alignment: Alignment.centerLeft,
-                padding:
-                    EdgeInsets.only(left: 30, right: 30, top: 20, bottom: 20),
-                child: Text(
-                  '1. Choose between '
-                  'Upload Video'
-                  ' or '
-                  'Use Video Camera'
-                  ' option on the homepage. \n2. Choose or take a video that is less that 30s long. \n3. Make sure the faces are clearly visible in the video. \n \n Results may take up to 1 minute to load. Emotions will be catogorized a POSITIVE, NEGATIVE, or NEUTRAL. Clicking on the catogorized results will show you the specific video frame.',
-                  style: TextStyle(
-                    fontFamily: 'OpenSans',
-                    color: Color.fromARGB(255, 222, 215, 215),
-                    fontSize: 12,
+                    textAlign: TextAlign.justify,
                   ),
-                  textAlign: TextAlign.justify,
-                ),
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 121, 111, 111),
-                )),
-          ],
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 121, 111, 111),
+                  )),
+            ],
+          ),
         ),
       ),
     );
