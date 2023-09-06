@@ -48,27 +48,80 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatelessWidget {
   final String title;
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff1e133d),
+      backgroundColor: Color.fromARGB(255, 172, 158, 158),
       appBar: AppBar(
-        backgroundColor: Color(0xff1e133d),
+        backgroundColor: Color.fromARGB(255, 172, 158, 158),
+        centerTitle: true,
         toolbarHeight: 100,
         elevation: 0,
-
-        title: Center(
-            child: Text(title,style: TextStyle(color: Color(0xffc9b6b9), fontSize: 30))
+        title: Text(
+          title,
+          style: TextStyle(
+            fontFamily: 'Lusteria',
+            color: Color.fromARGB(255, 66, 39, 39),
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(20),
+          child: SizedBox(),
         ),
       ),
       body: Container(
-          alignment: Alignment.center,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              ElevatedButton(
+        margin: EdgeInsets.only(top: 20),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [
+              Color.fromARGB(255, 66, 39, 39),
+              Color.fromARGB(255, 66, 39, 39),
+            ],
+          ),
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(50),
+          ),
+          color: Color.fromARGB(255, 66, 39, 39),
+        ),
+        alignment: Alignment.center,
+        child: Column(
+          children: <Widget>[
+            Container(
+              alignment: Alignment.center,
+              padding: EdgeInsets.only(top: 80),
+              child: Text(
+                'Choose an Option',
+                style: TextStyle(
+                  fontFamily: 'Lusteria',
+                  color: Color.fromARGB(255, 212, 195, 195),
+                  fontSize: 37,
+                ),
+              ),
+            ),
+            Container(
+              alignment: Alignment.center,
+              padding: EdgeInsets.only(top: 30),
+              child: Text(
+                'Begin your exploration',
+                style: TextStyle(
+                  fontFamily: 'OpenSans',
+                  color: Color.fromARGB(255, 172, 158, 158),
+                  fontSize: 15,
+                  fontStyle: FontStyle.italic,
+                ),
+              ),
+            ),
+            SizedBox(height: 60),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                ElevatedButton(
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -76,19 +129,27 @@ class MyHomePage extends StatelessWidget {
                           builder: (context) => const videoUpload()),
                     );
                   },
-                  child: Text("UPLOAD VIDEO"),
+                  child: Center(
+                    child: Text("UPLOAD VIDEO"),
+                  ),
                   style: ElevatedButton.styleFrom(
-                    fixedSize: Size(250, 110),
-                    textStyle:
-                    TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    primary: Color(0xffc9b6b9),
-                    onPrimary: Color(0xff1e133d),
-                    elevation: 20,
-                    shadowColor: Color(0xff1e133d),
-                    shape: StadiumBorder(),
-                  )
-              ),
-              ElevatedButton(
+                    fixedSize: Size(250, 100),
+                    textStyle: TextStyle(
+                      fontFamily: 'OpenSans',
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    primary: Color.fromARGB(255, 212, 195, 195),
+                    onPrimary: Color.fromARGB(255, 66, 39, 39),
+                    elevation: 0,
+                    shadowColor: Color.fromARGB(255, 66, 39, 39),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 40),
+                ElevatedButton(
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -96,19 +157,36 @@ class MyHomePage extends StatelessWidget {
                           builder: (context) => const videoRecord()),
                     );
                   },
-                  child: Text("USE VIDEO CAMERA"),
+                  child: Center(
+                    child: Text("USE VIDEO CAMERA"),
+                  ),
                   style: ElevatedButton.styleFrom(
-                    fixedSize: Size(250, 110),
-                    textStyle:
-                    TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    primary: Color(0xffc9b6b9),
-                    onPrimary: Color(0xff1e133d),
-                    elevation: 20,
-                    shadowColor: Color(0xff1e133d),
-                    shape: StadiumBorder(),
-                  )),
-            ],
-          )),
+                    fixedSize: Size(250, 100),
+                    textStyle: TextStyle(
+                      fontFamily: 'OpenSans',
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    primary: Color.fromARGB(255, 212, 195, 195),
+                    onPrimary: Color.fromARGB(255, 66, 39, 39),
+                    elevation: 0,
+                    shadowColor: Color.fromARGB(255, 66, 39, 39),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 150),
+            Container(
+              height: 2,
+              color: Color.fromARGB(255, 149, 139, 139),
+              width: 50,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -144,12 +222,14 @@ class _videoRecord extends State<videoRecord> {
   recordVideo() async {
     if (!controllers.value.isRecordingVideo) {
       await controllers.startVideoRecording();
-
-    }
-    else {
+    } else {
       final file = await controllers.stopVideoRecording();
       //Navigator.push(context, MaterialPageRoute(builder: (context) =>  Test(file.path),));
-      Navigator.push(context, MaterialPageRoute(builder: (context) =>  ResultDisplay(file.path),));
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ResultDisplay(file.path),
+          ));
     }
   }
 
@@ -159,8 +239,7 @@ class _videoRecord extends State<videoRecord> {
       return Container(
         color: Color(0xffc9b6b9),
       );
-    }
-    else {
+    } else {
       return Center(
         child: Stack(
           alignment: Alignment.bottomCenter,
@@ -200,7 +279,6 @@ class videoUpload extends StatelessWidget {
         ),
       ),
       body: Container(
-
           alignment: Alignment.center,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -210,15 +288,16 @@ class videoUpload extends StatelessWidget {
                     var picked = await FilePicker.platform.pickFiles();
 
                     if (picked != null) {
-                      print(picked.files.first.size/(1024*1024));
-                      if(picked.files.first.size/(1024*1024) > 50){
+                      print(picked.files.first.size / (1024 * 1024));
+                      if (picked.files.first.size / (1024 * 1024) > 50) {
                         print('File size cannot exceed 50 MB');
-                      }else{
+                      } else {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                               //builder: (context) =>  Test(picked.files.first.path!)),
-                              builder: (context) => ResultDisplay(picked.files.first.path!)),
+                              builder: (context) =>
+                                  ResultDisplay(picked.files.first.path!)),
                         );
                       }
                     }
@@ -227,7 +306,7 @@ class videoUpload extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     fixedSize: Size(250, 110),
                     textStyle:
-                    TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     primary: Color(0xffc9b6b9),
                     onPrimary: Color(0xff1e133d),
                     elevation: 20,
@@ -235,11 +314,8 @@ class videoUpload extends StatelessWidget {
                     shape: StadiumBorder(),
                   )),
             ],
-          )
-      ),
+          )),
     );
-
-
   }
 }
 
@@ -279,7 +355,7 @@ class playVideo extends State<Test> {
       throw Exception('Failed to save video');
     }
 
-    if(_videoPlayerController != null) {
+    if (_videoPlayerController != null) {
       _videoPlayerController!.dispose();
     }
 
@@ -359,17 +435,17 @@ class playVideo extends State<Test> {
   }
 
   Future<void> loadAsset() async {
-    var client =http.Client();
-    var uri=Uri.parse("http://10.0.2.2:5000/call_db");
+    var client = http.Client();
+    var uri = Uri.parse("http://10.0.2.2:5000/call_db");
     var response = await client.patch(uri);
 
-    uri=Uri.parse("http://10.0.2.2:5000/pull");
+    uri = Uri.parse("http://10.0.2.2:5000/pull");
     response = await client.get(uri);
 
-    uri=Uri.parse("http://10.0.2.2:5000/vid_to_img");
+    uri = Uri.parse("http://10.0.2.2:5000/vid_to_img");
     response = await client.get(uri);
 
-    uri=Uri.parse("http://10.0.2.2:5000/predict");
+    uri = Uri.parse("http://10.0.2.2:5000/predict");
     response = await client.get(uri);
   }
 }
