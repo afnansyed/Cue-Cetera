@@ -76,14 +76,6 @@ class MyHomePage extends StatelessWidget {
       body: Container(
         margin: EdgeInsets.only(top: 20),
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [
-              Color.fromARGB(255, 66, 39, 39),
-              Color.fromARGB(255, 66, 39, 39),
-            ],
-          ),
           borderRadius: BorderRadius.vertical(
             top: Radius.circular(50),
           ),
@@ -178,12 +170,133 @@ class MyHomePage extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 150),
-            Container(
-              height: 2,
-              color: Color.fromARGB(255, 149, 139, 139),
-              width: 50,
+            SizedBox(height: 60),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const infoPage()),
+                    );
+                  },
+                  child: Center(
+                    child: Text("INFO"),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    fixedSize: Size(150, 50),
+                    textStyle: TextStyle(
+                      fontFamily: 'OpenSans',
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    primary: Color.fromARGB(255, 35, 23, 23),
+                    onPrimary: Color.fromARGB(255, 158, 144, 144),
+                    elevation: 0,
+                    shadowColor: Color.fromARGB(255, 66, 39, 39),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                  ),
+                ),
+              ],
             ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class infoPage extends StatelessWidget {
+  const infoPage({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Color.fromARGB(255, 172, 158, 158),
+      appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 172, 158, 158),
+        centerTitle: true,
+        toolbarHeight: 100,
+        elevation: 0,
+        title: Text(
+          'CUE-CETERA',
+          style: TextStyle(
+            fontFamily: 'Lusteria',
+            color: Color.fromARGB(255, 66, 39, 39),
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(20),
+          child: SizedBox(),
+        ),
+      ),
+      body: Container(
+        alignment: Alignment.center,
+        child: Column(
+          children: <Widget>[
+            Container(
+              alignment: Alignment.centerLeft,
+              padding: EdgeInsets.only(left: 30, top: 30),
+              child: Text(
+                'ABOUT',
+                style: TextStyle(
+                  fontFamily: 'Lusteria',
+                  color: Color.fromARGB(255, 35, 23, 23),
+                  fontSize: 37,
+                ),
+              ),
+            ),
+            Container(
+                alignment: Alignment.centerLeft,
+                padding:
+                    EdgeInsets.only(left: 30, right: 30, top: 15, bottom: 15),
+                child: Text(
+                    'Cue-Cetera is an application that can be used to detect and classify visual facial cues by the means of Machine Learning. Our goal is to have a social impact by giving access to a learning tool and hence, bringing awareness to related communities.',
+                    style: TextStyle(
+                      fontFamily: 'OpenSans',
+                      color: Color.fromARGB(255, 222, 215, 215),
+                      fontSize: 12,
+                    ),
+                    textAlign: TextAlign.justify),
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 66, 39, 39),
+                )),
+            Container(
+              alignment: Alignment.centerLeft,
+              padding: EdgeInsets.only(left: 30, top: 20),
+              child: Text(
+                'How To Use',
+                style: TextStyle(
+                  fontFamily: 'Lusteria',
+                  color: Color.fromARGB(255, 35, 23, 23),
+                  fontSize: 37,
+                ),
+              ),
+            ),
+            Container(
+                alignment: Alignment.centerLeft,
+                padding:
+                    EdgeInsets.only(left: 30, right: 30, top: 20, bottom: 20),
+                child: Text(
+                  '1. Choose between '
+                  'Upload Video'
+                  ' or '
+                  'Use Video Camera'
+                  ' option on the homepage. \n2. Choose or take a video that is less that 30s long. \n3. Make sure the faces are clearly visible in the video. \n \n Results may take up to 1 minute to load. Emotions will be catogorized a POSITIVE, NEGATIVE, or NEUTRAL. Clicking on the catogorized results will show you the specific video frame.',
+                  style: TextStyle(
+                    fontFamily: 'OpenSans',
+                    color: Color.fromARGB(255, 222, 215, 215),
+                    fontSize: 12,
+                  ),
+                  textAlign: TextAlign.justify,
+                ),
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 121, 111, 111),
+                )),
           ],
         ),
       ),
