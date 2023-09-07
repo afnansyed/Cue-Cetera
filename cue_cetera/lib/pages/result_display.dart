@@ -73,6 +73,7 @@ class _ResultDisplayState extends State<ResultDisplay> {
     Timestamp(timeMs: 13000, emotion: 4),
     Timestamp(timeMs: 21000, emotion: 27),
     Timestamp(timeMs: 34000, emotion: 25),
+    Timestamp(timeMs: 55000, emotion: 8),
   ];
 
   int currentTimestampIndex = 0;
@@ -131,27 +132,44 @@ class _ResultDisplayState extends State<ResultDisplay> {
   }
 
   setCurrentTimestampIndexBinary() {
-    // O(log(N)) binary search to find which timestamp we currently lie within
+    // O(N) linear search to find which timestamp we currently lie within
     // assumes the first timestamp will always be at 0 ms
     // ASSUMES LIST IN ASCENDING ORDER!!!
+    // should rewrite this algorithm to use a binary search, O(log(n)).
     if (videoController == null) {
       currentTimestampIndex = 0;
       return;
     }
     int currentTime = videoController!.value.position.inMilliseconds;
-    int searchIndex = 0;
-    while (currentTime > timestamps[searchIndex].timeMs!) {
-      if (searchIndex < timestamps.length - 1) {
-        if (currentTime < timestamps[searchIndex + 1].timeMs!) {
-          break;
-        }
-        searchIndex++;
+    int high = timestamps.length - 1;
+    int low = 0;
+    int middle = timestamps.length ~/ 2;
+    // we are at the correct timestamp if currentTime >= timestamps[middle] && < timestamps[middle+1]
+    bool searching = true;
+    while (searching) {
+      if (currentTime < timestamps[middle].timeMs!) {
+        // search the lower half of our timestamps for the correct one
+        high = middle;
+        middle = (high + low) ~/ 2;
       }
       else {
-        break;
+        //currentTime >= timestamps[middle], check if currentTime < timestamps[middle+1]
+        if (middle + 1 < timestamps.length) {
+          // we are at the last legal index, break
+          break; // shouldnt have to change searching to false;
+        }
+        if (currentTime < timestamps[middle + 1].timeMs!) {
+          // we are at the correct index
+          break;
+        }
+        else {
+          // search the upper half of our timestamps
+          low = middle;
+          middle = (high + low) ~/ 2;
+        }
       }
     }
-    currentTimestampIndex = searchIndex;
+    currentTimestampIndex = middle;
     return;
   }
 
@@ -172,7 +190,7 @@ class _ResultDisplayState extends State<ResultDisplay> {
   }
 
   String updateAndGetThumbPath() {
-    setCurrentTimestampIndexLinear();
+    setCurrentTimestampIndexBinary();
     //currentTimestampIndex = 0;
     return getThumbPath(timestamps[currentTimestampIndex].emotion!);
   }
