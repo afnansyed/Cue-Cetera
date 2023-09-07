@@ -24,56 +24,35 @@ class _ResultDisplayState extends State<ResultDisplay> {
 
   // there is probably a way to not define these sets twice
   List<int> positiveEmotions = [
-    0,
     3,
-    5,
-    11,
-    12,
-    13,
-    16,
-    18,
-    19,
-    24,
-    25
+    5
   ];
 
   List<int> negativeEmotions = [
+    0,
     1,
     2,
-    4,
-    6,
-    7,
-    8,
-    9,
-    10,
-    14,
-    15,
-    17,
-    20,
-    21,
-    22,
-    26
+    4
   ];
 
   // dont actually need this list with current implementation, but makes it clear
   List<int> neutralEmotions = [
-    23,
-    27
+    6
   ];
 
   // would be best to already get our timestamp info in chronological order
   // if in chronological order, we can use binary search to find our current emotion
   List<Timestamp> timestamps = [
-    Timestamp(timeMs: 0, emotion: 0),
+    Timestamp(timeMs: 0, emotion: 3),
     Timestamp(timeMs: 1000, emotion: 1),
-    Timestamp(timeMs: 2000, emotion: 3),
-    Timestamp(timeMs: 3000, emotion: 5),
-    Timestamp(timeMs: 5000, emotion: 23),
+    Timestamp(timeMs: 2000, emotion: 2),
+    Timestamp(timeMs: 3000, emotion: 4),
+    Timestamp(timeMs: 5000, emotion: 5),
     Timestamp(timeMs: 8000, emotion: 2),
-    Timestamp(timeMs: 13000, emotion: 4),
-    Timestamp(timeMs: 21000, emotion: 27),
-    Timestamp(timeMs: 34000, emotion: 25),
-    Timestamp(timeMs: 55000, emotion: 8),
+    Timestamp(timeMs: 13000, emotion: 6),
+    Timestamp(timeMs: 21000, emotion: 0),
+    Timestamp(timeMs: 34000, emotion: 6),
+    Timestamp(timeMs: 55000, emotion: 3),
   ];
 
   int currentTimestampIndex = 0;
@@ -210,99 +189,106 @@ class _ResultDisplayState extends State<ResultDisplay> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff1e133d),
+      backgroundColor: const Color(0xFFAC9E9E),
       appBar: AppBar(
-        backgroundColor: const Color(0xff3c2087),
-        toolbarHeight: 50,
+        backgroundColor: const Color(0xFFAC9E9E),
+        toolbarHeight: 75,
         elevation: 0,
-        title: const Center(
-            child: Text(
-                "CUE-CETERA",
-                style: TextStyle(
-                    //color: Color(0xffc9b6b9),
-                    color: Color(0xffffffff),
-                    fontSize: 26,
-                    letterSpacing: 2.0,
-                    //fontFamily: "Montserrat",
-                ),
+        centerTitle: true,
+        title: const Text(
+            "CUE-CETERA",
+            style: TextStyle(
+                color: Color(0xFF422727),
+                fontSize: 20,
+                fontFamily: "Lusteria",
+              fontWeight: FontWeight.bold,
             ),
         ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        // using expanded widgets here so our heights will be properly proportioned
-        // and in bounds
-        children: <Widget> [
-          const Expanded(
-            flex: 1,
-            child: SizedBox(
-              width: double.infinity,
-              //height: 40.0,
-              //height: screenHeight(context) * .05,
-            ),
+      body: Container(
+        alignment: Alignment.center,
+        decoration: const BoxDecoration(
+          color: Color(0xFF422727),
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(50),
           ),
-          Container(
-            width: 320.0,
-            height: 180.0,
-            color: Colors.black,
-            child: Stack(
-              children: <Widget> [
-                // will show loading symbol if our chewie controller is null for whatever reason
-                chewieController != null ? Chewie(controller: chewieController!) : const SpinKitFadingCircle(color: Colors.white, size: 50.0),
-                Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: Align(
-                    alignment: Alignment.bottomRight,
-                    child: ValueListenableBuilder(
-                      valueListenable: videoController!,
-                      builder: (context, value, child) {
-                        return Image.asset( //will have to make this asset depend on the current emotion
-                          // will either be green thumb, red thumb, or no thumb (use a function to return the correct
-                          // asset path
-                          //"assets/imgs/thumbs/greenThumb.png",
-                          updateAndGetThumbPath(),
-                          scale: 6,
-                          // found this trick for image opacity here: https://stackoverflow.com/questions/73490832/change-image-asset-opacity-using-opacity-parameter-in-image-widget
-                          opacity: const AlwaysStoppedAnimation(.75),
-                        );
-                      },
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const Expanded(
-            flex: 1,
-            child: SizedBox(
-              width: double.infinity,
-              //height: 40.0,
-              //height: screenHeight(context) * .05,
-            ),
-          ),
-          Container(
-            width: 320.0,
-            height: 370.0,
-            color: Colors.grey[800],
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: timestamps.map((timestamp) => TimestampCard(
-                  timestamp: timestamp,
-                  jump: jump,
-                )).toList(),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          // using expanded widgets here so our heights will be properly proportioned
+          // and in bounds
+          children: <Widget> [
+            const Expanded(
+              flex: 1,
+              child: SizedBox(
+                width: double.infinity,
+                //height: 40.0,
+                //height: screenHeight(context) * .05,
               ),
             ),
-          ),
-          const Expanded(
-            flex: 2,
-            child: SizedBox(
-              width: double.infinity,
-              //height: 40.0,
-              //height: screenHeight(context) * .05,
+            Container(
+              width: 320.0,
+              height: 180.0,
+              color: Colors.black,
+              child: Stack(
+                children: <Widget> [
+                  // will show loading symbol if our chewie controller is null for whatever reason
+                  chewieController != null ? Chewie(controller: chewieController!) : const SpinKitFadingCircle(color: Colors.white, size: 50.0),
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: ValueListenableBuilder(
+                        valueListenable: videoController!,
+                        builder: (context, value, child) {
+                          return Image.asset( //will have to make this asset depend on the current emotion
+                            // will either be green thumb, red thumb, or no thumb (use a function to return the correct
+                            // asset path
+                            //"assets/imgs/thumbs/greenThumb.png",
+                            updateAndGetThumbPath(),
+                            scale: 6,
+                            // found this trick for image opacity here: https://stackoverflow.com/questions/73490832/change-image-asset-opacity-using-opacity-parameter-in-image-widget
+                            opacity: const AlwaysStoppedAnimation(.75),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+            const Expanded(
+              flex: 1,
+              child: SizedBox(
+                width: double.infinity,
+                //height: 40.0,
+                //height: screenHeight(context) * .05,
+              ),
+            ),
+            Container(
+              width: 320.0,
+              height: 370.0,
+              color: const Color(0xFFAC9E9E),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: timestamps.map((timestamp) => TimestampCard(
+                    timestamp: timestamp,
+                    jump: jump,
+                  )).toList(),
+                ),
+              ),
+            ),
+            const Expanded(
+              flex: 2,
+              child: SizedBox(
+                width: double.infinity,
+                //height: 40.0,
+                //height: screenHeight(context) * .05,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

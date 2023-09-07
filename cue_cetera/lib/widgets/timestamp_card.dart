@@ -8,42 +8,20 @@ class TimestampCard extends StatelessWidget {
 
   // there is probably a way to not define these sets twice
   List<int> positiveEmotions = [
-    0,
     3,
-    5,
-    11,
-    12,
-    13,
-    16,
-    18,
-    19,
-    24,
-    25
+    5
   ];
 
   List<int> negativeEmotions = [
+    0,
     1,
     2,
-    4,
-    6,
-    7,
-    8,
-    9,
-    10,
-    14,
-    15,
-    17,
-    20,
-    21,
-    22,
-    26
+    4
   ];
 
-  // dont actually need this list with current implementation, but is clear
+  // dont actually need this list with current implementation, but makes it clear
   List<int> neutralEmotions = [
-    23,
-    25,
-    27
+    6
   ];
 
   TimestampCard({required this.timestamp, required this.jump});
@@ -51,60 +29,18 @@ class TimestampCard extends StatelessWidget {
   String getEmotion(int emotion) {
     switch(emotion) {
       case 0:
-        return "Affection";
-      case 1:
-        return "Anger";
-      case 2:
-        return "Annoyance";
-      case 3:
-        return "Anticipation";
-      case 4:
-        return "Aversion";
-      case 5:
-        return "Confidence";
-      case 6:
         return "Disapproval";
-      case 7:
-        return "Disconnection";
-      case 8:
-        return "Disquietment";
-      case 9:
-        return "Doubt/Confusion";
-      case 10:
-        return "Embarrassment";
-      case 11:
-        return "Engagement";
-      case 12:
-        return "Esteem";
-      case 13:
-        return "Excitement";
-      case 14:
-        return "Fatigue";
-      case 15:
+      case 1:
+        return "Angry";
+      case 2:
         return "Fear";
-      case 16:
-        return "Happiness";
-      case 17:
-        return "Pain";
-      case 18:
-        return "Peace";
-      case 19:
-        return "Pleasure";
-      case 20:
-        return "Sadness";
-      case 21:
-        return "Sensitivity";
-      case 22:
-        return "Suffering";
-      case 23:
+      case 3:
+        return "Happy";
+      case 4:
+        return "Sad";
+      case 5:
         return "Surprise";
-      case 24:
-        return "Sympathy";
-      case 25:
-        return "Yearning";
-      case 26:
-        return "Disgust";
-      case 27:
+      case 6:
         return "Neutral";
       default: // we ideally never want this to happen
         print("Invalid emotion value");
@@ -160,7 +96,13 @@ class TimestampCard extends StatelessWidget {
       child: ListTile(
         onTap: () => jump(timestamp.timeMs),
         //title: Text("${timestamp.timeMs}"),
-        title: Text(formatTime(timestamp.timeMs!)),
+        title: Text(
+          formatTime(timestamp.timeMs!),
+          style: const TextStyle(
+            //fontWeight: FontWeight.bold,
+            fontFamily: "Lusteria",
+          ),
+        ),
         tileColor: Color(getBackgroundColor(timestamp.emotion!)),
         visualDensity: const VisualDensity(vertical: 4),
         leading: CircleAvatar(
@@ -172,7 +114,8 @@ class TimestampCard extends StatelessWidget {
           getEmotion(timestamp.emotion!),
           style: const TextStyle(
             fontWeight: FontWeight.bold,
-            letterSpacing: 1.5,
+            fontFamily: "Lusteria",
+            //letterSpacing: 1.5,
           ),
         ),
       ),
