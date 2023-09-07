@@ -15,10 +15,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_ml_model_downloader/firebase_ml_model_downloader.dart';
 import 'firebase_options.dart';
-
-import 'package:flutter/services.dart' show rootBundle;
-import 'package:path_provider/path_provider.dart';
-import 'package:http/http.dart' as http;
+import 'package:cloud_functions/cloud_functions.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -333,6 +330,7 @@ class _videoRecord extends State<videoRecord> {
       await controllers.startVideoRecording();
     } else {
       final file = await controllers.stopVideoRecording();
+      runFirebase(file.path);
       //Navigator.push(context, MaterialPageRoute(builder: (context) =>  Test(file.path),));
       Navigator.push(
           context,
@@ -401,6 +399,7 @@ class videoUpload extends StatelessWidget {
                       if (picked.files.first.size / (1024 * 1024) > 50) {
                         print('File size cannot exceed 50 MB');
                       } else {
+                        runFirebase(picked.files.first.path!);
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -428,133 +427,45 @@ class videoUpload extends StatelessWidget {
   }
 }
 
-class Test extends StatefulWidget {
-  String filePath;
-  Test(this.filePath);
+void runFirebase(String filePath) async {
+  //send file name to db
+  DatabaseReference ref = FirebaseDatabase.instance.ref("Videos");
 
-  @override
-  State<Test> createState() => playVideo(filePath);
+  ref.child('paths').push().set({
+    "Path": filePath,
+  });
+
+  //send video itself to storage
+  final storage = FirebaseStorage.instance.ref();
+
+  final storRef = storage.child(filePath);
+
+  File file = File(filePath);
+
+  try {
+    await storRef.putFile(file);
+  } on FirebaseException catch (e) {
+    throw Exception('Failed to save video');
+  }
+
+  runBackend();
 }
 
-//class _videoUpload written referrencing code from:
-//https://blog.logrocket.com/flutter-video-player/#creating-new-video-player
-//https://docs.flutter.dev/cookbook/plugins/play-video
-//https://pub.dev/packages/open_file/example
-class playVideo extends State<Test> {
-  String filePath;
-
-  playVideo(this.filePath);
-  VideoPlayerController? _videoPlayerController;
-  loadVideoPlayer(File file) async {
-    DatabaseReference ref = FirebaseDatabase.instance.ref("Videos");
-
-    ref.child('paths').push().set({
-      "Path": filePath,
-    });
-
-    final storage = FirebaseStorage.instance.ref();
-
-    final storRef = storage.child(filePath);
-
-    File file = File(filePath);
-
-    try {
-      await storRef.putFile(file);
-    } on FirebaseException catch (e) {
-      throw Exception('Failed to save video');
-    }
-
-    if (_videoPlayerController != null) {
-      _videoPlayerController!.dispose();
-    }
-
-    OpenFile.open(filePath!);
-
-    _videoPlayerController = VideoPlayerController.file(file);
-    _videoPlayerController!.initialize().then((value) {
-      setState(() {});
-    });
+Future<void> runBackend() async {
+  try {
+    final result = await FirebaseFunctions.instance.httpsCallable('pull_from_dB').call('pull');
+  } on FirebaseFunctionsException catch (error) {
+    print(error.code);
+    print(error.details);
+    print(error.message);
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xffc9b6b9),
-      appBar: AppBar(
-        backgroundColor: Color(0xff1e133d),
-        toolbarHeight: 100,
-        title: Center(
-          child: Text("CUE-CETERA"),
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(25.0),
-              bottomRight: Radius.circular(25.0)),
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Color(0xff1e133d),
-        onPressed: selectVideo,
-        child: Icon(
-          Icons.play_circle_outline_outlined,
-        ),
-      ),
-      body: Center(
-        child: Stack(
-          children: [
-            if (_videoPlayerController != null) ...[
-              AspectRatio(
-                aspectRatio: _videoPlayerController!.value.aspectRatio,
-                child: VideoPlayer(_videoPlayerController!),
-              ),
-            ]
-          ],
-        ),
-      ),
-    );
+  try {
+    final result = await FirebaseFunctions.instance.httpsCallable('vid_to_imgs').call('convert');
+  } on FirebaseFunctionsException catch (error) {
+    print(error.code);
+    print(error.details);
+    print(error.message);
   }
 
-  void selectVideo() async {
-    //send file name to db
-    DatabaseReference ref = FirebaseDatabase.instance.ref("Videos");
-
-    ref.child('paths').push().set({
-      "Path": filePath,
-    });
-
-    //send video itself to storage
-    final storage = FirebaseStorage.instance.ref();
-
-    final storRef = storage.child(filePath);
-
-    File file = File(filePath);
-
-    try {
-      await storRef.putFile(file);
-    } on FirebaseException catch (e) {
-      throw Exception('Failed to save video');
-    }
-
-    // loadAsset();
-
-    setState(() {
-      File file = File(filePath);
-      loadVideoPlayer(file);
-    });
-  }
-
-  Future<void> loadAsset() async {
-    var client = http.Client();
-    var uri = Uri.parse("http://10.0.2.2:5000/call_db");
-    var response = await client.patch(uri);
-
-    uri = Uri.parse("http://10.0.2.2:5000/pull");
-    response = await client.get(uri);
-
-    uri = Uri.parse("http://10.0.2.2:5000/vid_to_img");
-    response = await client.get(uri);
-
-    uri = Uri.parse("http://10.0.2.2:5000/predict");
-    response = await client.get(uri);
-  }
 }
