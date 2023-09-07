@@ -77,3 +77,5 @@
 | 8/30 | Diana |  Clean + reshape emotic dataset  | 3 hrs
 | 9/1 | Diana |  Finished cleaning/reshaping emotic dataset  | 2.5 hrs
 | 9/5 | Diana | Fixed labels of dataset to a smaller number of categories and started  building new model | 2 hrs
+| 9/6 | Diana | Training/hypertuning transfer learning model using mobilenetv2 | 3.5 hrs
+| 9/6 | Diana | Hyper-tuning model and exporting as tensorlite model| 2.5 hrs
