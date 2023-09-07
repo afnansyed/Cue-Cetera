@@ -1,19 +1,13 @@
+import tensorflow as tf
 from tensorflow import keras
 import numpy as np
-import joblib
 import cv2
 import os
 import datetime
-import ipywidgets
 
 import firebase_admin
-from firebase_admin import db, storage
+from firebase_admin import db, ml, storage, initialize_app
 import firebase_admin.auth as auth
-
-from flask import Flask, request
-
-app = Flask(__name__)
-
 
 class Emotion_ML:
     def __init__(self):
@@ -21,31 +15,18 @@ class Emotion_ML:
         self.labels = []
         self.images = []
 
-
-# These app.route entries above each function are from flask. When a request is called at that url
-# ending it runs that function.
-
-# @app.route('/call_db', methods=['PUT', 'PATCH'])
 def dbObj():
-    authPath = os.path.join(os.path.dirname(__file__), "cue-cetera-726df-firebase-adminsdk-z8vba-e4c583ce09.json")
+    authPath = os.path.join(os.path.dirname(__file__), "cue-cetera-726df-firebase-adminsdk-z8vba-4ba059bdf8.json")
     cred_obj = firebase_admin.credentials.Certificate(authPath)
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = authPath
     databaseURL = 'https://cue-cetera-726df-default-rtdb.firebaseio.com/'
     bucket = 'cue-cetera-726df.appspot.com'
 
-    firebase_admin.initialize_app(cred_obj, {
+    initialize_app(cred_obj, {
         'databaseURL': databaseURL,
         'storageBucket': bucket
     })
 
-    ### end of function so flask request goes through ###
-
-    # req = request.get_data()
-    # print(req)
-    # return jsonify(req)
-
-
-# @app.route('/pull', methods=['PUT', 'PATCH'])
 def pull_from_dB():
     ref = db.reference("Videos/paths")
     path = ref.order_by_child('Path').get()
@@ -67,9 +48,6 @@ def pull_from_dB():
     blob = bucket.blob(source_blob_name)
     blob.download_to_filename(destination_file_name)
 
-    # req = request.get_data()
-    # print(req)
-    # return jsonify(req)
 
 # adds classification labels to database.
 def add_to_db(file_name, emotion, label):
@@ -95,18 +73,11 @@ def upload_img(file_name):
     blob.upload_from_filename(file_name)
     return blob
 
-
 # again for security purposes
-# @app.route('/delete_img', methods=['PUT', 'PATCH'])
 def delete_img(blobs):
     for blob_item in blobs:
         blob_item.delete()
 
-    # req = request.get_data()
-    # print(req)
-    # return jsonify(req)
-
-# @app.route('/vid_to_img', methods=['PUT', 'PATCH'])
 def vid_to_imgs(file_name="videoAnalysis.mp4"):
     # Create imgs folder
     osPath = os.path.join(os.path.dirname(__file__), "imgs")
@@ -157,31 +128,26 @@ def vid_to_imgs(file_name="videoAnalysis.mp4"):
             curr_step += 1
         cnt += 1
 
-    # req = request.get_data()
-    # print(req)
-    # return jsonify(req)
-
 # Where the ml model makes the predictions
-# @app.route('/predict', methods=['POST', 'PATCH'])
+# NOTE: TO BE DEPRECATED ONCE PREDICTIONS MADE IN FRONT END
 def predict_emotions(img_dir=os.path.join(os.path.dirname(__file__), "imgs/")):
     # emotion map
-    emotions = {0:'Affection', 1:'Anger', 2:'Annoyance', 3:'Anticipation',
-               4:'Aversion', 5:'Confidence',6:'Disapproval', 7:'Disconnection',
-               8:'Disquietment', 9:'Doubt/Confusion', 10:'Embarrassment',
-               11:'Engagement',12:'Esteem', 13:'Excitement', 14:'Fatigue',
-               15:'Fear', 16:'Happiness', 17:'Pain', 18:'Peace', 19:'Pleasure',
-               20:'Sadness', 21:'Sensitivity', 22:'Suffering', 23:'Surprise',
-               24:'Sympathy', 25:'Yearning', 26:'Disgust', 27:'Neutral'}
-
+    emotions = ['Disapproval','Angry','Fear','Happy','Sad','Surprised', 'Neutral']
+    
     # import model
-    model3 = keras.models.load_model('Model3_trained_updated');
+    interpreter = tf.lite.Interpreter(model_path='../../ModelControl/training/models/model.tflite')
+    interpreter.allocate_tensors()
+
+    input_details = interpreter.get_input_details()
+    output_details = interpreter.get_output_details()
+
     # num_imgs = len([name for name in os.listdir(img_dir) if os.path.isfile(os.path.join(img_dir, name))])
     imgs = []
     img_dirs = []
     blobs = []
     for image in os.listdir(img_dir):
         img = cv2.imread(os.path.join(img_dir, image))
-        arr = cv2.resize(img, (48, 48), interpolation=cv2.INTER_CUBIC)
+        arr = cv2.resize(img, (224, 224), interpolation=cv2.INTER_CUBIC)
         imgs.append(arr)
 
         curr_img = "imgs/" + image
@@ -189,42 +155,38 @@ def predict_emotions(img_dir=os.path.join(os.path.dirname(__file__), "imgs/")):
         curr_blob = upload_img(curr_img)
         blobs.append(curr_blob)
 
-    # for i in range(len(img_dirs)):
-    #     add_to_db(img_dirs[i])
-
     # reshape image
-    imgs = np.array(imgs).reshape(-1, 48, 48, 3)
+    imgs = np.array(imgs).reshape(-1, 224, 224, 3)
 
     # preprocess data for model
     imgs_rs = keras.applications.mobilenet_v2.preprocess_input(imgs)
+    
+    predictions = []
 
-    #predict labels
-    y_imgs = np.argmax(model3.predict(imgs_rs), axis=1)
+    for img in imgs_rs:
+        interpreter.set_tensor(input_details[0]['index'], [img])
 
-    labels = []
-    for i in range(len(y_imgs)):
-        labels.append(emotions[y_imgs[i]])
-        add_to_db(img_dirs[i], emotions[y_imgs[i]], np.random.randint(2)) # random number for classification
+        interpreter.invoke()
 
-    # req = request.get_data()
-    # print(req)
-    # return jsonify(req)
+        # # The function `get_tensor()` returns a copy of the tensor data.
+        output_data = interpreter.get_tensor(output_details[0]['index'])
+        emotion = emotions[round(np.amax(output_data))]
+        predictions.append(emotion)
 
+        print('emotion:', emotion)
+
+    for i in range(len(predictions)):
+        add_to_db(img_dirs[i], predictions[i], np.random.randint(2)) # random number for classification
+    
 
 if __name__ == "__main__":
     model = Emotion_ML()
     dbObj()
 
-    ### Following commented out lines are for the user session ###
-# make anonymous user
-#     anonymous_user = auth.create_user()
-#     uid = anonymous_user.uid
-#     token = auth.create_custom_token(uid)
+    predict_emotions()
 
-    pull_from_dB()
-    vid_to_imgs("videoAnalysis.mp4")
-    osPath = os.path.join(os.path.dirname(__file__), "imgs/")
-    predict_emotions(osPath)
-    # labels = model.labels
-
-    # app.run(debug=True) # Flask backend starter
+#     ### Following commented out lines are for the user session ###
+# # make anonymous user
+# #     anonymous_user = auth.create_user()
+# #     uid = anonymous_user.uid
+# #     token = auth.create_custom_token(uid)
