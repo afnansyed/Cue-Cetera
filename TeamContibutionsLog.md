@@ -79,3 +79,5 @@
 | 9/5 | Diana | Fixed labels of dataset to a smaller number of categories and started  building new model | 2 hrs
 | 9/6 | Diana | Training/hypertuning transfer learning model using mobilenetv2 | 3.5 hrs
 | 9/6 | Diana | Hyper-tuning model and exporting as tensorlite model| 2.5 hrs
+| 9/7 | Shravya | Latest code pull and fixed build errors | 1.5 hrs 
+| 9/7 | Shravya | UI change of video upload page | 3 hrs 
