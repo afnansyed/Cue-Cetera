@@ -82,3 +82,4 @@
 | 9/7 | Shravya | Latest code pull and fixed build errors | 1.5 hrs 
 | 9/7 | Shravya | UI change of video upload page | 3 hrs 
 | 9/7 | Diana | Hyper-tuning learning rate of model in attempt to increase the performance of model| 3 hrs
+| 9/8 | Diana | Research + Adding top layers to transfer learning model  | 3.5 hrs
