@@ -89,7 +89,7 @@ The database storing the video itself for each video uploaded by the user
 ![fire2](https://github.com/AmaniN16/Cue-Cetera/blob/main/readme_imgs/firebase_img_2.png)
 
 
-# cue_cetera front-end
+# cue_cetera project details
 
 Flutter project written using dart.
 Main code for the app written in 'cue_cetera/lib/main.dart'
