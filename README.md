@@ -39,9 +39,9 @@ Our project has the following file structure for the model system:
 ![file_str](https://github.com/AmaniN16/Cue-Cetera/blob/main/readme_imgs/file_str.png)
 
 Download the following datasets and place them in a `datasets` folder as shown in the diagram above:
-- [`train_data.npy`](https://drive.google.com/file/d/1i2jtb_qB7lU_q1wY92LdHxY2KueWIZGR/view?usp=sharing)
+- [`train_data.npy`](https://drive.google.com/file/d/1I5tPiknclCqdPgPZH2zK3ezgVcX1BA-U/view?usp=sharing)
 - [`train_labels.npy`](https://drive.google.com/file/d/1W0QuMZmwaUrRuHqyv2o0EeZpldsXgbuk/view?usp=drive_link)
-- [`test_data.npy`](https://drive.google.com/file/d/1gx1xulZUNzYMWoFcdpNYKwLXoBclme25/view?usp=sharing)
+- [`test_data.npy`](https://drive.google.com/file/d/18VcyGCQeLSblP95oCWLCzAFGhiFBq3Xq/view?usp=sharing)
 - [`test_labels.npy`](https://drive.google.com/file/d/1cT88dypR13W8nO-k4d_n82tUI6oPq7Fk/view?usp=drive_link)
 
 Example of loading data:
