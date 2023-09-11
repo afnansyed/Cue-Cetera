@@ -14,8 +14,8 @@ Comments / experimentation / failed attempts / difficulties:
 - To make sure th user has uploaded a video of the right size, we check for the file size of the selected video and print out a message:
   ![Capture3](https://user-images.githubusercontent.com/44105687/228719377-00f5d4e9-f3c1-4691-988d-b1c869cf0de4.PNG)
 
-- Priority Issue to Fix: In the video playback page, when clicking play, the video stops at the first frame. We haven't been able to fix this.
-  - We think the issue might be with this instance of code where program is directed after clicking the play button:
+- FIXED ~~Priority Issue to Fix: In the video playback page, when clicking play, the video stops at the first frame. We haven't been able to fix this.~~
+ ~~- We think the issue might be with this instance of code where program is directed after clicking the play button:~~
    ![Capture2](https://user-images.githubusercontent.com/44105687/228716490-16c6895c-c482-4efd-8401-98c3ad4b2f34.PNG)
 
 
@@ -32,37 +32,42 @@ Comments / experimentation / failed attempts / difficulties:
 Current pages setup status:
 ---------------	
 ```
-1. HOMPAGE:
+1. HOME PAGE:
 ```
 
-![144dc9bd-27c1-47fc-ba2e-797e21ac1cc3](https://user-images.githubusercontent.com/44105687/228425748-3ad0cc52-328d-436e-862c-0751cda8101e.jpg)
-
-
-```
-2. UPLOAD VIDEO PAGE:
-```
-
-![a5f104ab-1d1b-462d-a685-552e6d04a5f3](https://user-images.githubusercontent.com/44105687/228425785-da94631b-b0ea-4a93-809e-5ba26a549148.jpg)
+![MicrosoftTeams-image](https://github.com/AmaniN16/Cue-Cetera/assets/44105687/e4d19ffa-c6c8-45db-bb31-71de08054d84)
 
 
 ```
-3. PICK VIDEO FROM DEVICE:
+2. ABOUT PAGE:
+```
+
+![MicrosoftTeams-image (1)](https://github.com/AmaniN16/Cue-Cetera/assets/44105687/37834d1f-0e84-41cd-9193-8ab47eeec9f7)
+
+
+
+```
+3. UPLOAD VIDEO PAGE:
+```
+
+![MicrosoftTeams-image (2)](https://github.com/AmaniN16/Cue-Cetera/assets/44105687/5cc6ce59-c4ef-4e14-b561-50c75d3153f8)
+
+
+
+```
+4. PICK VIDEO FROM DEVICE PAGE PAGE:
 ```
 
 ![34e95a7a-f85b-443a-a5d6-29f24e821038](https://user-images.githubusercontent.com/44105687/228425794-c82b6608-aaf8-4bcd-a638-50ec1a4d5289.jpg)
 
 
-```
-4. PLAY VIDEO:
-```
-
-![d2716f80-406c-4c03-9b80-b4904456de79](https://user-images.githubusercontent.com/44105687/228425815-a97c73bc-67a8-41c5-bbe2-0effce62b0cc.jpg)
-
 
 ```
-5. USE VIDEO CAMERA PAGE:
+5. RESULTS PAGE:
 ```
 
-![26a0de84-8a93-4049-9cad-ce714d25bc6f](https://user-images.githubusercontent.com/44105687/228425838-c4f263a6-ab91-4f3a-899e-c6ccdcd03c8c.jpg)
+![MicrosoftTeams-image (3)](https://github.com/AmaniN16/Cue-Cetera/assets/44105687/98102289-037b-49b4-a6f0-8c37d6236965)
+
+
 
 
