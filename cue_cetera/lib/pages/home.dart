@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:cue_cetera/main.dart';
 import 'package:cue_cetera/pages/info.dart';
 import 'package:cue_cetera/pages/record_video.dart';
 import 'package:cue_cetera/pages/upload_video.dart';

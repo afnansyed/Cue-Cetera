@@ -5,8 +5,6 @@ import 'package:chewie/chewie.dart';
 import 'package:cue_cetera/classes/timestamp.dart';
 import 'package:cue_cetera/widgets/timestamp_card.dart';
 import 'dart:io';
-import 'package:open_file/open_file.dart';
-import 'package:cue_cetera/services/screen_size.dart';
 
 class ResultDisplay extends StatefulWidget {
   String filePath;

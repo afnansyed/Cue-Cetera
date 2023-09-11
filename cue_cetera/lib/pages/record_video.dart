@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 
-import 'package:cue_cetera/main.dart';
 import 'package:cue_cetera/pages/result_display.dart';
+import 'package:cue_cetera/services/firebase_services.dart';
 
 
 

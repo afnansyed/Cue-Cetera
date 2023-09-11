@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:cue_cetera/main.dart';
 
 class Info extends StatefulWidget {
   const Info({Key? key}) : super(key: key);
@@ -53,9 +52,9 @@ class _InfoState extends State<Info> {
                 ),
                 const SizedBox(height: 10),
                 Container(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 212, 195, 195),
+                    color: const Color.fromARGB(255, 212, 195, 195),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: const Text(
@@ -80,9 +79,9 @@ class _InfoState extends State<Info> {
                 ),
                 const SizedBox(height: 10),
                 Container(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 212, 195, 195),
+                    color: const Color.fromARGB(255, 212, 195, 195),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: const Text(
