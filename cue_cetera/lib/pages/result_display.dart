@@ -43,12 +43,12 @@ class _ResultDisplayState extends State<ResultDisplay> {
   // would be best to already get our timestamp info in chronological order
   // if in chronological order, we can use binary search to find our current emotion
   List<Timestamp> timestamps = [
-    Timestamp(timeMs: 0, emotion: 3),
+    Timestamp(timeMs: 0, emotion: 0),
     Timestamp(timeMs: 1000, emotion: 1),
     Timestamp(timeMs: 2000, emotion: 2),
-    Timestamp(timeMs: 3000, emotion: 4),
-    Timestamp(timeMs: 5000, emotion: 5),
-    Timestamp(timeMs: 8000, emotion: 2),
+    Timestamp(timeMs: 3000, emotion: 3),
+    Timestamp(timeMs: 5000, emotion: 4),
+    Timestamp(timeMs: 8000, emotion: 5),
     Timestamp(timeMs: 13000, emotion: 6),
     Timestamp(timeMs: 21000, emotion: 0),
     Timestamp(timeMs: 34000, emotion: 6),

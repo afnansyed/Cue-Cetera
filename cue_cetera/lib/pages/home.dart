@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cue_cetera/main.dart';
+import 'package:cue_cetera/pages/info.dart';
 
 class Home extends StatefulWidget {
   final String title;
@@ -152,7 +153,7 @@ class _HomeState extends State<Home> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const infoPage()),
+                      builder: (context) => const Info()),
                 );
               },
               style: ElevatedButton.styleFrom(
