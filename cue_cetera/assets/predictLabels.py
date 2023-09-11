@@ -159,11 +159,11 @@ def predict_emotions(img_dir=os.path.join(os.path.dirname(__file__), "imgs/")):
     imgs = np.array(imgs).reshape(-1, 224, 224, 3)
 
     # preprocess data for model
-    imgs_rs = keras.applications.mobilenet_v2.preprocess_input(imgs)
+    #imgs_rs = keras.applications.mobilenet_v2.preprocess_input(imgs)
     
     predictions = []
 
-    for img in imgs_rs:
+    for img in imgs:
         interpreter.set_tensor(input_details[0]['index'], [img])
 
         interpreter.invoke()
