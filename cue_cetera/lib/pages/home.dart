@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+
 import 'package:cue_cetera/main.dart';
 import 'package:cue_cetera/pages/info.dart';
+import 'package:cue_cetera/pages/record_video.dart';
+import 'package:cue_cetera/pages/upload_video.dart';
 
 class Home extends StatefulWidget {
   final String title;
@@ -91,7 +94,7 @@ class _HomeState extends State<Home> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const videoUpload()),
+                      builder: (context) => const UploadVideo()),
                 );
               },
               style: ElevatedButton.styleFrom(
@@ -122,7 +125,7 @@ class _HomeState extends State<Home> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const videoRecord()),
+                      builder: (context) => const RecordVideo()),
                 );
               },
               style: ElevatedButton.styleFrom(
