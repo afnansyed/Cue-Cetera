@@ -8,6 +8,7 @@ import 'package:camera/camera.dart';
 
 import 'package:cue_cetera/pages/result_display.dart';
 import 'package:cue_cetera/services/screen_size.dart';
+import 'package:cue_cetera/pages/home.dart';
 
 import 'package:flutter/widgets.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -37,173 +38,11 @@ class MyApp extends StatelessWidget {
         //primaryColor: Color(0xff1e133d),
         primaryColor: Color(0xff1e133d),
       ),
-      home: MyHomePage(title: 'CUE-CETERA'),
+      home: const Home('CUE-CETERA'),
       //home: const ResultDisplay(),
     );
   }
 }
-
-class MyHomePage extends StatelessWidget {
-  final String title;
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color.fromARGB(255, 172, 158, 158),
-      appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 172, 158, 158),
-        centerTitle: true,
-        toolbarHeight: 100,
-        elevation: 0,
-        title: Text(
-          title,
-          style: TextStyle(
-            fontFamily: 'Lusteria',
-            color: Color.fromARGB(255, 66, 39, 39),
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-      body: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(50),
-          ),
-          color: Color.fromARGB(255, 66, 39, 39),
-        ),
-        alignment: Alignment.center,
-        child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              Container(
-                alignment: Alignment.center,
-                padding: EdgeInsets.only(top: 80),
-                child: Text(
-                  'Choose an Option',
-                  style: TextStyle(
-                    fontFamily: 'Lusteria',
-                    color: Color.fromARGB(255, 212, 195, 195),
-                    fontSize: 37,
-                  ),
-                ),
-              ),
-              Container(
-                alignment: Alignment.center,
-                padding: EdgeInsets.only(top: 30),
-                child: Text(
-                  'Begin your exploration',
-                  style: TextStyle(
-                    fontFamily: 'OpenSans',
-                    color: Color.fromARGB(255, 172, 158, 158),
-                    fontSize: 15,
-                    fontStyle: FontStyle.italic,
-                  ),
-                ),
-              ),
-              SizedBox(height: 60),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const videoUpload()),
-                      );
-                    },
-                    child: Center(
-                      child: Text("UPLOAD VIDEO"),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      fixedSize: Size(250, 100),
-                      textStyle: TextStyle(
-                        fontFamily: 'OpenSans',
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      primary: Color.fromARGB(255, 212, 195, 195),
-                      onPrimary: Color.fromARGB(255, 66, 39, 39),
-                      elevation: 0,
-                      shadowColor: Color.fromARGB(255, 66, 39, 39),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 40),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const videoRecord()),
-                      );
-                    },
-                    child: Center(
-                      child: Text("USE VIDEO CAMERA"),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      fixedSize: Size(250, 100),
-                      textStyle: TextStyle(
-                        fontFamily: 'OpenSans',
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      primary: Color.fromARGB(255, 212, 195, 195),
-                      onPrimary: Color.fromARGB(255, 66, 39, 39),
-                      elevation: 0,
-                      shadowColor: Color.fromARGB(255, 66, 39, 39),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 60),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const infoPage()),
-                      );
-                    },
-                    child: Center(
-                      child: Text("INFO"),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      fixedSize: Size(150, 50),
-                      textStyle: TextStyle(
-                        fontFamily: 'OpenSans',
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      primary: Color.fromARGB(255, 35, 23, 23),
-                      onPrimary: Color.fromARGB(255, 158, 144, 144),
-                      elevation: 0,
-                      shadowColor: Color.fromARGB(255, 66, 39, 39),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 
 class infoPage extends StatelessWidget {
   const infoPage({Key? key}) : super(key: key);
@@ -416,6 +255,7 @@ class videoUpload extends StatelessWidget {
                 padding: EdgeInsets.only(top: 50),
                 child: Text(
                   'Click Below to Upload a Video\n\n\n',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                     fontFamily: 'Lusteria',
                     color: Color.fromARGB(255, 212, 195, 195),
