@@ -160,11 +160,6 @@ Comments / experimentation / failed attempts / difficulties:
 - To make sure th user has uploaded a video of the right size, we check for the file size of the selected video and print out a message:
   ![Capture3](https://user-images.githubusercontent.com/44105687/228719377-00f5d4e9-f3c1-4691-988d-b1c869cf0de4.PNG)
 
-- FIXED ~~Priority Issue to Fix: In the video playback page, when clicking play, the video stops at the first frame. We haven't been able to fix this.~~
- ~~- We think the issue might be with this instance of code where program is directed after clicking the play button:~~
-   ![Capture2](https://user-images.githubusercontent.com/44105687/228716490-16c6895c-c482-4efd-8401-98c3ad4b2f34.PNG)
-
-
 - To send the video to the backend, we first thought of using Rest API where when video is played, the path url is sent to the http localhost. However, we first ran into issues with the python code for this where the localhost was giving a 404 error. We also try different methods of writing code with the dart to write the path out using Rest API. We decided to use firebase for now which is compatible with both python and flutter. We had issues with flutter uploading the video file to the database. As no errors were being generated and the logic that we are apply with code seemed correct, its was harder to debug the issue. However,, we got it to successfully work.
 
 <img width="958" alt="firebase_img_1" src="https://user-images.githubusercontent.com/44105687/228723575-a9668f42-4381-4d1d-bc18-4369388e2bde.png">
