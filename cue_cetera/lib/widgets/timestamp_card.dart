@@ -29,17 +29,17 @@ class TimestampCard extends StatelessWidget {
   String getEmotion(int emotion) {
     switch(emotion) {
       case 0:
-        return "Disapproval";
+        return "Disapproving";
       case 1:
         return "Angry";
       case 2:
-        return "Fear";
+        return "Fearful";
       case 3:
         return "Happy";
       case 4:
         return "Sad";
       case 5:
-        return "Surprise";
+        return "Surprised";
       case 6:
         return "Neutral";
       default: // we ideally never want this to happen
