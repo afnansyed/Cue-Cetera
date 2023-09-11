@@ -53,39 +53,24 @@ t_train = np.load('labels_train.npy')
 
 `t_train[0]` returns an array of size 1 that corresponds to the first image in `X_train`, where `t_train[0]` is the label corresponding to the emotion.
 
+## Emotional Classifications
+Our model assigns every frame within the requested video a value of 0 to 6. This value corresponds to the emotion being displayed within that frame, and follows this mapping:
 
-### Valence mapping of 28 Emotions:
-For each emotion, we mapped the valence, which is a value between 0-9 that represents the positive/negative scale of each emotion (9 being the most positive and 0 being the most negative).
-- `0. Affection`: 8
-- `1. Anger`: 3
-- `2. Annoyance`: 3
-- `3. Anticipation`: 6
-- `4. Aversion`: 5
-- `5. Confidence`: 6
-- `6. Disapproval`: 3
-- `7. Disconnection`: 5
-- `8. Disquietment`: 5
-- `9. Doubt/Confusion`: 5
-- `10. Embarrassment`: 5
-- `11. Engagement`: 7
-- `12. Esteem`: 6  
-- `13. Excitement`: 7
-- `14. Fatigue`: 5
-- `15. Fear`: 5
-- `16. Happiness`: 9
-- `17. Pain`: 3
-- `18. Peace`: 6
-- `19. Pleasure`: 6
-- `20. Saddness`: 4
-- `21. Sensitivity`: 6
-- `22. Suffering`: 5
-- `23. Surprise`: 6
-- `24. Sympathy`: 7
-- `25. Yearning`: 6
-- `26. Disgust`: 4
-- `27. Neutral`: 5
+0) Disapproving
+1) Angry
+2) Fearful
+3) Happy
+4) Sad
+5) Surprised
+6) Neutral
 
+These classifications are then dislayed on the front-end through text, along with a symbol representing whether that emotion is positive, negative, or neutral.
 
+Positive contains: Happy and Surprised
+
+Negative contains: Disapproving, Angry, Fearful, and Sad
+
+Neutral contains: Neutral.
 
 ## Mockup of App Interface
 ----
