@@ -204,8 +204,10 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
+
 class infoPage extends StatelessWidget {
-  const infoPage({super.key});
+  const infoPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -226,76 +228,84 @@ class infoPage extends StatelessWidget {
         ),
       ),
       body: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(50),
+          ),
+          color: Color.fromARGB(255, 66, 39, 39),
+        ),
         alignment: Alignment.center,
         child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              Container(
-                alignment: Alignment.centerLeft,
-                padding: EdgeInsets.only(left: 30, top: 30),
-                child: Text(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
                   'ABOUT',
                   style: TextStyle(
                     fontFamily: 'Lusteria',
-                    color: Color.fromARGB(255, 35, 23, 23),
-                    fontSize: 37,
+                      color: Color.fromARGB(255, 222, 215, 215),
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-              ),
-              Container(
-                  alignment: Alignment.centerLeft,
-                  padding:
-                      EdgeInsets.only(left: 30, right: 30, top: 15, bottom: 15),
-                  child: Text(
-                      'Cue-Cetera is an application that can be used to detect and classify visual facial cues by the means of Machine Learning. Our goal is to have a social impact by giving access to a learning tool and hence, bringing awareness to related communities.',
-                      style: TextStyle(
-                        fontFamily: 'OpenSans',
-                        color: Color.fromARGB(255, 222, 215, 215),
-                        fontSize: 12,
-                      ),
-                      textAlign: TextAlign.justify),
+                SizedBox(height: 10),
+                Container(
+                  padding: EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 66, 39, 39),
-                  )),
-              Container(
-                alignment: Alignment.centerLeft,
-                padding: EdgeInsets.only(left: 30, top: 20),
-                child: Text(
-                  'How To Use',
-                  style: TextStyle(
-                    fontFamily: 'Lusteria',
-                    color: Color.fromARGB(255, 35, 23, 23),
-                    fontSize: 37,
+                    color: Color.fromARGB(255, 212, 195, 195),
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                ),
-              ),
-              Container(
-                  alignment: Alignment.centerLeft,
-                  padding:
-                      EdgeInsets.only(left: 30, right: 30, top: 20, bottom: 20),
                   child: Text(
-                    '1. Choose between '
-                    'Upload Video'
-                    ' or '
-                    'Use Video Camera'
-                    ' option on the homepage. \n2. Choose or take a video that is less that 30s long. \n3. Make sure the faces are clearly visible in the video. \n \n Results may take up to 1 minute to load. Emotions will be catogorized a POSITIVE, NEGATIVE, or NEUTRAL. Clicking on the catogorized results will show you the specific video frame.',
+                    'Cue-Cetera is an application that can be used to detect and classify visual facial cues by the means of Machine Learning. Our goal is to have a social impact by giving access to a learning tool and hence, bringing awareness to related communities.',
                     style: TextStyle(
                       fontFamily: 'OpenSans',
-                      color: Color.fromARGB(255, 222, 215, 215),
-                      fontSize: 12,
+                      color: Color.fromARGB(255, 66, 39, 39),
+                      fontSize: 16,
                     ),
                     textAlign: TextAlign.justify,
                   ),
+                ),
+                SizedBox(height: 70),
+                Text(
+                  'HOW TO USE',
+                  style: TextStyle(
+                    fontFamily: 'Lusteria',
+                    color: Color.fromARGB(255, 222, 215, 215),
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 10),
+                Container(
+                  padding: EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 121, 111, 111),
-                  )),
-            ],
+                    color: Color.fromARGB(255, 212, 195, 195),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Text(
+                    '1. Choose between "Upload Video" or "Use Video Camera" option on the homepage. \n'
+                        '2. Choose or take a video that is less than 30 seconds long. \n'
+                        '3. Make sure the faces are clearly visible in the video. \n\n'
+                        'Results may take up to 1 minute to load. Emotions will be categorized as POSITIVE, NEGATIVE, or NEUTRAL. Clicking on the categorized results will show you the specific video frame.',
+                    style: TextStyle(
+                      fontFamily: 'OpenSans',
+                      color: Color.fromARGB(255, 66, 39, 39),
+                      fontSize: 16,
+                    ),
+                    textAlign: TextAlign.justify,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 }
+
 
 class videoRecord extends StatefulWidget {
   const videoRecord({super.key});
@@ -372,22 +382,50 @@ class videoUpload extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffc9b6b9),
+      backgroundColor: Color.fromARGB(255, 172, 158, 158),
       appBar: AppBar(
-        backgroundColor: Color(0xff1e133d),
+        backgroundColor: Color.fromARGB(255, 172, 158, 158),
+        centerTitle: true,
         toolbarHeight: 100,
-        title: Center(
-          child: Text("CUE-CETERA"),
+        elevation: 0,
+        title: Text(
+          'CUE-CETERA',
+              style: TextStyle(
+                fontFamily: 'Lusteria',
+                color: Color.fromARGB(255, 66, 39, 39),
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+
         ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(25.0),
-              bottomRight: Radius.circular(25.0)),
-        ),
+
       ),
       body: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(50),
+            ),
+            color: Color.fromARGB(255, 66, 39, 39),
+          ),
           alignment: Alignment.center,
-          child: Column(
+          child: SingleChildScrollView(
+            child: Column(
+            children: <Widget>[
+              Container(
+                alignment: Alignment.center,
+                padding: EdgeInsets.only(top: 50),
+                child: Text(
+                  'Click Below to Upload a Video\n\n\n',
+                    style: TextStyle(
+                    fontFamily: 'Lusteria',
+                    color: Color.fromARGB(255, 212, 195, 195),
+                    fontSize: 28,
+                    ),
+                  ),
+              ),
+
+
+   Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               ElevatedButton(
@@ -410,19 +448,32 @@ class videoUpload extends StatelessWidget {
                       }
                     }
                   },
-                  child: Text("SELECT"),
+                  child: Center(
+                    child: Text("SELECT"),
+                  ),
+
                   style: ElevatedButton.styleFrom(
-                    fixedSize: Size(250, 110),
-                    textStyle:
-                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    primary: Color(0xffc9b6b9),
-                    onPrimary: Color(0xff1e133d),
-                    elevation: 20,
-                    shadowColor: Color(0xff1e133d),
-                    shape: StadiumBorder(),
+                    fixedSize: Size(250, 100),
+                    textStyle: TextStyle(
+                      fontFamily: 'OpenSans',
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                    ),
+                    primary: Color.fromARGB(255, 212, 195, 195),
+                    onPrimary: Color.fromARGB(255, 66, 39, 39),
+                    elevation: 0,
+                    shadowColor: Color.fromARGB(255, 66, 39, 39),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
                   )),
+              SizedBox(height: 80),
             ],
-          )),
+          ),
+     ],
+      ),
+      ),
+      ),
     );
   }
 }
