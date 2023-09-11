@@ -42,7 +42,8 @@ Current pages setup status:
 2. ABOUT PAGE:
 ```
 
-![MicrosoftTeams-image (1)](https://github.com/AmaniN16/Cue-Cetera/assets/44105687/37834d1f-0e84-41cd-9193-8ab47eeec9f7)
+![MicrosoftTeams-image (1)](https://github.com/AmaniN16/Cue-Cetera/assets/44105687/6e55805d-82fe-45b4-b770-be0a0db5f94e)
+
 
 
 
@@ -50,7 +51,8 @@ Current pages setup status:
 3. UPLOAD VIDEO PAGE:
 ```
 
-![MicrosoftTeams-image (2)](https://github.com/AmaniN16/Cue-Cetera/assets/44105687/5cc6ce59-c4ef-4e14-b561-50c75d3153f8)
+![MicrosoftTeams-image](https://github.com/AmaniN16/Cue-Cetera/assets/44105687/fe66433c-6e4c-4758-925a-2cf07d774ce7)
+
 
 
 
