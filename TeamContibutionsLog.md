@@ -77,10 +77,16 @@
 | 8/30 | Diana |  Clean + reshape emotic dataset  | 3 hrs
 | 9/1 | Diana |  Finished cleaning/reshaping emotic dataset  | 2.5 hrs
 | 9/5 | Diana | Fixed labels of dataset to a smaller number of categories and started  building new model | 2 hrs
+| 9/5 | Afnan |  Set up project to run on vscode + fix testing on device emulators | 2 hrs
+| 9/5 | Afnan |  Make changes to homepage UI  | 6 hrs
 | 9/6 | Diana | Training/hypertuning transfer learning model using mobilenetv2 | 3.5 hrs
 | 9/6 | Diana | Hyper-tuning model and exporting as tensorlite model| 2.5 hrs
+| 9/6 | Afnan |  Add info page and fix issues on homepage UI  | 3.5 hrs
 | 9/7 | Shravya | Latest code pull and fixed build errors | 1.5 hrs 
 | 9/7 | Shravya | UI change of video upload page | 3 hrs 
 | 9/7 | Diana | Hyper-tuning learning rate of model in attempt to increase the performance of model| 3 hrs
 | 9/8 | Diana | Research + Adding top layers to transfer learning model  | 3.5 hrs
 | 9/10 | Shravya | UI change of info page | 4.5 hrs
+
+
+(Afnan Syed) Google docs contribution record: https://docs.google.com/document/d/1yr94W63IZH-b98pGuP2m3c1zsexB2Q_fsDCncp7gjkc/edit?usp=sharing
