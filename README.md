@@ -9,9 +9,9 @@ Our project follows the following system structure:
 
 We use Firebase to store the video the user uploads. This allows the app server to access the video in order to convert it into frames and apply the machine learning model to the set of images. In doing so, it creates a folder of the frames extracted from the video, with their corresponding timeframes, along with an array of labels that map to each frame. The folder and array are then uploaded to Firebase so it could be accessed by the front end.
 
-More information about the the video conversion and prediction can be found [here](https://github.com/AmaniN16/Cue-Cetera/tree/main/ModelControl).
+More information about the the video conversion and prediction can be found [here]([https://github.com/AmaniN16/Cue-Cetera/tree/main/ModelControl](https://github.com/AmaniN16/Cue-Cetera/tree/main/cue_cetera/assets)).
 
-More information about the CNN Model and training methods used for the model can be found [here](https://github.com/AmaniN16/Cue-Cetera/tree/main/ModelControl/training).
+More information about the Transfer Learning Model and training methods used for the model can be found [here](https://github.com/AmaniN16/Cue-Cetera/tree/main/ModelControl/training).
  
 More information about the Flutter Application can be found [here](https://github.com/AmaniN16/Cue-Cetera/tree/main/cue_cetera)
 
