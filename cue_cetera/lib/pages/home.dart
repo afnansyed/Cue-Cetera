@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:cue_cetera/pages/info.dart';
+import 'package:cue_cetera/pages/settings.dart';
 import 'package:cue_cetera/pages/record_video.dart';
 import 'package:cue_cetera/pages/upload_video.dart';
 
 class Home extends StatefulWidget {
   final String title;
-  const Home(this.title,{Key? key}) : super(key: key);
+  const Home(this.title, {Key? key}) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState(title);
@@ -92,8 +93,7 @@ class _HomeState extends State<Home> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => const UploadVideo()),
+                  MaterialPageRoute(builder: (context) => const UploadVideo()),
                 );
               },
               style: ElevatedButton.styleFrom(
@@ -123,8 +123,7 @@ class _HomeState extends State<Home> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => const RecordVideo()),
+                  MaterialPageRoute(builder: (context) => const RecordVideo()),
                 );
               },
               style: ElevatedButton.styleFrom(
@@ -154,8 +153,7 @@ class _HomeState extends State<Home> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => const Info()),
+                  MaterialPageRoute(builder: (context) => const Info()),
                 );
               },
               style: ElevatedButton.styleFrom(
@@ -174,6 +172,23 @@ class _HomeState extends State<Home> {
                 ),
               ),
               child: const Text("INFO"),
+            ),
+            const Expanded(
+              flex: 4,
+              child: SizedBox(
+                width: double.infinity,
+              ),
+            ),
+            FloatingActionButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Set()),
+                );
+              },
+              backgroundColor: Color.fromARGB(255, 35, 23, 23),
+              foregroundColor: Color.fromARGB(255, 158, 144, 144),
+              child: const Icon(Icons.settings),
             ),
             const Expanded(
               flex: 4,
