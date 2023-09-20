@@ -95,7 +95,7 @@
 | 9/8 | Amani | Integration of Firebase function + new ML model interpretation backend | 4 hrs
 | 9/10 | Shravya | UI change of info page | 4.5 hrs
 | 9/14 | Diana | Hyper-tuning model + Research on CNN transfer learning  | 4 hrs
-
+| 9/19 | Diana | Hyper-tuning model and experimenting with tf.data API to optimize performance and reduce the time of each training step | 5.5 hrs
 (Afnan Syed) Google docs contribution record: https://docs.google.com/document/d/1yr94W63IZH-b98pGuP2m3c1zsexB2Q_fsDCncp7gjkc/edit?usp=sharing
 
 (Shravya Iruvanti) Google docs contribution record: https://docs.google.com/document/d/1Hg9JnWLR-NZJpnrB-8ZdGJv_D4ouR0JuR8zSA6MB-5g/edit?usp=sharing 
