@@ -5,6 +5,7 @@ import 'package:chewie/chewie.dart';
 import 'package:cue_cetera/classes/timestamp.dart';
 import 'package:cue_cetera/widgets/timestamp_card.dart';
 import 'dart:io';
+import 'package:flutter_file_dialog/flutter_file_dialog.dart';
 
 class ResultDisplay extends StatefulWidget {
   String filePath;
@@ -178,6 +179,19 @@ class _ResultDisplayState extends State<ResultDisplay> {
     });
   }
 
+  Future<void> downloadVideo() async {
+    // using https://www.youtube.com/watch?v=FpkJxg34Cng&ab_channel=DavidSerrano as reference
+    String? errorMessage;
+    File file = File(filePath);
+    try {
+      final saveFileParams = SaveFileDialogParams(sourceFilePath: filePath);
+      final finalPath = await FlutterFileDialog.saveFile(params: saveFileParams);
+    }
+    catch (e) {
+      print("Unexplained error, yipee!");
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -206,7 +220,9 @@ class _ResultDisplayState extends State<ResultDisplay> {
         actions: <Widget> [
           IconButton(
             icon: const Icon(Icons.download),
-            onPressed: () => {},
+            onPressed: () => {
+              downloadVideo()
+            },
             color: const Color(0xFF422727),
             iconSize: 40,
           ),
@@ -227,9 +243,9 @@ class _ResultDisplayState extends State<ResultDisplay> {
                       ),
                   ),
                   content: const Text(
-                      "Are you sure? After returning home you will no longer have access"
-                          " to your classified video. Make sure you've saved your video"
-                          " if you would like to access it on your device later.",
+                      "Are you sure you want to return home? You will no longer have access to your"
+                          " classified video within the app. Make sure you've saved your video if you"
+                          " would like to access it on your device later.",
                     style: TextStyle(
                       //perhaps some stuff here
                     ),
@@ -245,8 +261,7 @@ class _ResultDisplayState extends State<ResultDisplay> {
                     ),
                     TextButton(
                       onPressed: () => {
-                        // TODO: remove the loaded video from RAM
-                        // return the page to home by popping the rest of the stack
+                        // cancel the return home request
                         Navigator.of(context).pop(),
                       },
                       child: const Text("Go Back"),
