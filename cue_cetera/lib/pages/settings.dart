@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cue_cetera/pages/home.dart';
 
 class Set extends StatefulWidget {
   const Set({Key? key}) : super(key: key);
@@ -17,12 +18,12 @@ class _SetState extends State<Set> {
         centerTitle: true,
         toolbarHeight: 100,
         elevation: 0,
-        title: const Text(
+        title: Text(
           'CUE-CETERA',
           style: TextStyle(
             fontFamily: 'Lusteria',
             color: Color.fromARGB(255, 66, 39, 39),
-            fontSize: 20,
+            fontSize: TextSize20,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -45,9 +46,9 @@ class _SetState extends State<Set> {
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     fixedSize: const Size(250, 90),
-                    textStyle: const TextStyle(
+                    textStyle: TextStyle(
                       fontFamily: 'OpenSans',
-                      fontSize: 15,
+                      fontSize: TextSize15,
                       fontWeight: FontWeight.bold,
                     ),
                     backgroundColor: const Color.fromARGB(255, 212, 195, 195),
@@ -65,9 +66,9 @@ class _SetState extends State<Set> {
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     fixedSize: const Size(250, 90),
-                    textStyle: const TextStyle(
+                    textStyle: TextStyle(
                       fontFamily: 'OpenSans',
-                      fontSize: 15,
+                      fontSize: TextSize15,
                       fontWeight: FontWeight.bold,
                     ),
                     backgroundColor: const Color.fromARGB(255, 212, 195, 195),
@@ -85,9 +86,9 @@ class _SetState extends State<Set> {
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     fixedSize: const Size(250, 90),
-                    textStyle: const TextStyle(
+                    textStyle: TextStyle(
                       fontFamily: 'OpenSans',
-                      fontSize: 15,
+                      fontSize: TextSize15,
                       fontWeight: FontWeight.bold,
                     ),
                     backgroundColor: const Color.fromARGB(255, 212, 195, 195),
@@ -112,27 +113,42 @@ class _SetState extends State<Set> {
                   child: Column(
                     children: <Widget>[
                       Container(
-                        child: const Text(
+                        child: Text(
                           'CHANGE TEXT SIZE',
                           style: TextStyle(
                             fontFamily: 'OpenSans',
                             color: Color.fromARGB(255, 66, 39, 39),
-                            fontSize: 15,
+                            fontSize: TextSize15,
                             fontWeight: FontWeight.bold,
                           ),
                           textAlign: TextAlign.justify,
                         ),
                       ),
                       Slider(
-                        value: 16,
+                        value: TextSize15,
                         min: 10.0,
-                        max: 30.0,
+                        max: 70.0,
+                        label: TextSize15.round().toString(),
                         activeColor: Color.fromARGB(255, 81, 48, 48),
                         inactiveColor: Color.fromARGB(255, 158, 144, 144),
                         thumbColor: Color.fromARGB(255, 35, 23, 23),
-                        onChanged: (newValue) {
-                          setState(() {});
+                        onChanged: (double value) {
+                          setState(() {
+                            TextSize15 = value;
+                            TextSize20 = value + 5;
+                            TextSize28 = value + 13;
+                            TextSize37 = value + 17;
+                          });
                         },
+                      ),
+                      Text(
+                        TextSize15.round().toString(),
+                        style: TextStyle(
+                          fontFamily: 'OpenSans',
+                          fontSize: TextSize15,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 66, 39, 39),
+                        ),
                       ),
                     ],
                   ),

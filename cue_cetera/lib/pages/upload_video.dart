@@ -3,6 +3,7 @@ import 'package:file_picker/file_picker.dart';
 
 import 'package:cue_cetera/pages/result_display.dart';
 import 'package:cue_cetera/services/firebase_services.dart';
+import 'package:cue_cetera/pages/home.dart';
 
 class UploadVideo extends StatefulWidget {
   const UploadVideo({Key? key}) : super(key: key);
@@ -24,17 +25,15 @@ class _UploadVideoState extends State<UploadVideo> {
         centerTitle: true,
         toolbarHeight: 100,
         elevation: 0,
-        title: const Text(
+        title: Text(
           'CUE-CETERA',
           style: TextStyle(
             fontFamily: 'Lusteria',
             color: Color.fromARGB(255, 66, 39, 39),
-            fontSize: 20,
+            fontSize: TextSize20,
             fontWeight: FontWeight.bold,
           ),
-
         ),
-
       ),
       body: Container(
         decoration: const BoxDecoration(
@@ -50,56 +49,54 @@ class _UploadVideoState extends State<UploadVideo> {
               Container(
                 alignment: Alignment.center,
                 padding: const EdgeInsets.only(top: 50),
-                child: const Text(
+                child: Text(
                   'Click Below to Upload a Video\n\n\n',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontFamily: 'Lusteria',
                     color: Color.fromARGB(255, 212, 195, 195),
-                    fontSize: 28,
+                    fontSize: TextSize28,
                   ),
                 ),
               ),
-
-
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   ElevatedButton(
-                      onPressed: () async {
-                        var picked = await FilePicker.platform.pickFiles();
+                    onPressed: () async {
+                      var picked = await FilePicker.platform.pickFiles();
 
-                        if (picked != null) {
-                          print(picked.files.first.size / (1024 * 1024));
-                          if (picked.files.first.size / (1024 * 1024) > 50) {
-                            print('File size cannot exceed 50 MB');
-                          } else {
-                            runFirebase(picked.files.first.path!);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
+                      if (picked != null) {
+                        print(picked.files.first.size / (1024 * 1024));
+                        if (picked.files.first.size / (1024 * 1024) > 50) {
+                          print('File size cannot exceed 50 MB');
+                        } else {
+                          runFirebase(picked.files.first.path!);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
                                 //builder: (context) =>  Test(picked.files.first.path!)),
-                                  builder: (context) =>
-                                      ResultDisplay(picked.files.first.path!)),
-                            );
-                          }
+                                builder: (context) =>
+                                    ResultDisplay(picked.files.first.path!)),
+                          );
                         }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        fixedSize: const Size(250, 100),
-                        textStyle: const TextStyle(
-                          fontFamily: 'OpenSans',
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        backgroundColor: const Color.fromARGB(255, 212, 195, 195),
-                        foregroundColor: const Color.fromARGB(255, 66, 39, 39),
-                        elevation: 0,
-                        shadowColor: const Color.fromARGB(255, 66, 39, 39),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      fixedSize: const Size(250, 100),
+                      textStyle: TextStyle(
+                        fontFamily: 'OpenSans',
+                        fontSize: TextSize15,
+                        fontWeight: FontWeight.bold,
                       ),
+                      backgroundColor: const Color.fromARGB(255, 212, 195, 195),
+                      foregroundColor: const Color.fromARGB(255, 66, 39, 39),
+                      elevation: 0,
+                      shadowColor: const Color.fromARGB(255, 66, 39, 39),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                    ),
                     child: const Center(
                       child: Text("SELECT"),
                     ),

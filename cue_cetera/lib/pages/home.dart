@@ -5,6 +5,11 @@ import 'package:cue_cetera/pages/settings.dart';
 import 'package:cue_cetera/pages/record_video.dart';
 import 'package:cue_cetera/pages/upload_video.dart';
 
+double TextSize15 = 15;
+double TextSize20 = 20;
+double TextSize28 = 28;
+double TextSize37 = 37;
+
 class Home extends StatefulWidget {
   final String title;
   const Home(this.title, {Key? key}) : super(key: key);
@@ -28,10 +33,10 @@ class _HomeState extends State<Home> {
         elevation: 0,
         title: Text(
           title,
-          style: const TextStyle(
+          style: TextStyle(
             fontFamily: 'Lusteria',
             color: Color.fromARGB(255, 66, 39, 39),
-            fontSize: 20,
+            fontSize: TextSize20,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -55,12 +60,12 @@ class _HomeState extends State<Home> {
             Container(
               alignment: Alignment.center,
               //padding: EdgeInsets.only(top: 80),
-              child: const Text(
+              child: Text(
                 'Choose an Option',
                 style: TextStyle(
                   fontFamily: 'Lusteria',
                   color: Color.fromARGB(255, 212, 195, 195),
-                  fontSize: 37,
+                  fontSize: TextSize37,
                 ),
               ),
             ),
@@ -73,12 +78,12 @@ class _HomeState extends State<Home> {
             Container(
               alignment: Alignment.center,
               padding: const EdgeInsets.only(top: 30),
-              child: const Text(
+              child: Text(
                 'Begin your exploration',
                 style: TextStyle(
                   fontFamily: 'OpenSans',
                   color: Color.fromARGB(255, 172, 158, 158),
-                  fontSize: 15,
+                  fontSize: TextSize15,
                   fontStyle: FontStyle.italic,
                 ),
               ),
@@ -98,9 +103,9 @@ class _HomeState extends State<Home> {
               },
               style: ElevatedButton.styleFrom(
                 fixedSize: const Size(250, 100),
-                textStyle: const TextStyle(
+                textStyle: TextStyle(
                   fontFamily: 'OpenSans',
-                  fontSize: 15,
+                  fontSize: TextSize15,
                   fontWeight: FontWeight.bold,
                 ),
                 backgroundColor: const Color.fromARGB(255, 212, 195, 195),
@@ -128,9 +133,9 @@ class _HomeState extends State<Home> {
               },
               style: ElevatedButton.styleFrom(
                 fixedSize: const Size(250, 100),
-                textStyle: const TextStyle(
+                textStyle: TextStyle(
                   fontFamily: 'OpenSans',
-                  fontSize: 15,
+                  fontSize: TextSize15,
                   fontWeight: FontWeight.bold,
                 ),
                 backgroundColor: const Color.fromARGB(255, 212, 195, 195),
@@ -158,9 +163,9 @@ class _HomeState extends State<Home> {
               },
               style: ElevatedButton.styleFrom(
                 fixedSize: const Size(150, 50),
-                textStyle: const TextStyle(
+                textStyle: TextStyle(
                   fontFamily: 'OpenSans',
-                  fontSize: 15,
+                  fontSize: TextSize15,
                   fontWeight: FontWeight.bold,
                 ),
                 backgroundColor: const Color.fromARGB(255, 35, 23, 23),
