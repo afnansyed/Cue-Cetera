@@ -101,6 +101,7 @@
 | 9/24 | Diana | Experimenting with Resnet50, Xception, InceptionResNetV2, and NasNetMobile pre-trained models for transfer learning | 3 hrs
 | 9/25 | Diana | Implemented learning rate scheduler to dynamically adjust learning rate and started to fix class imbalance by performing data augmentation on minority classes and removing images | 4 hrs
 | 9/26 | Diana | Fixed class imbalance and started experimenting with other hidden layers for resnet tl model | 3 hrs
+| 9/28 | Diana | Converted dataset to images to manually clean as a team| 0.5 hrs
 (Afnan Syed) Google docs contribution record: https://docs.google.com/document/d/1yr94W63IZH-b98pGuP2m3c1zsexB2Q_fsDCncp7gjkc/edit?usp=sharing
 
 (Shravya Iruvanti) Google docs contribution record: https://docs.google.com/document/d/1Hg9JnWLR-NZJpnrB-8ZdGJv_D4ouR0JuR8zSA6MB-5g/edit?usp=sharing 
