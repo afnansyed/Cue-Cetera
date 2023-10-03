@@ -6,6 +6,7 @@ import 'package:cue_cetera/classes/timestamp.dart';
 import 'package:cue_cetera/widgets/timestamp_card.dart';
 import 'dart:io';
 import 'package:flutter_file_dialog/flutter_file_dialog.dart';
+import 'package:cue_cetera/pages/info_results.dart';
 
 class ResultDisplay extends StatefulWidget {
   String filePath;
@@ -22,22 +23,12 @@ class _ResultDisplayState extends State<ResultDisplay> {
   _ResultDisplayState(this.filePath);
 
   // there is probably a way to not define these sets twice
-  List<int> positiveEmotions = [
-    3,
-    5
-  ];
+  List<int> positiveEmotions = [3, 5];
 
-  List<int> negativeEmotions = [
-    0,
-    1,
-    2,
-    4
-  ];
+  List<int> negativeEmotions = [0, 1, 2, 4];
 
   // dont actually need this list with current implementation, but makes it clear
-  List<int> neutralEmotions = [
-    6
-  ];
+  List<int> neutralEmotions = [6];
 
   // would be best to already get our timestamp info in chronological order
   // if in chronological order, we can use binary search to find our current emotion
@@ -100,8 +91,7 @@ class _ResultDisplayState extends State<ResultDisplay> {
           break;
         }
         searchIndex++;
-      }
-      else {
+      } else {
         break;
       }
     }
@@ -129,8 +119,7 @@ class _ResultDisplayState extends State<ResultDisplay> {
         // search the lower half of our timestamps for the correct one
         high = middle;
         middle = (high + low) ~/ 2;
-      }
-      else {
+      } else {
         //currentTime >= timestamps[middle], check if currentTime < timestamps[middle+1]
         if (middle + 1 < timestamps.length) {
           // we are at the last legal index, break
@@ -139,8 +128,7 @@ class _ResultDisplayState extends State<ResultDisplay> {
         if (currentTime < timestamps[middle + 1].timeMs!) {
           // we are at the correct index
           break;
-        }
-        else {
+        } else {
           // search the upper half of our timestamps
           low = middle;
           middle = (high + low) ~/ 2;
@@ -155,11 +143,9 @@ class _ResultDisplayState extends State<ResultDisplay> {
     String thumbString = "";
     if (positiveEmotions.contains(emotion)) {
       thumbString = "blueThumb";
-    }
-    else if (negativeEmotions.contains(emotion)) {
+    } else if (negativeEmotions.contains(emotion)) {
       thumbString = "redThumb";
-    }
-    else {
+    } else {
       thumbString = "neutralThumb";
     }
 
@@ -185,9 +171,9 @@ class _ResultDisplayState extends State<ResultDisplay> {
     File file = File(filePath);
     try {
       final saveFileParams = SaveFileDialogParams(sourceFilePath: filePath);
-      final finalPath = await FlutterFileDialog.saveFile(params: saveFileParams);
-    }
-    catch (e) {
+      final finalPath =
+          await FlutterFileDialog.saveFile(params: saveFileParams);
+    } catch (e) {
       print("Unexplained error, yipee!");
     }
   }
@@ -207,22 +193,31 @@ class _ResultDisplayState extends State<ResultDisplay> {
         backgroundColor: const Color(0xFFAC9E9E),
         toolbarHeight: 75,
         elevation: 0,
-        centerTitle: true,
+        centerTitle: false,
         title: const Text(
-            "CUE-CETERA",
-            style: TextStyle(
-                color: Color(0xFF422727),
-                fontSize: 20,
-                fontFamily: "Lusteria",
-              fontWeight: FontWeight.bold,
-            ),
+          "RESULTS",
+          style: TextStyle(
+            color: Color(0xFF422727),
+            fontSize: 20,
+            fontFamily: "Lusteria",
+            fontWeight: FontWeight.bold,
+          ),
         ),
-        actions: <Widget> [
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.info),
+            onPressed: () => {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const InfoResults()),
+              )
+            },
+            color: const Color(0xFF422727),
+            iconSize: 40,
+          ),
           IconButton(
             icon: const Icon(Icons.download),
-            onPressed: () => {
-              downloadVideo()
-            },
+            onPressed: () => {downloadVideo()},
             color: const Color(0xFF422727),
             iconSize: 40,
           ),
@@ -237,20 +232,20 @@ class _ResultDisplayState extends State<ResultDisplay> {
                 context: context,
                 builder: (context) => AlertDialog(
                   title: const Text(
-                      "WAIT!",
-                      style: TextStyle(
+                    "WAIT!",
+                    style: TextStyle(
                         //perhaps some stuff here
-                      ),
+                        ),
                   ),
                   content: const Text(
-                      "Are you sure you want to return home? You will no longer have access to your"
-                          " classified video within the app. Make sure you've saved your video if you"
-                          " would like to access it on your device later.",
+                    "Are you sure you want to return home? You will no longer have access to your"
+                    " classified video within the app. Make sure you've saved your video if you"
+                    " would like to access it on your device later.",
                     style: TextStyle(
-                      //perhaps some stuff here
-                    ),
+                        //perhaps some stuff here
+                        ),
                   ),
-                  actions: <Widget> [
+                  actions: <Widget>[
                     TextButton(
                       onPressed: () => {
                         // TODO: remove the loaded video from RAM
@@ -287,7 +282,7 @@ class _ResultDisplayState extends State<ResultDisplay> {
           crossAxisAlignment: CrossAxisAlignment.center,
           // using expanded widgets here so our heights will be properly proportioned
           // and in bounds
-          children: <Widget> [
+          children: <Widget>[
             const Expanded(
               flex: 1,
               child: SizedBox(
@@ -301,9 +296,12 @@ class _ResultDisplayState extends State<ResultDisplay> {
               height: 180.0,
               color: Colors.black,
               child: Stack(
-                children: <Widget> [
+                children: <Widget>[
                   // will show loading symbol if our chewie controller is null for whatever reason
-                  chewieController != null ? Chewie(controller: chewieController!) : const SpinKitFadingCircle(color: Colors.white, size: 50.0),
+                  chewieController != null
+                      ? Chewie(controller: chewieController!)
+                      : const SpinKitFadingCircle(
+                          color: Colors.white, size: 50.0),
                   Padding(
                     padding: const EdgeInsets.all(4.0),
                     child: Align(
@@ -311,7 +309,8 @@ class _ResultDisplayState extends State<ResultDisplay> {
                       child: ValueListenableBuilder(
                         valueListenable: videoController!,
                         builder: (context, value, child) {
-                          return Image.asset( //will have to make this asset depend on the current emotion
+                          return Image.asset(
+                            //will have to make this asset depend on the current emotion
                             // will either be green thumb, red thumb, or no thumb (use a function to return the correct
                             // asset path
                             //"assets/imgs/thumbs/greenThumb.png",
@@ -342,10 +341,12 @@ class _ResultDisplayState extends State<ResultDisplay> {
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: timestamps.map((timestamp) => TimestampCard(
-                    timestamp: timestamp,
-                    jump: jump,
-                  )).toList(),
+                  children: timestamps
+                      .map((timestamp) => TimestampCard(
+                            timestamp: timestamp,
+                            jump: jump,
+                          ))
+                      .toList(),
                 ),
               ),
             ),

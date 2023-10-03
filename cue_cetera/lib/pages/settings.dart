@@ -62,46 +62,6 @@ class _SetState extends State<Set> {
                   child: const Text("TEXT-TO-SPEECH"),
                 ),
                 const SizedBox(height: 10),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    fixedSize: const Size(250, 90),
-                    textStyle: TextStyle(
-                      fontFamily: 'OpenSans',
-                      fontSize: TextSize15,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    backgroundColor: const Color.fromARGB(255, 212, 195, 195),
-                    foregroundColor: const Color.fromARGB(255, 66, 39, 39),
-                    elevation: 0,
-                    shadowColor: const Color.fromARGB(255, 66, 39, 39),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(35),
-                    ),
-                  ),
-                  child: const Text("CAPTIONS IN PLAYBACK VIDEO"),
-                ),
-                const SizedBox(height: 10),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    fixedSize: const Size(250, 90),
-                    textStyle: TextStyle(
-                      fontFamily: 'OpenSans',
-                      fontSize: TextSize15,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    backgroundColor: const Color.fromARGB(255, 212, 195, 195),
-                    foregroundColor: const Color.fromARGB(255, 66, 39, 39),
-                    elevation: 0,
-                    shadowColor: const Color.fromARGB(255, 66, 39, 39),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(35),
-                    ),
-                  ),
-                  child: const Text("COLOR BLIND MODE"),
-                ),
-                const SizedBox(height: 10),
                 Container(
                   width: 250,
                   alignment: Alignment.center,
