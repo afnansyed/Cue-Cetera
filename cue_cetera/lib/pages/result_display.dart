@@ -32,18 +32,22 @@ class _ResultDisplayState extends State<ResultDisplay> {
 
   // would be best to already get our timestamp info in chronological order
   // if in chronological order, we can use binary search to find our current emotion
-  List<Timestamp> timestamps = [
-    Timestamp(timeMs: 0, emotion: 0),
-    Timestamp(timeMs: 1000, emotion: 1),
-    Timestamp(timeMs: 2000, emotion: 2),
-    Timestamp(timeMs: 3000, emotion: 3),
-    Timestamp(timeMs: 5000, emotion: 4),
-    Timestamp(timeMs: 8000, emotion: 5),
-    Timestamp(timeMs: 13000, emotion: 6),
-    Timestamp(timeMs: 21000, emotion: 0),
-    Timestamp(timeMs: 34000, emotion: 6),
-    Timestamp(timeMs: 55000, emotion: 3),
-  ];
+  List<Timestamp> timestamps = [];
+  bool timestampsReady = false;
+  void populateTimestamps() {
+    timestamps.add(Timestamp(timeMs: 0, emotion: 0));
+    timestamps.add(Timestamp(timeMs: 1000, emotion: 1));
+    timestamps.add(Timestamp(timeMs: 2000, emotion: 2));
+    timestamps.add(Timestamp(timeMs: 3000, emotion: 3));
+    timestamps.add(Timestamp(timeMs: 5000, emotion: 4));
+    timestamps.add(Timestamp(timeMs: 8000, emotion: 5));
+    timestamps.add(Timestamp(timeMs: 13000, emotion: 6));
+    timestamps.add(Timestamp(timeMs: 34000, emotion: 6));
+    timestamps.add(Timestamp(timeMs: 55000, emotion: 3));
+    Future.delayed(const Duration(seconds: 5), () {
+      setState(() {timestampsReady = true;});
+    });
+  }
 
   int currentTimestampIndex = 0;
 
@@ -182,6 +186,7 @@ class _ResultDisplayState extends State<ResultDisplay> {
   void initState() {
     super.initState();
     videoInit();
+    populateTimestamps();
   }
 
   @override
@@ -338,7 +343,12 @@ class _ResultDisplayState extends State<ResultDisplay> {
               width: 320.0,
               height: 370.0,
               color: const Color(0xFFAC9E9E),
-              child: SingleChildScrollView(
+              // our child is either a loading symbol or our timestamps
+              child: !timestampsReady
+                  ? const SpinKitFadingCircle(
+                  color: Colors.white, size: 50.0)
+                  :
+              SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: timestamps
