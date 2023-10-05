@@ -218,7 +218,7 @@ class _ResultDisplayState extends State<ResultDisplay> {
           "RESULTS",
           style: TextStyle(
             color: Color(0xFF422727),
-            fontSize: 20,
+            fontSize: 16,
             fontFamily: "Lusteria",
             fontWeight: FontWeight.bold,
           ),
