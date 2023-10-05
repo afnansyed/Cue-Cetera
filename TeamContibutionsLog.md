@@ -102,4 +102,4 @@
 
 (Matthew Fernandez) Github Worklog Repo: https://github.com/fernandezmatthew/CueCeteraWorklogs.git
 
-(Amani-Azra Numa) Google docs contribution record: https://docs.google.com/document/d/1TdKUmlQMiBH92p8Hp3u812Km_SlbAUAuW9bMf-o8YQ8/edit
+(Amani-Azra Numa) Google docs contribution record: https://docs.google.com/document/d/1TdKUmlQMiBH92p8Hp3u812Km_SlbAUAuW9bMf-o8YQ8/edit?usp=sharing
