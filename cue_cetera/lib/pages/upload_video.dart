@@ -24,7 +24,7 @@ class _UploadVideoState extends State<UploadVideo> {
 
   @override
   void dispose() {
-    flutterTts.stop(); // <-- 5. Ensure to stop the TTS when leaving the screen
+    flutterTts.stop();
     super.dispose();
   }
 
@@ -43,6 +43,7 @@ class _UploadVideoState extends State<UploadVideo> {
                     'Click below to upload a video.'
                 );
               },
+              iconSize: 40,
             ),
           )
         ],

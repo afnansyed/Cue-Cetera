@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cue_cetera/pages/home.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 class Set extends StatefulWidget {
   const Set({Key? key}) : super(key: key);
@@ -9,11 +10,37 @@ class Set extends StatefulWidget {
 }
 
 class _SetState extends State<Set> {
+  FlutterTts flutterTts = FlutterTts();
+
+  speak(String text) async {
+    await flutterTts.speak(text);
+  }
+
+  @override
+  void dispose() {
+    flutterTts.stop();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 172, 158, 158),
       appBar: AppBar(
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 25.0),
+            child: IconButton(
+              icon: Icon(Icons.volume_up, color: Color.fromARGB(255, 66, 39, 39)),
+              onPressed: () {
+                speak(
+                    'You are on the settings page. Text-to-speech option: Tap on the speaker icon at the top of each page to enable Text-to-Speech. Change Text Size option: adjust the text size for better readability.'
+                );
+              },
+              iconSize: 40,
+            ),
+          )
+        ],
         backgroundColor: const Color.fromARGB(255, 172, 158, 158),
         centerTitle: true,
         toolbarHeight: 100,

@@ -36,6 +36,7 @@ class _InfoState extends State<Info> {
                         'How to use. 1. Choose between "Upload Video" or "Use Video Camera" option on the homepage. 2. Choose or take a video that is less than 30 seconds long. 3. Make sure the faces are clearly visible in the video. Results may take up to 1 minute to load. Emotions will be categorized as POSITIVE, NEGATIVE, or NEUTRAL. Clicking on the categorized results will show you the specific video frame.'
                 );
               },
+              iconSize: 40,
             ),
           )
         ],

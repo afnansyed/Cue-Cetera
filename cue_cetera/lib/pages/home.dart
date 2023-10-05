@@ -46,6 +46,7 @@ class _HomeState extends State<Home> {
                   'Welcome to Cue-Cetera. Choose an option below to begin your exploration. Upload video or Use Video Camera. For more details, click on the info and settings button.'
               );
             },
+              iconSize: 40,
             ),
           )
         ],
