@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:cue_cetera/pages/info.dart';
 import 'package:cue_cetera/pages/settings.dart';
 import 'package:cue_cetera/pages/record_video.dart';
@@ -19,14 +19,36 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  FlutterTts flutterTts = FlutterTts();
+  speak(String text) async {
+    await flutterTts.speak(text);
+  }
+
   String title;
   _HomeState(this.title);
 
   @override
+  void dispose() {
+    flutterTts.stop();
+    super.dispose();
+  }
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 172, 158, 158),
       appBar: AppBar(
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 25.0),
+            child: IconButton(
+              icon: Icon(Icons.volume_up, color: Color.fromARGB(255, 66, 39, 39)),
+              onPressed: () {
+                speak(
+                  'Welcome to Cue-Cetera. Choose an option below to begin your exploration. Upload video or Use Video Camera. For more details, click on the info and settings button.'
+              );
+            },
+            ),
+          )
+        ],
         backgroundColor: const Color.fromARGB(255, 172, 158, 158),
         centerTitle: true,
         toolbarHeight: 100,
@@ -96,6 +118,7 @@ class _HomeState extends State<Home> {
             ),
             ElevatedButton(
               onPressed: () {
+                flutterTts.stop();
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const UploadVideo()),
@@ -126,6 +149,7 @@ class _HomeState extends State<Home> {
             ),
             ElevatedButton(
               onPressed: () {
+                flutterTts.stop();
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const RecordVideo()),
@@ -156,6 +180,7 @@ class _HomeState extends State<Home> {
             ),
             ElevatedButton(
               onPressed: () {
+                flutterTts.stop();
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const Info()),
@@ -186,6 +211,7 @@ class _HomeState extends State<Home> {
             ),
             FloatingActionButton(
               onPressed: () {
+                flutterTts.stop();
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const Set()),

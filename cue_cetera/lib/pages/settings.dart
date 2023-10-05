@@ -42,26 +42,49 @@ class _SetState extends State<Set> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    fixedSize: const Size(250, 90),
-                    textStyle: TextStyle(
-                      fontFamily: 'OpenSans',
-                      fontSize: TextSize15,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    backgroundColor: const Color.fromARGB(255, 212, 195, 195),
-                    foregroundColor: const Color.fromARGB(255, 66, 39, 39),
-                    elevation: 0,
-                    shadowColor: const Color.fromARGB(255, 66, 39, 39),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(35),
-                    ),
+                Container(
+                  width: 250,
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 212, 195, 195),
+                    borderRadius: BorderRadius.circular(35),
                   ),
-                  child: const Text("TEXT-TO-SPEECH"),
+                  child: Column(
+                    children: <Widget>[
+                      Text(
+                        "TEXT-TO-SPEECH",
+                        style: TextStyle(
+                          fontFamily: 'OpenSans',
+                          fontSize: TextSize15,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 66, 39, 39),
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(Icons.volume_up, color: Color.fromARGB(255, 66, 39, 39)),
+                          const SizedBox(width: 5),
+                          Flexible(
+                            child: Text(
+                              'Tap on the speaker icon at the top of each page to enable Text-to-Speech.',
+                              style: TextStyle(
+                                fontFamily: 'OpenSans',
+                                color: Color.fromARGB(255, 66, 39, 39),
+                                fontSize: TextSize15-3,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 20),
+
                 Container(
                   width: 250,
                   alignment: Alignment.center,

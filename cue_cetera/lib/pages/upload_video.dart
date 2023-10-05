@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
-
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:cue_cetera/pages/result_display.dart';
 import 'package:cue_cetera/services/firebase_services.dart';
 import 'package:cue_cetera/pages/home.dart';
@@ -16,11 +16,36 @@ class UploadVideo extends StatefulWidget {
 //https://stackoverflow.com/questions/57869422/how-to-upload-a-video-from-gallery-in-flutter
 //https://pub.dev/packages/file_picker
 class _UploadVideoState extends State<UploadVideo> {
+  FlutterTts flutterTts = FlutterTts();
+
+  speak(String text) async {
+    await flutterTts.speak(text);
+  }
+
+  @override
+  void dispose() {
+    flutterTts.stop(); // <-- 5. Ensure to stop the TTS when leaving the screen
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 172, 158, 158),
       appBar: AppBar(
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 25.0),
+            child: IconButton(
+              icon: Icon(Icons.volume_up, color: Color.fromARGB(255, 66, 39, 39)),
+              onPressed: () {
+                speak(
+                    'Click below to upload a video.'
+                );
+              },
+            ),
+          )
+        ],
         backgroundColor: const Color.fromARGB(255, 172, 158, 158),
         centerTitle: true,
         toolbarHeight: 100,
