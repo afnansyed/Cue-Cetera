@@ -49,7 +49,8 @@ def pull_from_db():
 
 @https_fn.on_call()
 def vid_to_imgs(req: https_fn.CallableRequest):
-    delete_db()
+    delete_img_paths()
+    delete_imgs()
     file_name=pull_from_db()
 
     # Create imgs folder
@@ -115,8 +116,8 @@ def add_to_db(file_name):
         "Path": file_name,
     })
 
-# not in use at the moment but for security once the user's session is over
-def delete_db():
+# Delete image paths before starting new inference run
+def delete_img_paths():
     ref = db.reference("Images/")
     data = ref.get()
     for key, val in data.items():
@@ -131,7 +132,9 @@ def upload_img(file_name):
     add_to_db(file_name)
     return blob
 
-# again for security purposes
-def delete_img(blobs):
+# Delete pre-existing images before starting new inference run
+def delete_imgs():
+    bucket = storage.bucket()
+    blobs = bucket.list_blobs(prefix="imgs/")
     for blob_item in blobs:
         blob_item.delete()
