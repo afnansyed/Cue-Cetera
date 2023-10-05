@@ -104,6 +104,7 @@
 | 9/28 | Diana | Converted dataset to images to manually clean as a team + started manually cleaning my assigned section of the dataset | 2.5 hrs
 | 10/1| Diana | Manually cleaning dataset | 3 hrs
 | 10/3| Diana | Made script to organize new dataset + finished manually cleaning dataset | 2 hrs
+| 10/4 | Diana | Helped manually clean fear dataset | 2 hrs
 (Afnan Syed) Google docs contribution record: https://docs.google.com/document/d/1yr94W63IZH-b98pGuP2m3c1zsexB2Q_fsDCncp7gjkc/edit?usp=sharing
 
 (Shravya Iruvanti) Google docs contribution record: https://docs.google.com/document/d/1Hg9JnWLR-NZJpnrB-8ZdGJv_D4ouR0JuR8zSA6MB-5g/edit?usp=sharing 
