@@ -50,6 +50,8 @@ dependencies:
 #  chaquopy: ^0.0.19
   http: ^0.13.5
   cloud_functions: ^4.4.0
+  tflite: ^1.1.2
+  image: ^3.3.0
 
 dependency_overrides:
   ffi: ^2.0.1
@@ -77,6 +79,8 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/labels.txt
+    - assets/model.tflite
     - assets/predictLabels.py
     - assets/videos/
     - assets/imgs/

@@ -99,7 +99,8 @@ def vid_to_imgs(req: https_fn.CallableRequest):
             # save image to folder
             img_name = f"frame{timeStamp}.jpg"
             img_path = os.path.join(osPath + '/', img_name)
-            cv2.imwrite(img_path, image)
+            image_re = cv2.resize(image, (224, 224), interpolation=cv2.INTER_CUBIC)
+            cv2.imwrite(img_path, image_re)
             curr_img = "imgs/" + img_name
             upload_img(curr_img)
             curr_step += 1
@@ -116,7 +117,7 @@ def add_to_db(file_name):
 
 # not in use at the moment but for security once the user's session is over
 def delete_db():
-    ref = db.reference("/")
+    ref = db.reference("Images/")
     data = ref.get()
     for key, val in data.items():
         delete_user_ref = ref.child(key)
