@@ -24,11 +24,11 @@ def dbObj():
 def pull_from_db():
     dbObj()
 
-    ref = db.reference("Videos/paths")
-    path = ref.order_by_child('Path').get()
+    ref = db.reference("Videos")
+    path = ref.child("paths").order_by_key().limit_to_last(1).get()
     path_val = ""
     currPath = ""
-
+    
     for key, val in path.items():
         path_val = val
         path_val = path_val['Path']
