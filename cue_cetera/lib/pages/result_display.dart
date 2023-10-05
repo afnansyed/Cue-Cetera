@@ -7,6 +7,7 @@ import 'package:cue_cetera/widgets/timestamp_card.dart';
 import 'dart:io';
 import 'package:flutter_file_dialog/flutter_file_dialog.dart';
 import 'package:cue_cetera/pages/info_results.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 class ResultDisplay extends StatefulWidget {
   String filePath;
@@ -19,6 +20,19 @@ class ResultDisplay extends StatefulWidget {
 // TODO: make current timestamp search use binary search algorithm,
 
 class _ResultDisplayState extends State<ResultDisplay> {
+
+  FlutterTts flutterTts = FlutterTts();
+
+  speak(String text) async {
+    await flutterTts.speak(text);
+  }
+
+  @override
+  void dispose() {
+    flutterTts.stop();
+    super.dispose();
+  }
+
   String filePath;
   _ResultDisplayState(this.filePath);
 
@@ -194,6 +208,7 @@ class _ResultDisplayState extends State<ResultDisplay> {
     return Scaffold(
       backgroundColor: const Color(0xFFAC9E9E),
       appBar: AppBar(
+
         // TODO: Add a download button to download the video, PREFERABLY with the thumb burned
         backgroundColor: const Color(0xFFAC9E9E),
         toolbarHeight: 75,
@@ -209,6 +224,14 @@ class _ResultDisplayState extends State<ResultDisplay> {
           ),
         ),
         actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.volume_up),
+            onPressed: () => speak(
+                "You're on the results page. Here, you can view the analysis of your video, access information about the results, download the video to your device, or return to the home screen."
+            ),
+            color: const Color(0xFF422727),
+            iconSize: 40,
+          ),
           IconButton(
             icon: const Icon(Icons.info),
             onPressed: () => {
