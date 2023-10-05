@@ -4,6 +4,8 @@ import numpy as np
 import cv2
 import os
 import datetime
+import tempfile
+import shutil
 
 import firebase_admin
 from firebase_admin import db, ml, storage, initialize_app
@@ -31,6 +33,7 @@ def pull_from_dB():
     ref = db.reference("Videos/paths")
     path = ref.order_by_child('Path').get()
     path_val = ""
+    currPath = ""
 
     for key, val in path.items():
         path_val = val
@@ -39,24 +42,28 @@ def pull_from_dB():
     if path_val[0] == "/":
         currPath = path_val[1:]
 
+    else:
+        return
+    
+    print("We here")
+
     source_blob_name = currPath
 
-    # The path to which the video should be downloaded so processing can work.
     destination_file_name = r"videoAnalysis.mp4"
 
     bucket = storage.bucket()
     blob = bucket.blob(source_blob_name)
     blob.download_to_filename(destination_file_name)
+    return destination_file_name
 
 
 # adds classification labels to database.
-def add_to_db(file_name, emotion, label):
+def add_to_db(file_name):
     ref = db.reference("Images")
-    ref.child("Classification").push().set({
+    ref.child("Paths").push().set({
         "Path": file_name,
-        "Emotion": emotion,
-        "Label": label,
     })
+
 
 # not in use at the moment but for security once the user's session is over
 def delete_db():
@@ -71,6 +78,7 @@ def upload_img(file_name):
     bucket = storage.bucket()
     blob = bucket.blob(file_name)
     blob.upload_from_filename(file_name)
+    add_to_db(file_name)
     return blob
 
 # again for security purposes
@@ -79,6 +87,8 @@ def delete_img(blobs):
         blob_item.delete()
 
 def vid_to_imgs(file_name="videoAnalysis.mp4"):
+    file_name=pull_from_dB()
+
     # Create imgs folder
     osPath = os.path.join(os.path.dirname(__file__), "imgs")
     if not os.path.isdir(osPath):
@@ -124,7 +134,11 @@ def vid_to_imgs(file_name="videoAnalysis.mp4"):
             except ValueError:
                 timeStamp = (timeStamp + ".00").replace(":", "-")
             # save image to folder
-            cv2.imwrite(os.path.join(osPath + '/', f"frame{timeStamp}.jpg"), image)
+            img_name = f"frame{timeStamp}.jpg"
+            img_path = os.path.join(osPath + '/', img_name)
+            cv2.imwrite(img_path, image)
+            curr_img = "imgs/" + img_name
+            upload_img(curr_img)
             curr_step += 1
         cnt += 1
 
@@ -183,7 +197,7 @@ if __name__ == "__main__":
     model = Emotion_ML()
     dbObj()
 
-    predict_emotions()
+    vid_to_imgs()
 
 #     ### Following commented out lines are for the user session ###
 # # make anonymous user
