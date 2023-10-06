@@ -39,7 +39,7 @@ class _RecordVideoState extends State<RecordVideo> {
       await controllers.startVideoRecording();
     } else {
       final file = await controllers.stopVideoRecording();
-      runFirebase(file.path);
+      var output = await runFirebase(file.path);
       //Navigator.push(context, MaterialPageRoute(builder: (context) =>  Test(file.path),));
       Navigator.push(
           context,

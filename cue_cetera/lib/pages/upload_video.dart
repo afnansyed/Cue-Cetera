@@ -97,7 +97,7 @@ class _UploadVideoState extends State<UploadVideo> {
                         if (picked.files.first.size / (1024 * 1024) > 50) {
                           print('File size cannot exceed 50 MB');
                         } else {
-                          runFirebase(picked.files.first.path!);
+                          var output = await runFirebase(picked.files.first.path!);
                           Navigator.push(
                             context,
                             MaterialPageRoute(

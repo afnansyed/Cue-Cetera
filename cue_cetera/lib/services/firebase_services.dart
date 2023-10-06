@@ -7,7 +7,9 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:tflite/tflite.dart';
 import 'package:image/image.dart' as img;
 
-void runFirebase(String filePath) async {
+Map modelOutput = Map<int, int>();
+
+Future<Map<int, int>> runFirebase(String filePath) async {
   //send file name to db
   DatabaseReference ref = FirebaseDatabase.instance.ref("Videos");
 
@@ -28,17 +30,18 @@ void runFirebase(String filePath) async {
     throw Exception('Failed to save video');
   }
 
-  runBackend();
-  await Future.delayed(const Duration(seconds: 10)); // Added delay to let images finish processing
+  await runBackend();
 
-  var modelOutput = await runModelInference();
+  Completer<Map<int, int>> completer = Completer();
+  completer.complete(modelOutput as FutureOr<Map<int, int>>?);
+  return completer.future;
 }
 
 Future<void> runBackend() async {
   try {
     final result = await FirebaseFunctions.instance
         .httpsCallable('vid_to_imgs')
-        .call('convert');
+        .call('convert').whenComplete(() => runModelInference());
   } on FirebaseFunctionsException catch (error) {
     print(error.code);
     print(error.details);
@@ -46,7 +49,9 @@ Future<void> runBackend() async {
   }
 }
 
-Future<Map<int, int>> runModelInference() async {
+
+
+Future<void> runModelInference() async {
   // Get images from Firebase
   final image_query = await FirebaseDatabase.instance.ref("Images/Paths").orderByChild('Path').get();
   final images = image_query.value as Map<dynamic, dynamic>;
@@ -62,8 +67,6 @@ Future<Map<int, int>> runModelInference() async {
       useGpuDelegate: false // defaults to false, set to true to use GPU delegate
   );
   print("Starting inference run");
-
-  Map modelOutput = Map<int, int>();
 
   for (var value in images.values){
     final path = value.toString().substring(7,31);
@@ -94,9 +97,6 @@ Future<Map<int, int>> runModelInference() async {
       });
     }
   };
-  Completer<Map<int, int>> completer = Completer();
-  completer.complete(modelOutput as FutureOr<Map<int, int>>?);
-  return completer.future;
 }
 
 // Convert pulled image to Float32 byte list for model processing
