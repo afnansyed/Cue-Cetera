@@ -57,7 +57,7 @@ def vid_to_imgs(req: https_fn.CallableRequest):
     osPath = os.path.join(os.path.dirname(__file__), "imgs")
     if not os.path.isdir(osPath):
         os.mkdir(osPath)
-    FPS = 3
+    FPS = 1
     # Read the video and its fps
     video = cv2.VideoCapture(file_name)
     vid_fps = video.get(cv2.CAP_PROP_FPS)

@@ -53,6 +53,8 @@ dependencies:
   cloud_functions: ^4.4.0
   tflite: ^1.1.2
   image: ^3.3.0
+  google_mlkit_face_detection: ^0.8.0
+  google_mlkit_commons: ^0.5.0
 
 dependency_overrides:
   ffi: ^2.0.1
