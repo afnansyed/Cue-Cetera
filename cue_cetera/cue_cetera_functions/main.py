@@ -120,9 +120,10 @@ def add_to_db(file_name):
 def delete_img_paths():
     ref = db.reference("Images/")
     data = ref.get()
-    for key, val in data.items():
-        delete_user_ref = ref.child(key)
-        delete_user_ref.delete()
+    if data:
+        for key, val in data.items():
+            delete_user_ref = ref.child(key)
+            delete_user_ref.delete()
 
 # uploads images to the firebase database storage
 def upload_img(file_name):
