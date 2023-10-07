@@ -11,10 +11,11 @@ import 'package:flutter_tts/flutter_tts.dart';
 
 class ResultDisplay extends StatefulWidget {
   String filePath;
-  ResultDisplay(this.filePath, {Key? key}) : super(key: key);
+  Map<int, int> modelOutput;
+  ResultDisplay(this.filePath, this.modelOutput, {Key? key}) : super(key: key);
 
   @override
-  State<ResultDisplay> createState() => _ResultDisplayState(filePath);
+  State<ResultDisplay> createState() => _ResultDisplayState(filePath, modelOutput);
 }
 
 // TODO: make current timestamp search use binary search algorithm,
@@ -34,7 +35,8 @@ class _ResultDisplayState extends State<ResultDisplay> {
   }
 
   String filePath;
-  _ResultDisplayState(this.filePath);
+  Map<int, int> modelOutput;
+  _ResultDisplayState(this.filePath, this.modelOutput);
 
   // there is probably a way to not define these sets twice
   List<int> positiveEmotions = [3, 5];
@@ -49,18 +51,22 @@ class _ResultDisplayState extends State<ResultDisplay> {
   List<Timestamp> timestamps = [];
   bool timestampsReady = false;
   void populateTimestamps() {
-    timestamps.add(Timestamp(timeMs: 0, emotion: 0));
-    timestamps.add(Timestamp(timeMs: 1000, emotion: 1));
-    timestamps.add(Timestamp(timeMs: 2000, emotion: 2));
-    timestamps.add(Timestamp(timeMs: 3000, emotion: 3));
-    timestamps.add(Timestamp(timeMs: 5000, emotion: 4));
-    timestamps.add(Timestamp(timeMs: 8000, emotion: 5));
-    timestamps.add(Timestamp(timeMs: 13000, emotion: 6));
-    timestamps.add(Timestamp(timeMs: 34000, emotion: 6));
-    timestamps.add(Timestamp(timeMs: 55000, emotion: 3));
-    Future.delayed(const Duration(seconds: 5), () {
-      setState(() {timestampsReady = true;});
-    });
+    //first sort the map so we can use binary search
+    var sortedMap = Map.fromEntries(modelOutput.entries.toList()..sort((lhs, rhs) => lhs.key.compareTo(rhs.key)));
+    int formerEmotion = -1;
+    for (var output in sortedMap.entries) {
+      int timeMs = output.key;
+      int emotion = output.value;
+      if (formerEmotion == emotion) {
+        // do nothing
+      }
+      else {
+        formerEmotion = emotion;
+        Timestamp timestamp = Timestamp(timeMs: output.key, emotion: output.value);
+        timestamps.add(timestamp);
+      }
+    }
+    setState(() {timestampsReady = true;});
   }
 
   int currentTimestampIndex = 0;
@@ -126,6 +132,13 @@ class _ResultDisplayState extends State<ResultDisplay> {
       currentTimestampIndex = 0;
       return;
     }
+    if (timestamps.isEmpty) {
+      // no timestamps available
+      // make a neutral one so we dont brick our program
+      timestamps.add(Timestamp(timeMs: 0, emotion: 6));
+      currentTimestampIndex = 0;
+      return;
+    }
     int currentTime = videoController!.value.position.inMilliseconds;
     int high = timestamps.length - 1;
     int low = 0;
@@ -139,7 +152,7 @@ class _ResultDisplayState extends State<ResultDisplay> {
         middle = (high + low) ~/ 2;
       } else {
         //currentTime >= timestamps[middle], check if currentTime < timestamps[middle+1]
-        if (middle + 1 < timestamps.length) {
+        if (middle + 1 >= timestamps.length) {
           // we are at the last legal index, break
           break; // shouldnt have to change searching to false;
         }

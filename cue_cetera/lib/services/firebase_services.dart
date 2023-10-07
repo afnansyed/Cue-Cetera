@@ -4,8 +4,12 @@ import 'dart:async';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:tflite/tflite.dart';
 import 'package:image/image.dart' as img;
+import 'package:google_mlkit_commons/google_mlkit_commons.dart';
+import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
+import 'package:flutter/services.dart';
 
 Map modelOutput = Map<int, int>();
 
@@ -49,8 +53,6 @@ Future<void> runBackend() async {
   }
 }
 
-
-
 Future<void> runModelInference() async {
   // Get images from Firebase
   final image_query = await FirebaseDatabase.instance.ref("Images/Paths").orderByChild('Path').get();
@@ -62,56 +64,66 @@ Future<void> runModelInference() async {
   final res = await Tflite.loadModel(
       model: "assets/model.tflite",
       labels: "assets/labels.txt",
-      numThreads: 1, // defaults to 1
+      numThreads: 10, // defaults to 1
       isAsset: true, // defaults to true, set to false to load resources outside assets
       useGpuDelegate: false // defaults to false, set to true to use GPU delegate
   );
+
+  Directory root = await getTemporaryDirectory();
   print("Starting inference run");
 
-  for (var value in images.values){
-    final path = value.toString().substring(7,31);
+  for (var value in images.values) {
+    final path = value.toString().substring(7, 31);
     final pathReference = storageRef.child(path);
-    final Uint8List? data = await pathReference.getData(1024*1024);
+    final Uint8List? data = await pathReference.getData(1024 * 1024);
     final image = img.decodeImage(data!);
+    final jpg = img.encodeJpg(image!);
+    final file = await File(root.path + '/image.jpg').writeAsBytes(jpg);
 
     //Convert file path to ms
-    final secondsString = value.toString().substring(22,24);
+    final secondsString = value.toString().substring(22, 24);
     var secondsConv = int.parse(secondsString) * 1000;
     final msString = value.toString().substring(25, 27);
     var msConv = int.parse(msString);
     final timestamp = secondsConv + msConv;
 
-    if(data!.isNotEmpty) {
-      // Run Tflite model
-      var output = await Tflite.runModelOnBinary(
-          binary: imageToByteListFloat32(image!, 224, 127.5, 127.5),
-          numResults: 1,
-          threshold: 0.05,
-          asynch: true
-      );
+    if (await detectFace(file)){
+      print("Face detected");
+      if (data!.isNotEmpty) {
+        var output = await Tflite.runModelOnImage(path: root.path + '/image.jpg',
+            imageMean: 127.5,   // defaults to 117.0
+            imageStd: 127.5,  // defaults to 1.0
+            numResults: 1,    // defaults to 5
+            threshold: 0.05,   // defaults to 0.1
+            asynch: true      // defaults to true
+        );
 
-      // Store output in map
-      output!.forEach((element) {
+        // Store output in map
+        output!.forEach((element) {
           var out = int.parse(element.values.toList()[2].toString());
           modelOutput.putIfAbsent(timestamp, () => out);
-      });
+        });
+      }
     }
-  };
-}
 
-// Convert pulled image to Float32 byte list for model processing
-Uint8List imageToByteListFloat32(
-    img.Image image, int inputSize, double mean, double std) {
-  var convertedBytes = Float32List(1 * inputSize * inputSize * 3);
-  var buffer = Float32List.view(convertedBytes.buffer);
-  int pixelIndex = 0;
-  for (var i = 0; i < inputSize; i++) {
-    for (var j = 0; j < inputSize; j++) {
-      var pixel = image.getPixel(j, i);
-      buffer[pixelIndex++] = (img.getRed(pixel) - mean) / std;
-      buffer[pixelIndex++] = (img.getGreen(pixel) - mean) / std;
-      buffer[pixelIndex++] = (img.getBlue(pixel) - mean) / std;
+    else{
+      // Just store neutral if a face is not detected.
+      print("Face not detected");
+      modelOutput.putIfAbsent(timestamp, () => 5);
     }
   }
-  return convertedBytes.buffer.asUint8List();
+}
+
+Future<bool> detectFace(File file) async {
+  final inputImage = InputImage.fromFile(file);
+  final options = FaceDetectorOptions();
+  final faceDetector = FaceDetector(options: options);
+  final List<Face> faces = await faceDetector.processImage(inputImage);
+  faceDetector.close();
+
+  if(faces.isEmpty)
+      return false;
+
+  else
+      return true;
 }

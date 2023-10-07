@@ -4,6 +4,7 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:cue_cetera/pages/result_display.dart';
 import 'package:cue_cetera/services/firebase_services.dart';
 import 'package:cue_cetera/pages/home.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class UploadVideo extends StatefulWidget {
   const UploadVideo({Key? key}) : super(key: key);
@@ -16,7 +17,11 @@ class UploadVideo extends StatefulWidget {
 //https://stackoverflow.com/questions/57869422/how-to-upload-a-video-from-gallery-in-flutter
 //https://pub.dev/packages/file_picker
 class _UploadVideoState extends State<UploadVideo> {
+
   FlutterTts flutterTts = FlutterTts();
+
+  bool runningFirebase = false;
+  bool videoChosen = false;
 
   speak(String text) async {
     await flutterTts.speak(text);
@@ -61,78 +66,95 @@ class _UploadVideoState extends State<UploadVideo> {
           ),
         ),
       ),
-      body: Container(
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(50),
-          ),
-          color: Color.fromARGB(255, 66, 39, 39),
-        ),
-        alignment: Alignment.center,
-        child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.only(top: 50),
-                child: Text(
-                  'Click Below to Upload a Video\n\n\n',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontFamily: 'Lusteria',
-                    color: Color.fromARGB(255, 212, 195, 195),
-                    fontSize: TextSize28,
-                  ),
-                ),
+      body: Stack(
+        children: [
+          Container(
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(50),
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              color: Color.fromARGB(255, 66, 39, 39),
+            ),
+            alignment: Alignment.center,
+            child: SingleChildScrollView(
+              child: Column(
                 children: <Widget>[
-                  ElevatedButton(
-                    onPressed: () async {
-                      var picked = await FilePicker.platform.pickFiles();
-
-                      if (picked != null) {
-                        print(picked.files.first.size / (1024 * 1024));
-                        if (picked.files.first.size / (1024 * 1024) > 50) {
-                          print('File size cannot exceed 50 MB');
-                        } else {
-                          var output = await runFirebase(picked.files.first.path!);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                //builder: (context) =>  Test(picked.files.first.path!)),
-                                builder: (context) =>
-                                    ResultDisplay(picked.files.first.path!)),
-                          );
-                        }
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      fixedSize: const Size(250, 100),
-                      textStyle: TextStyle(
-                        fontFamily: 'OpenSans',
-                        fontSize: TextSize15,
-                        fontWeight: FontWeight.bold,
+                  Container(
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.only(top: 50),
+                    child: Text(
+                      'Click Below to Upload a Video\n\n\n',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: 'Lusteria',
+                        color: Color.fromARGB(255, 212, 195, 195),
+                        fontSize: TextSize28,
                       ),
-                      backgroundColor: const Color.fromARGB(255, 212, 195, 195),
-                      foregroundColor: const Color.fromARGB(255, 66, 39, 39),
-                      elevation: 0,
-                      shadowColor: const Color.fromARGB(255, 66, 39, 39),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                    ),
-                    child: const Center(
-                      child: Text("SELECT"),
                     ),
                   ),
-                  const SizedBox(height: 80),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      ElevatedButton(
+                        onPressed: !videoChosen ? () async {
+                          var picked = await FilePicker.platform.pickFiles();
+
+                          if (picked != null) {
+                            print(picked.files.first.size / (1024 * 1024));
+                            if (picked.files.first.size / (1024 * 1024) > 50) {
+                              print('File size cannot exceed 50 MB');
+                            } else {
+                              videoChosen = true;
+                              runningFirebase = true;
+                              setState(() {});
+                              var output = await runFirebase(picked.files.first.path!);
+                              runningFirebase = false;
+                              videoChosen = false;
+                              setState(() {});
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  //builder: (context) =>  Test(picked.files.first.path!)),
+                                    builder: (context) =>
+                                        ResultDisplay(picked.files.first.path!, output)),
+                              );
+                            }
+                          }
+                        } :
+                        null, // disbale button if videochosen
+                        style: ElevatedButton.styleFrom(
+                          fixedSize: const Size(250, 100),
+                          textStyle: TextStyle(
+                            fontFamily: 'OpenSans',
+                            fontSize: TextSize15,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          backgroundColor: const Color.fromARGB(255, 212, 195, 195),
+                          foregroundColor: const Color.fromARGB(255, 66, 39, 39),
+                          elevation: 0,
+                          shadowColor: const Color.fromARGB(255, 66, 39, 39),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                        ),
+                        child: const Center(
+                          child: Text("SELECT"),
+                        ),
+                      ),
+                      const SizedBox(height: 80),
+                    ],
+                  ),
                 ],
               ),
-            ],
+            ),
           ),
-        ),
+          runningFirebase ? const SpinKitFadingCircle(
+              color: Colors.white,
+              size: 50.0
+          ) :
+          // SizedBox.shrink() is basically nothing, which we want if we're not loading
+          const SizedBox.shrink(),
+        ]
       ),
     );
   }

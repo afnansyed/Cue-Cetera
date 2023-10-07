@@ -7,11 +7,11 @@
     <list default="true" id="34f2ed93-a068-41e3-b83c-766de9aabb24" name="Changes" comment="Changes">
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cue-Cetera.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Cue-Cetera.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cue_cetera/lib/pages/record_video.dart" beforeDir="false" afterPath="$PROJECT_DIR$/cue_cetera/lib/pages/record_video.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cue_cetera/lib/pages/result_display.dart" beforeDir="false" afterPath="$PROJECT_DIR$/cue_cetera/lib/pages/result_display.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cue_cetera/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/cue_cetera/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cue_cetera/lib/pages/upload_video.dart" beforeDir="false" afterPath="$PROJECT_DIR$/cue_cetera/lib/pages/upload_video.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cue_cetera/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/cue_cetera/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cue_cetera/windows/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/cue_cetera/windows/flutter/generated_plugin_registrant.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cue_cetera/windows/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cue_cetera/windows/flutter/generated_plugins.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
