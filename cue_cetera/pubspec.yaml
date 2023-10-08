@@ -83,7 +83,7 @@ flutter:
 
   assets:
     - assets/labels.txt
-    - assets/model.tflite
+    - assets/model_15.tflite
     - assets/predictLabels.py
     - assets/videos/
     - assets/imgs/

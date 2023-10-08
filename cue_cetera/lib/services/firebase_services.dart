@@ -69,7 +69,7 @@ Future<void> runModelInference() async {
 
   try {
     final res = await Tflite.loadModel(
-        model: "assets/model.tflite",
+        model: "assets/model_15.tflite",
         labels: "assets/labels.txt", // labels from 0-6 for all emotions
         numThreads: 10, // defaults to 1
         isAsset: true, // defaults to true, set to false to load resources outside assets
@@ -137,7 +137,7 @@ Future<void> runModelInference() async {
     else{
       // Just store neutral if a face is not detected.
       print("Face not detected");
-      modelOutput.putIfAbsent(timestamp, () => 6);
+      modelOutput.putIfAbsent(timestamp, () => 5);
     }
   }
 }
