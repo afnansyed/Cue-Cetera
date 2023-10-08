@@ -19,13 +19,20 @@ Comments / experimentation / failed attempts / difficulties:
    ![Capture2](https://user-images.githubusercontent.com/44105687/228716490-16c6895c-c482-4efd-8401-98c3ad4b2f34.PNG)
 
 
-- To send the video to the backend, we first thought of using Rest API where when video is played, the path url is sent to the http localhost. However, we first ran into issues with the python code for this where the localhost was giving a 404 error. We also try different methods of writing code with the dart to write the path out using Rest API. We decided to use firebase for now which is compatible with both python and flutter. We had issues with flutter uploading the video file to the database. As no errors were being generated and the logic that we are apply with code seemed correct, its was harder to debug the issue. However,, we got it to successfully work.
-
+- FIXED ~~To send the video to the backend, we first thought of using Rest API where when video is played, the path url is sent to the http localhost. However, we first ran into issues with the python code for this where the localhost was giving a 404 error. We also try different methods of writing code with the dart to write the path out using Rest API. We decided to use firebase for now which is compatible with both python and flutter. We had issues with flutter uploading the video file to the database. As no errors were being generated and the logic that we are apply with code seemed correct, its was harder to debug the issue. However,, we got it to successfully work.~~
+- Currently using a combination of Firebase, Firebase Functions, and Google Cloud Run to convert the video to image frames. The code for this is in the [main.py](https://github.com/AmaniN16/Cue-Cetera/blob/6b477ab1608f68f2172d61bb62d54d6c39f9ced5/cue_cetera/cue_cetera_functions/main.py) in the cue_cetera_functions folder.
+  
 <img width="958" alt="firebase_img_1" src="https://user-images.githubusercontent.com/44105687/228723575-a9668f42-4381-4d1d-bc18-4369388e2bde.png">
 
 <img width="954" alt="firebase_img_2" src="https://user-images.githubusercontent.com/44105687/228723596-fdaaa734-ae09-4b74-89fb-3d3591c6da87.png">
 
-- We installed Flutter and Android Studio on the CpE Lab Comupter which gives us a better access with Android device emulator. However, since this is a lab computer we had to gain administrative access for many steps from Instructor Carsten. We are setting up to testing with a physical android tablet to run our app as it might be more convenient and help with debugging such as catching gliches. We have access to a Samsung Galexy Tab 4. But since it is an older model we might run into some compatibility issues and so, we as a team will look into pitching in to invest in an android device.
+- FIXED ~~We installed Flutter and Android Studio on the CpE Lab Comupter which gives us a better access with Android device emulator. However, since this is a lab computer we had to gain administrative access for many steps from Instructor Carsten. We are setting up to testing with a physical android tablet to run our app as it might be more convenient and help with debugging such as catching gliches. We have access to a Samsung Galexy Tab 4. But since it is an older model we might run into some compatibility issues and so, we as a team will look into pitching in to invest in an android device.~~
+- We bought an android tablet to perform testing on.
+
+- Before forming a prediction on a frame, [Google ML Kit's Face Detection](https://developers.google.com/ml-kit/vision/face-detection) was used to check if a face was present in the frame. Currently, if a face is not detected it will set the emotion as neutral. If a face is detected it will be sent to be classified by our custom model.
+- The model has been packaged into a Tflite file and Flutter's [Tflite package](https://pub.dev/packages/tflite) has been used to form a prediction on each frame. The output is stored in a map with the Timestamp being a key and the classification being the value which is then converted to the Timestamp Class to display on the results display page. The model is currently downloaded separately and added to assets, but Firebase ML will be integrated in the next build to prevent this extra step.
+- The code for Firebase calling and model prediction is all on the [firebase_services.dart](https://github.com/AmaniN16/Cue-Cetera/blob/a1de08926808581dde53309c216e462c955af391/cue_cetera/lib/services/firebase_services.dart) file.
+  
 - Emmulator used below: Google Pixel 6
 
 
