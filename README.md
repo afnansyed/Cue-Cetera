@@ -148,7 +148,8 @@ Current pages setup status:
 1. HOME PAGE:
 ```
 
-![homepage](https://github.com/AmaniN16/Cue-Cetera/assets/44105687/1d589536-ceca-4671-84c6-a21efbec21e6)
+![homepage](https://github.com/AmaniN16/Cue-Cetera/assets/44105687/40e0f7cd-054e-44f1-94fb-97c405fb2bd5)
+
 
 
 ```
