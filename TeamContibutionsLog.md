@@ -108,6 +108,7 @@
 | 10/5 | Diana | Updated full dataset, measured distribution, and split into new train and testing npy | 4 hrs
 | 10/6 | Diana | Fixed class imbalance and re-ran models using updated dataset | 5 hrs
 | 10/7 | Diana | Hyper-tuning models in an attempt to increase accuracy, experimenting with the number of hidden layers and conversion of grayscale to rgb | 4.5 hrs
+| 10/8 | Diana | Computed class weights to adjust weights to account for class imbalance, re-ran models, adjusted hidden layers + exported model to tflite file | 2 hrs
 (Afnan Syed) Google docs contribution record: https://docs.google.com/document/d/1yr94W63IZH-b98pGuP2m3c1zsexB2Q_fsDCncp7gjkc/edit?usp=sharing
 
 (Shravya Iruvanti) Google docs contribution record: https://docs.google.com/document/d/1Hg9JnWLR-NZJpnrB-8ZdGJv_D4ouR0JuR8zSA6MB-5g/edit?usp=sharing 
