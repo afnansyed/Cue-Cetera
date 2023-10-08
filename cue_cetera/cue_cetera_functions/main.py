@@ -2,19 +2,22 @@ import numpy as np
 import cv2
 import os
 import datetime
-import tempfile
-import shutil
+import unittest
+import logging
 
 from firebase_admin import credentials, db, storage, initialize_app
 
 from firebase_functions import https_fn, options
 
 initialize_app()
+logging.info("Initialized Firebase app")
 
 options.set_global_options(
     region=options.SupportedRegion.US_CENTRAL1,
     memory=options.MemoryOption.MB_512,
 )
+logging.info("Region set as ", options.SupportedRegion.US_CENTRAL1)
+logging.info("Memory limit for Firebase Functions set as ", options.MemoryOption.MB_512)
 
 def dbObj():
     authPath = os.path.join(os.path.dirname(__file__), "cue-cetera-726df-firebase-adminsdk-z8vba-4ba059bdf8.json")
@@ -36,7 +39,9 @@ def pull_from_db():
     if path_val[0] == "/":
         currPath = path_val[1:]
 
-    # Need to add error for if path is not found
+    else:
+        logging.warn("Video path not found, check.")
+        exit()
 
     source_blob_name = currPath
 
@@ -58,6 +63,9 @@ def vid_to_imgs(req: https_fn.CallableRequest):
     if not os.path.isdir(osPath):
         os.mkdir(osPath)
     FPS = 1
+
+    logging.info("FPS currently set to: ", FPS)
+
     # Read the video and its fps
     video = cv2.VideoCapture(file_name)
     vid_fps = video.get(cv2.CAP_PROP_FPS)
@@ -118,12 +126,15 @@ def add_to_db(file_name):
 
 # Delete image paths before starting new inference run
 def delete_img_paths():
+    logging.info("Deleting image paths from database.")
     ref = db.reference("Images/")
     data = ref.get()
     if data:
         for key, val in data.items():
             delete_user_ref = ref.child(key)
             delete_user_ref.delete()
+    else:
+        logging.warn("Image paths not found.")
 
 # uploads images to the firebase database storage
 def upload_img(file_name):
@@ -135,7 +146,62 @@ def upload_img(file_name):
 
 # Delete pre-existing images before starting new inference run
 def delete_imgs():
+    logging.info("Deleting images from Firebase")
     bucket = storage.bucket()
     blobs = bucket.list_blobs(prefix="imgs/")
     for blob_item in blobs:
         blob_item.delete()
+
+
+
+# All unit testing for backend
+class TestBackend(unittest.TestCase):
+    dbObj()
+
+    def test_pull_from_db(self):
+        ref = db.reference("Test")
+        ref.child("Paths").push().set({
+            "Path": "testPath",
+        })
+
+        path = ref.child("Paths").order_by_key().limit_to_last(1).get()
+        path_val = ""
+        currPath = ""
+
+        for key, val in path.items():
+            path_val = val
+            path_val = path_val['Path'] 
+
+        if path_val[0] == "/":
+            currPath = path_val[1:]
+
+        else:
+            currPath = path_val
+
+        self.assertEqual(currPath, "testPath", "Database not working correctly.")
+
+    def test_delete_from_db(self):
+        ref = db.reference("Test/")
+        data = ref.get()
+        self.assertIsNotNone(data, "Database delete test not possible.")
+        if data:
+            for key, val in data.items():
+                delete_user_ref = ref.child(key)
+                delete_user_ref.delete()
+        
+            data = ref.get()
+            self.assertIsNone(data, "Database delete not completed successfully.")
+
+    def test_upload_imgs(self):
+        f = open("test.txt", "a")
+        f.write("Cue-Cetera file upload testing")
+        f.close()
+        bucket = storage.bucket()
+        blob = bucket.blob("test.txt")
+        blob.upload_from_filename("test.txt")
+
+        #Check if it exists
+        bucket = storage.bucket()
+        blob = bucket.blob("test.txt")
+        self.assertIsNotNone(blob, "Upload unsuccessful, file does not exist")
+        # blob.download_to_filename("test_success.txt")

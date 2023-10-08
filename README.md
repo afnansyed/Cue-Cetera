@@ -26,10 +26,10 @@ In total, there are 6 emotions.
 
 ### Shape of data files:
 ```
-train_data   :   (26824, 224, 224, 3) 
-train_labels :   (26824,)
-test_data    :   (6707, 224, 224, 3) 
-test_labels  :   (6707,)
+t_train_full   :   (26824, 224, 224, 3) 
+t_train_full :   (26824,)
+X_test_full    :   (6707, 224, 224, 3) 
+t_test_full  :   (6707,)
 ```
 
 
@@ -39,9 +39,9 @@ Our project has the following file structure for the model system:
 ![file_str](https://github.com/AmaniN16/Cue-Cetera/blob/main/readme_imgs/file_str.png)
 
 Download the following datasets and place them in a `datasets` folder as shown in the diagram above:
-- [`X_train_full.npy`](https://drive.google.com/file/d/1I5tPiknclCqdPgPZH2zK3ezgVcX1BA-U/view?usp=sharing)
+- [`X_train_full.npy`](https://drive.google.com/file/d/1B78hoiw3eFcveiJST_C81t735imGFOb3/view?usp=sharing)
 - [`t_train_full.npy`](https://drive.google.com/file/d/1TT18tZFBtXOrJZK7pB5ZYU_G_p2Y9mkO/view?usp=sharing)
-- [`X_test_full.npy`](https://drive.google.com/file/d/18VcyGCQeLSblP95oCWLCzAFGhiFBq3Xq/view?usp=sharing)
+- [`X_test_full.npy`](https://drive.google.com/file/d/1kZbk1QXQne_-btnxJkaLHVMCRxhX7Ksf/view?usp=sharing)
 - [`t_test_full.npy`](https://drive.google.com/file/d/1_1OpHoHfNCb1smVlngen9SKfLF5KU7Cc/view?usp=sharing)
 
 Example of loading data:
@@ -92,57 +92,32 @@ The database storing the video itself for each video uploaded by the user
 # cue_cetera project details
 
 Flutter project written using dart.
-Main code for the app written in 'cue_cetera/lib/main.dart'
+Code for the app written in different modules for every page and service.
 
 
 ## Steps to build and run project:
 
-
-- Front-end:
-
 1. Install  + Setup Flutter and Android studio: https://docs.flutter.dev/get-started/install
-
 2. Open project in Android studio. (File > Open Folder)
+Set-up Flutter plug-in in settings. (File > Settings > Plugins > Install Flutter)
+If errors are shown in files, run ‘pub get’ in the terminal.
+3. Download the `model_15.tflite` file from [here](https://drive.google.com/file/d/1MiKzIqyuHmmhGYj4pSG5jFfeIhcSOwX7/view?usp=sharing) and place it in the cue_cetera/assets folder. 
 
-3. Set-up Flutter plug-in in settings. (File > Settings > Plugins > Install Flutter)
+4. Run project after connecting the tablet or setting up an emulator that has Google Play functionality (Enable developer and USB debugging mode) https://docs.flutter.dev/get-started/test-drive?tab=androidstudio 
+    - NOTE: An error will pop up related to tflite, to fix this do the following:
+        - Go to the "Flutter Plugins" folder in "External Libraries".
+        
+        ![flutter_fix_img](https://github.com/AmaniN16/Cue-Cetera/blob/main/readme_imgs/flutter_fix_1.png)
 
-4. If errors are shown in files, run ‘pub get’ in the terminal.
+            - If this folder is not available, navigate to your "AppData" folder on your computer if using Windows, then Local>Pub>Cache>hosted>pub.dev
 
-5. Run project after connecting the tablet (Enable developer and USB debugging mode) https://docs.flutter.dev/get-started/test-drive?tab=androidstudio 
+        ![flutter_fix_if_not](https://github.com/AmaniN16/Cue-Cetera/blob/4d0b2031c48115c1a66b6e22216a2d05c94d0e89/readme_imgs/flutter_fix_if_not.png)
+        - Navigate to the "tflite-1.1.2" folder then to "android" and edit the "build.gradle" file.
+        ![flutter_fix_build_gradle](https://github.com/AmaniN16/Cue-Cetera/blob/4d0b2031c48115c1a66b6e22216a2d05c94d0e89/readme_imgs/flutter_fix_2.png)
 
-6. Home Screen/ Main Menu: Upload video or use video camera options 
-
-    i. Click on upload video 
-
-   ii. Select a 50 MB or less video from gallery/local device
-
-iii. Click play button to playback the video
-
-8.   Home Screen/ Main Menu: Upload video or use video camera options
-
-    i.  Click on use video camera
-   
-   ii. Record a video using the camera
-
-  iii. Click play button to playback the video 
-
-- Back-end:
-
-1. Download and setup python on computer device.
-
-  i. https://www.python.org/downloads/
-
-2. Use terminal to:
-
- i. pip install  numpy tensorflow firebase-admin opencv-python flask
-
-3. Read README in ModelControl/training to download pkl file.
-
-4. Go to cue-cetera/assets.
-
-5. Add pkl file to this folder.
-
-6. Run python predictLabels.py
+        - Scroll down to the dependencies{} block inside the android{} block and replace the word `compile` with `implementation` and save the file. It should run successfully.
+        ![flutter_fix_compile](https://github.com/AmaniN16/Cue-Cetera/blob/5bb681c4145e3776a2dbb816b10bcb4bcc486ea0/readme_imgs/flutter_fix_3.png)
+        ![flutter_fix_implementation](https://github.com/AmaniN16/Cue-Cetera/blob/5bb681c4145e3776a2dbb816b10bcb4bcc486ea0/readme_imgs/flutter_fix_4.png)
 
 
 
