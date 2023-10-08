@@ -103,32 +103,6 @@ As we can see, a lot of the images could be interpreted either way, such as the 
 
 Considering our dataset is over 33k images large, there could have been some misclassifications that we missed, which is something we plan on verifying again. We have seen improvement in training when lowering the complexity of the model and hyper-tuning the neurons in each custom layer, so it's something we will continue to do in an attempt to increase the accuracy. Our model is also overfitting significantly, so we plan on modifying the dropout rates and regularization terms in an attempt to avoid overfitting. 
 
-## Pre-Alpha Model: Convolutional Neural Network (CNN)
-
-Our pre-alpha model (Model 3) is a convolution neural network, created using the sequential API, to classify images into one of 28 categories of emotions. The CNN consists of an input layer, hidden layers, and an output layer. For the hidden layers, we used a series of 2D convolutional layers to perform elementwise multiplication and then normalized the output of each layer by re-scaling and re-centering using batch normalization. After this, MaxPooling was used to downsample the images in order to extract the most important features and then a dropout layer was used to prevent overfitting. In the output layer, in order to transition from the convolutional layers to the fully connected layer, we used the Flatten method where all the dimensions are kept and put into one vector. The output layer has 28 neurons, since there are 28 classes of emotions, with a softmax activation. We decided to use Adam as the optimizer with a learning rate of 0.0001. We also used sparse categorical cross-entropy as our loss function since there are 28 label classes. A summary of the model, along with its layers is displayed in the following table:
-
-![model_summary](https://github.com/dianas11xx/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/full_ms.PNG)
-
-Using an epoch of 25, each taking around 25 minutes, and a patience of 10, the model converged with:
-- 54.22% accuracy in training
-- 50.14% accuracy in validation
-
-![learning_curve](https://github.com/dianas11xx/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/learning_curve.PNG)
-
-### Test performance
-
-Using the test datasets and labels, we applied the test data to the model and it converged with:
-- 48.30% accuracy in testing
-
-This value is close to the validation accuracy score, meaning that the model is not overfitting. Here is a summary of its performance:
-
-![test_info](https://github.com/dianas11xx/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/test_performance.PNG)
-
-
-### Model observations
-
-One of the main observations made during the training of this model was that the accuracy in the training and validation sets was continuously increasing with each epoch, so in the future, we plan to use a slightly higher learning rate and more epochs to see where the model performs the best. Also, when the model was applied to our test sets, the accuracy was 48.30%, which is close to our validation accuracy, meaning that the model is not overfitting, but the parameters still need tuning since the accuracy is low. 
-
 # Alpha Model: Transfer Learning Model 
 
 In Alpha  model, we used the pre-trained MobileNetV2 architecture as our base model with Imagenet set as the weights to perform transfer learning on the datasets. One of the main updates we did during training was using images of size 224x224 instead of 48x48. This allowed our model to be able to identify more patterns in the dataset. 
@@ -167,3 +141,30 @@ Here are some examples of predictions made in the test set for every emotion:
 ### Model observations
 
 One of the main observations made during the training of this model was that the accuracy in the training and validation sets started increasing gradually as the number of epochs increased, but the validation accuracy didn't go above 66% even when the training accuracy kept going up, which meant the model started to overfit. We plan on experimenting with different regularizers and adding more layers to the top layer to decrease overfitting in the model and increase the accuracy in testing.
+
+
+# Pre-Alpha Model: Convolutional Neural Network (CNN)
+
+Our pre-alpha model (Model 3) is a convolution neural network, created using the sequential API, to classify images into one of 28 categories of emotions. The CNN consists of an input layer, hidden layers, and an output layer. For the hidden layers, we used a series of 2D convolutional layers to perform elementwise multiplication and then normalized the output of each layer by re-scaling and re-centering using batch normalization. After this, MaxPooling was used to downsample the images in order to extract the most important features and then a dropout layer was used to prevent overfitting. In the output layer, in order to transition from the convolutional layers to the fully connected layer, we used the Flatten method where all the dimensions are kept and put into one vector. The output layer has 28 neurons, since there are 28 classes of emotions, with a softmax activation. We decided to use Adam as the optimizer with a learning rate of 0.0001. We also used sparse categorical cross-entropy as our loss function since there are 28 label classes. A summary of the model, along with its layers is displayed in the following table:
+
+![model_summary](https://github.com/dianas11xx/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/full_ms.PNG)
+
+Using an epoch of 25, each taking around 25 minutes, and a patience of 10, the model converged with:
+- 54.22% accuracy in training
+- 50.14% accuracy in validation
+
+![learning_curve](https://github.com/dianas11xx/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/learning_curve.PNG)
+
+### Test performance
+
+Using the test datasets and labels, we applied the test data to the model and it converged with:
+- 48.30% accuracy in testing
+
+This value is close to the validation accuracy score, meaning that the model is not overfitting. Here is a summary of its performance:
+
+![test_info](https://github.com/dianas11xx/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/test_performance.PNG)
+
+
+### Model observations
+
+One of the main observations made during the training of this model was that the accuracy in the training and validation sets was continuously increasing with each epoch, so in the future, we plan to use a slightly higher learning rate and more epochs to see where the model performs the best. Also, when the model was applied to our test sets, the accuracy was 48.30%, which is close to our validation accuracy, meaning that the model is not overfitting, but the parameters still need tuning since the accuracy is low. 
