@@ -94,8 +94,21 @@
 | 9/8 | Diana | Research + Adding top layers to transfer learning model  | 3.5 hrs
 | 9/8 | Amani | Integration of Firebase function + new ML model interpretation backend | 4 hrs
 | 9/10 | Shravya | UI change of info page | 4.5 hrs
-
-
+| 9/14 | Diana | Hyper-tuning model + Research on CNN transfer learning  | 4 hrs
+| 9/19 | Diana | Hyper-tuning model and experimenting with tf.data API to optimize performance and reduce the time of each training step | 5.5 hrs
+| 9/20 | Diana | Experimenting with EfficientNetB7 model for transfer learning + hyper-tuning parameters and layers | 4 hrs
+| 9/21 | Diana | Adding data augmentation/conv2d/MaxPooling/Dropout layers to MobileNetV2 model in attempt to increase accuracy + hyper-tuning parameters during training if no improvement observed| 4 hrs
+| 9/24 | Diana | Experimenting with Resnet50, Xception, InceptionResNetV2, and NasNetMobile pre-trained models for transfer learning | 3 hrs
+| 9/25 | Diana | Implemented learning rate scheduler to dynamically adjust learning rate and started to fix class imbalance by performing data augmentation on minority classes and removing images | 4 hrs
+| 9/26 | Diana | Fixed class imbalance and started experimenting with other hidden layers for resnet tl model | 3 hrs
+| 9/28 | Diana | Converted dataset to images to manually clean as a team + started manually cleaning my assigned section of the dataset | 2.5 hrs
+| 10/1| Diana | Manually cleaning dataset | 3 hrs
+| 10/3| Diana | Made script to organize new dataset + finished manually cleaning dataset | 2 hrs
+| 10/4 | Diana | Helped manually clean fear dataset | 2 hrs
+| 10/5 | Diana | Updated full dataset, measured distribution, and split into new train and testing npy | 4 hrs
+| 10/6 | Diana | Fixed class imbalance and re-ran models using updated dataset | 5 hrs
+| 10/7 | Diana | Hyper-tuning models in an attempt to increase accuracy, experimenting with the number of hidden layers and conversion of grayscale to rgb | 4.5 hrs
+| 10/8 | Diana | Computed class weights to adjust weights to account for class imbalance, re-ran models, adjusted hidden layers + exported model to tflite file | 2 hrs
 (Afnan Syed) Google docs contribution record: https://docs.google.com/document/d/1yr94W63IZH-b98pGuP2m3c1zsexB2Q_fsDCncp7gjkc/edit?usp=sharing
 
 (Shravya Iruvanti) Google docs contribution record: https://docs.google.com/document/d/1Hg9JnWLR-NZJpnrB-8ZdGJv_D4ouR0JuR8zSA6MB-5g/edit?usp=sharing 
