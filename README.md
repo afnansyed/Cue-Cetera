@@ -26,10 +26,10 @@ In total, there are 6 emotions.
 
 ### Shape of data files:
 ```
-train_data   :   (26824, 224, 224, 3) 
-train_labels :   (26824,)
-test_data    :   (6707, 224, 224, 3) 
-test_labels  :   (6707,)
+t_train_full   :   (26824, 224, 224, 3) 
+t_train_full :   (26824,)
+X_test_full    :   (6707, 224, 224, 3) 
+t_test_full  :   (6707,)
 ```
 
 
@@ -39,9 +39,9 @@ Our project has the following file structure for the model system:
 ![file_str](https://github.com/AmaniN16/Cue-Cetera/blob/main/readme_imgs/file_str.png)
 
 Download the following datasets and place them in a `datasets` folder as shown in the diagram above:
-- [`X_train_full.npy`](https://drive.google.com/file/d/1I5tPiknclCqdPgPZH2zK3ezgVcX1BA-U/view?usp=sharing)
+- [`X_train_full.npy`](https://drive.google.com/file/d/1B78hoiw3eFcveiJST_C81t735imGFOb3/view?usp=sharing)
 - [`t_train_full.npy`](https://drive.google.com/file/d/1TT18tZFBtXOrJZK7pB5ZYU_G_p2Y9mkO/view?usp=sharing)
-- [`X_test_full.npy`](https://drive.google.com/file/d/18VcyGCQeLSblP95oCWLCzAFGhiFBq3Xq/view?usp=sharing)
+- [`X_test_full.npy`](https://drive.google.com/file/d/1kZbk1QXQne_-btnxJkaLHVMCRxhX7Ksf/view?usp=sharing)
 - [`t_test_full.npy`](https://drive.google.com/file/d/1_1OpHoHfNCb1smVlngen9SKfLF5KU7Cc/view?usp=sharing)
 
 Example of loading data:
