@@ -2,8 +2,8 @@ import numpy as np
 import cv2
 import os
 import datetime
-import tempfile
-import shutil
+import pytest
+import unittest
 
 from firebase_admin import credentials, db, storage, initialize_app
 
@@ -139,3 +139,57 @@ def delete_imgs():
     blobs = bucket.list_blobs(prefix="imgs/")
     for blob_item in blobs:
         blob_item.delete()
+
+
+
+# All unit testing for backend
+class TestBackend(unittest.TestCase):
+    dbObj()
+
+    def test_pull_from_db(self):
+        ref = db.reference("Test")
+        ref.child("Paths").push().set({
+            "Path": "testPath",
+        })
+
+        path = ref.child("Paths").order_by_key().limit_to_last(1).get()
+        path_val = ""
+        currPath = ""
+
+        for key, val in path.items():
+            path_val = val
+            path_val = path_val['Path'] 
+
+        if path_val[0] == "/":
+            currPath = path_val[1:]
+
+        else:
+            currPath = path_val
+
+        self.assertEqual(currPath, "testPath", "Database not working correctly.")
+
+    def test_delete_from_db(self):
+        ref = db.reference("Test/")
+        data = ref.get()
+        self.assertIsNotNone(data, "Database delete test not possible.")
+        if data:
+            for key, val in data.items():
+                delete_user_ref = ref.child(key)
+                delete_user_ref.delete()
+        
+            data = ref.get()
+            self.assertIsNone(data, "Database delete not completed successfully.")
+
+    def test_upload_imgs(self):
+        f = open("test.txt", "a")
+        f.write("Cue-Cetera file upload testing")
+        f.close()
+        bucket = storage.bucket()
+        blob = bucket.blob("test.txt")
+        blob.upload_from_filename("test.txt")
+
+        #Check if it exists
+        bucket = storage.bucket()
+        blob = bucket.blob("test.txt")
+        self.assertIsNotNone(blob, "Upload unsuccessful, file does not exist")
+        # blob.download_to_filename("test_success.txt")
