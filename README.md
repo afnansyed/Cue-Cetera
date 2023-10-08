@@ -11,7 +11,7 @@ We use Firebase to store the video the user uploads. This allows the app server 
 
 More information about the the video conversion and prediction can be found [here]([https://github.com/AmaniN16/Cue-Cetera/tree/main/ModelControl](https://github.com/AmaniN16/Cue-Cetera/tree/main/cue_cetera/assets)).
 
-More information about the Transfer Learning Model and training methods used for the model can be found [here](https://github.com/AmaniN16/Cue-Cetera/tree/main/ModelControl/training).
+For more information about the Transfer Learning Model and training methods used, please read the documentation for the [`Training Notebook here`](https://github.com/AmaniN16/Cue-Cetera/tree/main/ModelControl/training#training-notebook-information).
  
 More information about the Flutter Application can be found [here](https://github.com/AmaniN16/Cue-Cetera/tree/main/cue_cetera)
 
