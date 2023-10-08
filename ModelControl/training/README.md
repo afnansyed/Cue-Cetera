@@ -19,9 +19,9 @@ Our most current model: ['model_15.tflite'](https://drive.google.com/file/d/17PM
 # Beta Model: Transfer Learning Model 
 
 ### Preprocessing
-One of our main focus in our beta build was to fix any misclassifications or faulty data found in our dataset, such as highly pixalated images, since it was a factor that contributed to inaccurate results. As a group, we split up the dataset into emotions and manually cleaned each one.
+One of the main focuses in our beta build was to fix any misclassifications or faulty data found in our dataset, such as highly pixelated images, since it was a factor that contributed to inaccurate results. As a group, we split up the dataset into emotions and manually cleaned each one.
 
-In addition to updating the dataset, we applied data augmentation to the training set in order to fix the class imbalance, since emotions like happy outweighted the others significantly. To balance the representation of each emotion, we created augmented images of each by applying a series of transformations like:
+In addition to updating the dataset, we applied data augmentation to the training set in order to fix the class imbalance, since emotions like Happy outweighed the others significantly. To balance the representation of each emotion, we created augmented images of each by applying a series of transformations like:
 - Rotation
 - Width/Height shift
 - Shear range
@@ -33,19 +33,19 @@ and added them to the training dataset, making each emotion have the same number
 ### Training
 In our Beta Model, we used the pre-trained VGG16 architecture as our base model with ImageNet weights to perform transfer learning on the datasets. 
 
-We set all VGG16 layers to be trainable so that the weights could be updated and re-fined to our data. We also added custom layers on top of the VGG16 layers that were specific for our classification task. Here is a summary of the model, along with its layers:
+We set all VGG16 layers to be trainable so that the weights could be updated and refined to our data. We also added custom layers on top of the VGG16 layers that were specific to our classification task. Here is a summary of the model, along with its layers:
 
 ![model_summary2](https://github.com/AmaniN16/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/model_summary_beta.PNG)
 
 Some of the custom layers we added on top of the VGG16 layers include 
 - `Flatten`: To flatten the output of the VGG16 layers into a 1D vector
 - `Dense(128, activation='relu')`: To create a fully connected layer with 128 neurons and relu activation to mitigate the vanishing gradient problem and increase efficiency
-- `BatchNormalization()`: To help stabalize training and prevent overfitting 
-- `Dropout(0.6)`: To prevent overfitting and help model learn different representation of the data
+- `BatchNormalization()`: To help stabilize training and prevent overfitting 
+- `Dropout(0.6)`: To prevent overfitting and help the model learn different representations of the data
 - `Dense(6, activation='softmax')`: Output layer with 6 neurons, each representing different emotions, with a softmax activation function since it is a multi-class classification task.
 
 ### Training/Validation performance
-When compiling the model, we used Adam as the optimizer and sparse categorical crossentropy as the loss function since its a multi-class classification task.
+When compiling the model, we used Adam as the optimizer and sparse categorical cross-entropy as the loss function since its a multi-class classification task.
 
 We also implemented a learning rate scheduler to dynamically adjust the learning rate of the optimizer whenever it starts to plateau. It monitors the validation loss and reduces the learning rate by a factor of 0.5 whenever the validation loss has no progression for 3 epochs. This significantly helped with optimizing the learning rate hyper-tuning process.
 
@@ -64,7 +64,7 @@ Here is a summary of its performance:
 
 ![test_sum_beta](https://github.com/AmaniN16/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/test_sum_beta.PNG)
 
-To get a deeper insight of the performance of the model, we used a confusion matrix to evaluate the true positives, true negatives, false positives, and false negatives. Here are the results:
+To get a deeper insight into the performance of the model, we used a confusion matrix to evaluate the true positives, true negatives, false positives, and false negatives. Here are the results:
 
 ![test_cm_beta](https://github.com/AmaniN16/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/test_cm_beta.PNG)
 
@@ -85,7 +85,7 @@ As we can see, Happy and Surprised have the highest percentage of true positives
 - Sad and Angry are commonly misclassified as Neutral
 - And Neutral is commonly misclassified as Sad
 
-Here are some examples of predictions made in test set for every emotion along with their true label:
+Here are some examples of predictions made in the test set for every emotion along with their true label:
 
 ![angry_ex_b](https://github.com/AmaniN16/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/angry_ex_b.PNG)
 
@@ -99,13 +99,13 @@ Here are some examples of predictions made in test set for every emotion along w
 
 ![Neutral_ex_b](https://github.com/AmaniN16/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/neutral_ex.PNG)
 
-As we could see, a lot of the images could be interpreted either way, such as the first image in the angry set which is classified as Neutral but predicted as Angry since the man in the image has straight/dark eyebrows and no specific expression, which makes him look angry. This can also be seen in the third image in the Neutral set, which is classified as Angry and predicted as Neutral mainly due to there being no discernible expression in the image, which means the image itself could be misclassified. A lot of these results also align with the confusion matrix, such as angry and neutral being confused for eachother. 
+As we can see, a lot of the images could be interpreted either way, such as the first image in the angry set which is classified as Neutral but predicted as Angry since the man in the image has straight/dark eyebrows and no specific expression, which makes him look angry. This can also be seen in the third image in the Neutral set, which is classified as Angry and predicted as Neutral mainly due to there being no discernible expression in the image, which means the image itself could be misclassified. A lot of these results also align with the confusion matrix, such as angry and neutral being confused for each other. 
 
-Considering our dataset is over 33k images large, there could have been some misclassifications that we missed, which is something we plan on verifying again. We have seen improvement in training when lowering the complexity of the model and hyper-tuning the neurons in each custom layer, so it's something we will continue to do in attempt to increase the accuracy. Our model is also overfitting significantly, so we plan on modifying the dropout rates and regularization terms in attempt to avoid overfitting. 
+Considering our dataset is over 33k images large, there could have been some misclassifications that we missed, which is something we plan on verifying again. We have seen improvement in training when lowering the complexity of the model and hyper-tuning the neurons in each custom layer, so it's something we will continue to do in an attempt to increase the accuracy. Our model is also overfitting significantly, so we plan on modifying the dropout rates and regularization terms in an attempt to avoid overfitting. 
 
 ## Pre-Alpha Model: Convolutional Neural Network (CNN)
 
-Our pre-alpha model (Model 3) is a convolution neural network, created using the sequential API, to classify images into one of 28 categories of emotions. The CNN consists of an input layer, hidden layers, and an output layer. For the hidden layers, we used a series of 2D convolutional layers to perform elementwise multiplication and then normalized the output of each layer by re-scaling and re-centering using batch normalization. After this, MaxPooling was used to downsample the images in order to extract the most important features and then a dropout layer is used to prevent overfitting. In the output layer, in order to transition from the convolutional layers to the fully connected layer, we used the Flatten method where all the dimensions are kept and put into one vector. The output layer has 28 neurons, since there are 28 classes of emotions, with a softmax activation. We decided to use Adam as the optimizer with a learning rate of 0.0001. We also used sparse categorical cross-entropy as our loss function since there are 28 label classes. A summary of the model, along with its layers is displayed in the following table:
+Our pre-alpha model (Model 3) is a convolution neural network, created using the sequential API, to classify images into one of 28 categories of emotions. The CNN consists of an input layer, hidden layers, and an output layer. For the hidden layers, we used a series of 2D convolutional layers to perform elementwise multiplication and then normalized the output of each layer by re-scaling and re-centering using batch normalization. After this, MaxPooling was used to downsample the images in order to extract the most important features and then a dropout layer was used to prevent overfitting. In the output layer, in order to transition from the convolutional layers to the fully connected layer, we used the Flatten method where all the dimensions are kept and put into one vector. The output layer has 28 neurons, since there are 28 classes of emotions, with a softmax activation. We decided to use Adam as the optimizer with a learning rate of 0.0001. We also used sparse categorical cross-entropy as our loss function since there are 28 label classes. A summary of the model, along with its layers is displayed in the following table:
 
 ![model_summary](https://github.com/dianas11xx/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/full_ms.PNG)
 
