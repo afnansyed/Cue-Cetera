@@ -7,40 +7,28 @@ class TimestampCard extends StatelessWidget {
   final Function jump;
 
   // there is probably a way to not define these sets twice
-  List<int> positiveEmotions = [
-    3,
-    5
-  ];
+  List<int> positiveEmotions = [2, 4];
 
-  List<int> negativeEmotions = [
-    0,
-    1,
-    2,
-    4
-  ];
+  List<int> negativeEmotions = [0, 1, 3];
 
   // dont actually need this list with current implementation, but makes it clear
-  List<int> neutralEmotions = [
-    6
-  ];
+  List<int> neutralEmotions = [5];
 
   TimestampCard({required this.timestamp, required this.jump});
 
   String getEmotion(int emotion) {
     switch(emotion) {
       case 0:
-        return "Disapproving";
-      case 1:
         return "Angry";
-      case 2:
+      case 1:
         return "Fearful";
-      case 3:
+      case 2:
         return "Happy";
-      case 4:
+      case 3:
         return "Sad";
-      case 5:
+      case 4:
         return "Surprised";
-      case 6:
+      case 5:
         return "Neutral";
       default: // we ideally never want this to happen
         print("Invalid emotion value");

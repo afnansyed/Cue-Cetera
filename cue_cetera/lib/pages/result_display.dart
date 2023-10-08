@@ -39,12 +39,12 @@ class _ResultDisplayState extends State<ResultDisplay> {
   _ResultDisplayState(this.filePath, this.modelOutput);
 
   // there is probably a way to not define these sets twice
-  List<int> positiveEmotions = [3, 5];
+  List<int> positiveEmotions = [2, 4];
 
-  List<int> negativeEmotions = [0, 1, 2, 4];
+  List<int> negativeEmotions = [0, 1, 3];
 
   // dont actually need this list with current implementation, but makes it clear
-  List<int> neutralEmotions = [6];
+  List<int> neutralEmotions = [5];
 
   // would be best to already get our timestamp info in chronological order
   // if in chronological order, we can use binary search to find our current emotion
