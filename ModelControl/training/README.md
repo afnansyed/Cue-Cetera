@@ -78,7 +78,7 @@ It's important to note that the distribution of the testing data is as follows:
 | Happy | 1827 | 86.80% |
 | Sad | 994 | 60.26% |
 | Surprised | 711 | 79.89% |
-| Neutral | 915 | 72.56% |
+| Neutral | 1261 | 72.56% |
 
 As we can see, Happy and Surprised have the highest percentage of true positives. Looking at the confusion matrix, we can see that:
 - Fear is commonly misclassified as Sad
