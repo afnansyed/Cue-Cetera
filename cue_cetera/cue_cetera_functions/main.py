@@ -2,19 +2,22 @@ import numpy as np
 import cv2
 import os
 import datetime
-import pytest
 import unittest
+import logging
 
 from firebase_admin import credentials, db, storage, initialize_app
 
 from firebase_functions import https_fn, options
 
 initialize_app()
+logging.info("Initialized Firebase app")
 
 options.set_global_options(
     region=options.SupportedRegion.US_CENTRAL1,
     memory=options.MemoryOption.MB_512,
 )
+logging.info("Region set as ", options.SupportedRegion.US_CENTRAL1)
+logging.info("Memory limit for Firebase Functions set as ", options.MemoryOption.MB_512)
 
 def dbObj():
     authPath = os.path.join(os.path.dirname(__file__), "cue-cetera-726df-firebase-adminsdk-z8vba-4ba059bdf8.json")
@@ -36,7 +39,9 @@ def pull_from_db():
     if path_val[0] == "/":
         currPath = path_val[1:]
 
-    # Need to add error for if path is not found
+    else:
+        logging.warn("Video path not found, check.")
+        exit()
 
     source_blob_name = currPath
 
@@ -58,6 +63,9 @@ def vid_to_imgs(req: https_fn.CallableRequest):
     if not os.path.isdir(osPath):
         os.mkdir(osPath)
     FPS = 1
+
+    logging.info("FPS currently set to: ", FPS)
+
     # Read the video and its fps
     video = cv2.VideoCapture(file_name)
     vid_fps = video.get(cv2.CAP_PROP_FPS)
@@ -118,12 +126,15 @@ def add_to_db(file_name):
 
 # Delete image paths before starting new inference run
 def delete_img_paths():
+    logging.info("Deleting image paths from database.")
     ref = db.reference("Images/")
     data = ref.get()
     if data:
         for key, val in data.items():
             delete_user_ref = ref.child(key)
             delete_user_ref.delete()
+    else:
+        logging.warn("Image paths not found.")
 
 # uploads images to the firebase database storage
 def upload_img(file_name):
@@ -135,6 +146,7 @@ def upload_img(file_name):
 
 # Delete pre-existing images before starting new inference run
 def delete_imgs():
+    logging.info("Deleting images from Firebase")
     bucket = storage.bucket()
     blobs = bucket.list_blobs(prefix="imgs/")
     for blob_item in blobs:
