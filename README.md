@@ -92,7 +92,7 @@ The database storing the video itself for each video uploaded by the user
 # cue_cetera project details
 
 Flutter project written using dart.
-Main code for the app written in 'cue_cetera/lib/main.dart'
+Code for the app written in different modules for every page and service.
 
 
 ## Steps to build and run project:
