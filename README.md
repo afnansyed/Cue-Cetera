@@ -22,14 +22,14 @@ We logged each of our contributions in the following [table](https://github.com/
 ----
 The dataset we are using to train our machine learning model was made using datasets from the [FER-2013](https://www.kaggle.com/datasets/msambare/fer2013) and [EMOTIC](https://s3.sunai.uoc.edu/emotic/index.html) datasets. The train and test data files consist of 224x224 images that correspond to the train/test labels, which match each image to an emotion. 
 
-In total, there are 7 emotions.
+In total, there are 6 emotions.
 
 ### Shape of data files:
 ```
-train_data   :   (29994, 224, 224, 3) 
-train_labels :   (29994,)
-test_data    :   (7598, 224, 224, 3) 
-test_labels  :   (7598,)
+train_data   :   (26824, 224, 224, 3) 
+train_labels :   (26824,)
+test_data    :   (6707, 224, 224, 3) 
+test_labels  :   (6707,)
 ```
 
 
@@ -39,16 +39,16 @@ Our project has the following file structure for the model system:
 ![file_str](https://github.com/AmaniN16/Cue-Cetera/blob/main/readme_imgs/file_str.png)
 
 Download the following datasets and place them in a `datasets` folder as shown in the diagram above:
-- [`train_data.npy`](https://drive.google.com/file/d/1I5tPiknclCqdPgPZH2zK3ezgVcX1BA-U/view?usp=sharing)
-- [`train_labels.npy`](https://drive.google.com/file/d/1W0QuMZmwaUrRuHqyv2o0EeZpldsXgbuk/view?usp=drive_link)
-- [`test_data.npy`](https://drive.google.com/file/d/18VcyGCQeLSblP95oCWLCzAFGhiFBq3Xq/view?usp=sharing)
-- [`test_labels.npy`](https://drive.google.com/file/d/1cT88dypR13W8nO-k4d_n82tUI6oPq7Fk/view?usp=drive_link)
+- [`X_train_full.npy`](https://drive.google.com/file/d/1I5tPiknclCqdPgPZH2zK3ezgVcX1BA-U/view?usp=sharing)
+- [`t_train_full.npy`](https://drive.google.com/file/d/1TT18tZFBtXOrJZK7pB5ZYU_G_p2Y9mkO/view?usp=sharing)
+- [`X_test_full.npy`](https://drive.google.com/file/d/18VcyGCQeLSblP95oCWLCzAFGhiFBq3Xq/view?usp=sharing)
+- [`t_test_full.npy`](https://drive.google.com/file/d/1_1OpHoHfNCb1smVlngen9SKfLF5KU7Cc/view?usp=sharing)
 
 Example of loading data:
 
 ```
-X_train = np.load('train_data.npy')
-t_train = np.load('train_labels.npy')
+X_train = np.load('X_train_full.npy')
+t_train = np.load('t_train_full.npy')
 ```
 
 `t_train[0]` returns an array of size 1 that corresponds to the first image in `X_train`, where `t_train[0]` is the label corresponding to the emotion.
@@ -56,19 +56,19 @@ t_train = np.load('train_labels.npy')
 ## Emotional Classifications
 Our model assigns every frame within the requested video a value of 0 to 6. This value corresponds to the emotion being displayed within that frame, and follows this mapping:
 
-0) Disapproving
-1) Angry
-2) Fearful
-3) Happy
-4) Sad
-5) Surprised
-6) Neutral
 
-These classifications are then dislayed on the front-end through text, along with a symbol representing whether that emotion is positive, negative, or neutral.
+0) Angry
+1) Fearful
+2) Happy
+3) Sad
+4) Surprised
+5) Neutral
+
+These classifications are then displayed on the front-end through text, along with a symbol representing whether that emotion is positive, negative, or neutral.
 
 Positive contains: Happy and Surprised
 
-Negative contains: Disapproving, Angry, Fearful, and Sad
+Negative contains: Angry, Fearful, and Sad
 
 Neutral contains: Neutral.
 
