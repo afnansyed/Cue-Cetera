@@ -148,9 +148,10 @@ class _ResultDisplayState extends State<ResultDisplay> {
     while (searching) {
       if (currentTime < timestamps[middle].timeMs!) {
         // search the lower half of our timestamps for the correct one
-        high = middle;
+        high = middle - 1;
         middle = (high + low) ~/ 2;
-      } else {
+      }
+      else {
         //currentTime >= timestamps[middle], check if currentTime < timestamps[middle+1]
         if (middle + 1 >= timestamps.length) {
           // we are at the last legal index, break
@@ -161,7 +162,7 @@ class _ResultDisplayState extends State<ResultDisplay> {
           break;
         } else {
           // search the upper half of our timestamps
-          low = middle;
+          low = middle + 1;
           middle = (high + low) ~/ 2;
         }
       }
