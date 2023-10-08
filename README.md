@@ -148,7 +148,7 @@ Current pages setup status:
 1. HOME PAGE:
 ```
 
-![homepage](https://github.com/AmaniN16/Cue-Cetera/assets/44105687/40e0f7cd-054e-44f1-94fb-97c405fb2bd5)
+![homepage](https://github.com/AmaniN16/Cue-Cetera/assets/44105687/e112caf9-1b48-423d-8b9b-4a5f795d7ac7)
 
 
 
@@ -156,14 +156,15 @@ Current pages setup status:
 2. ABOUT PAGE:
 ```
 
-![MicrosoftTeams-image (1)](https://github.com/AmaniN16/Cue-Cetera/assets/44105687/6e55805d-82fe-45b4-b770-be0a0db5f94e)
+![info](https://github.com/AmaniN16/Cue-Cetera/assets/44105687/87098ddd-037f-47de-a6cd-2f058caacad8)
+
 
 
 ```
-2. SETTINGS PAGE:
+3. SETTINGS PAGE:
 ```
 
-![settings_Page](https://github.com/AmaniN16/Cue-Cetera/assets/44105687/d6dc0beb-28fb-4f71-88f3-8cad6ccc3a3c)
+![settings](https://github.com/AmaniN16/Cue-Cetera/assets/44105687/4ebb6fa4-7725-46e4-a209-a7dca9449704)
 
 
 
@@ -171,7 +172,7 @@ Current pages setup status:
 4. UPLOAD VIDEO PAGE:
 ```
 
-![MicrosoftTeams-image](https://github.com/AmaniN16/Cue-Cetera/assets/44105687/fe66433c-6e4c-4758-925a-2cf07d774ce7)
+![upload video](https://github.com/AmaniN16/Cue-Cetera/assets/44105687/7bbf3eda-ee06-44c4-a46f-b099d0cc8b58)
 
 
 
