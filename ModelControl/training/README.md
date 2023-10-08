@@ -8,7 +8,7 @@ The following structure is used:
 ## Pre-requisites to run
 Before running the training folder, make sure you have the train datasets downloaded and put into a folder called `datasets` alongside the Training.ipynb notebook (as shown in the file structure image above):
 - [`X_train_full`](https://drive.google.com/file/d/1B78hoiw3eFcveiJST_C81t735imGFOb3/view?usp=sharing)
-- [`t_train_full_`](https://drive.google.com/file/d/1TT18tZFBtXOrJZK7pB5ZYU_G_p2Y9mkO/view?usp=sharing)
+- [`t_train_full`](https://drive.google.com/file/d/1TT18tZFBtXOrJZK7pB5ZYU_G_p2Y9mkO/view?usp=sharing)
 
 The models created will be saved as a tensorflow lite model inside of a folder called `models` alongside the Training.ipynb notebook (as shown in the file structure image above).
 
