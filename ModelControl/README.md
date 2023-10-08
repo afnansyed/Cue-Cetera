@@ -23,9 +23,4 @@ model.predict_emotions("imgs/")
 emotion_labels = model.labels
 ```
 
-When tested using a 15-second video (clipped from [this video](https://youtu.be/99OsgN_SuE8)), it took a total of 4.94 seconds to convert the video and make the prediction. Because of the low accuracy of the model (as explained in the [`training notebook`](https://github.com/AmaniN16/Cue-Cetera/blob/main/ModelControl/training/Training.ipynb)), the labels were not completely accurate to each frame. Here are some samples:
-
-![sample1](https://github.com/AmaniN16/Cue-Cetera/blob/main/ModelControl/readme_imgs/pre_1.PNG)
-
-![sample2](https://github.com/AmaniN16/Cue-Cetera/blob/main/ModelControl/readme_imgs/pre_2.PNG)
 
