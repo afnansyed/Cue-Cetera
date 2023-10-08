@@ -139,6 +139,9 @@ Comments / experimentation / failed attempts / difficulties:
 - To connect the frontend to the backend we are using a combination of Firebase, Firebase Functions, and Google Cloud Run to convert the video to image frames. The ML model we are using is a Tflite model to make the predictions on the frontend.
   
 - We installed Flutter and Android Studio on the CpE Lab Comupter which gives us a better access with Android device emulator. However, since this is a lab computer we had to gain administrative access for many steps from Instructor Carsten. We are setting up to testing with a physical android tablet to run our app as it might be more convenient and help with debugging such as catching gliches. We have access to a Samsung Galexy Tab 4. But since it is an older model we might run into some compatibility issues and so, we as a team will look into pitching in to invest in an android device.
+  
+- As of the Beta build, model predictions have been fully integrated. Before forming a prediction on a frame, [Google ML Kit's Face Detection](https://developers.google.com/ml-kit/vision/face-detection) was used to check if a face was present in the frame. Currently, if a face is not detected it will set the emotion as neutral. If a face is detected it will be sent to be classified by our custom model. The model has been packaged into a Tflite file and Flutter's [Tflite package](https://pub.dev/packages/tflite) has been used to form a prediction on each frame.
+	- The output is stored in a map with the Timestamp being a key and the classification being the value which is then converted to the Timestamp Class to display on the results display page. The model is currently downloaded separately and added to assets, but Firebase ML will be integrated in the next build to prevent this extra step.
 - Emmulator used below: Google Pixel 6
 
 
