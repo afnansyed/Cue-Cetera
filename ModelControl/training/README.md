@@ -6,14 +6,102 @@ The following structure is used:
 ![file_structure](https://github.com/dianas11xx/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/file_structure.jpg)
 
 ## Pre-requisites to run
-Before running the training folder, make sure you have the train datasets downloaded and put into a folder called `datasets` alongside the training.ipynb notebook (as shown in the file structure image above):
-- [`train_data`](https://drive.google.com/file/d/1I5tPiknclCqdPgPZH2zK3ezgVcX1BA-U/view?usp=sharing)
-- [`train_labels`](https://drive.google.com/file/d/1W0QuMZmwaUrRuHqyv2o0EeZpldsXgbuk/view?usp=drive_link)
+Before running the training folder, make sure you have the train datasets downloaded and put into a folder called `datasets` alongside the Training.ipynb notebook (as shown in the file structure image above):
+- [`X_train_full`](https://drive.google.com/file/d/1B78hoiw3eFcveiJST_C81t735imGFOb3/view?usp=sharing)
+- [`t_train_full_`](https://drive.google.com/file/d/1TT18tZFBtXOrJZK7pB5ZYU_G_p2Y9mkO/view?usp=sharing)
 
-The models created will be saved as a pickle file and tensorflow lite model inside of a folder called `models` alongside the Training.ipynb notebook (as shown in the file structure image above).
+The models created will be saved as a tensorflow lite model inside of a folder called `models` alongside the Training.ipynb notebook (as shown in the file structure image above).
 
-Our most current model: ['model.tflite'](https://github.com/AmaniN16/Cue-Cetera/blob/main/ModelControl/training/models/model.tflite), 
+Our most current model: ['model_15.tflite'](https://drive.google.com/file/d/17PMx8stCFXg39bdlm7Gmco9RKp8FjLih/view?usp=sharing)
 
+
+
+# Beta Model: Transfer Learning Model 
+
+### Preprocessing
+One of our main focus in our beta build was to fix any misclassifications or faulty data found in our dataset, such as highly pixalated images, since it was a factor that contributed to inaccurate results. As a group, we split up the dataset into emotions and manually cleaned each one.
+
+In addition to updating the dataset, we applied data augmentation to the training set in order to fix the class imbalance, since emotions like happy outweighted the others significantly. To balance the representation of each emotion, we created augmented images of each by applying a series of transformations like:
+- Rotation
+- Width/Height shift
+- Shear range
+- Zoom
+- Horizontal Flip
+
+and added them to the training dataset, making each emotion have the same number of samples.
+
+### Training
+In our Beta Model, we used the pre-trained VGG16 architecture as our base model with ImageNet weights to perform transfer learning on the datasets. 
+
+We set all VGG16 layers to be trainable so that the weights could be updated and re-fined to our data. We also added custom layers on top of the VGG16 layers that were specific for our classification task. Here is a summary of the model, along with its layers:
+
+![model_summary2](https://github.com/AmaniN16/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/model_summary_beta.PNG)
+
+Some of the custom layers we added on top of the VGG16 layers include 
+- `Flatten`: To flatten the output of the VGG16 layers into a 1D vector
+- `Dense(128, activation='relu')`: To create a fully connected layer with 128 neurons and relu activation to mitigate the vanishing gradient problem and increase efficiency
+- `BatchNormalization()`: To help stabalize training and prevent overfitting 
+- `Dropout(0.6)`: To prevent overfitting and help model learn different representation of the data
+- `Dense(6, activation='softmax')`: Output layer with 6 neurons, each representing different emotions, with a softmax activation function since it is a multi-class classification task.
+
+### Training/Validation performance
+When compiling the model, we used Adam as the optimizer and sparse categorical crossentropy as the loss function since its a multi-class classification task.
+
+We also implemented a learning rate scheduler to dynamically adjust the learning rate of the optimizer whenever it starts to plateau. It monitors the validation loss and reduces the learning rate by a factor of 0.5 whenever the validation loss has no progression for 3 epochs. This significantly helped with optimizing the learning rate hyper-tuning process.
+
+Using 300 epochs, a batch size of 64, and specifying the class weights computed to account for class imbalance, the model converged with:
+- 99.89% accuracy in training
+- 72.21% accuracy in validation
+
+![learning_curve_beta](https://github.com/AmaniN16/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/Learning_curve_beta.PNG)
+
+### Test Performance
+
+Using the updated test datasets and labels, we applied the test data to the model and it converged with:
+- 72.06% accuracy in testing
+
+Here is a summary of its performance:
+
+![test_sum_beta](https://github.com/AmaniN16/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/test_sum_beta.PNG)
+
+To get a deeper insight of the performance of the model, we used a confusion matrix to evaluate the true positives, true negatives, false positives, and false negatives. Here are the results:
+
+![test_cm_beta](https://github.com/AmaniN16/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/test_cm_beta.PNG)
+
+### Observations
+
+It's important to note that the distribution of the testing data is as follows:
+| Emotion | # of Samples in Test Set | % of True Positives | 
+| --- | --- | --- | 
+| Angry | 1152 | 67.45% |
+| Fear | 762 | 50.92% |
+| Happy | 1827 | 86.80% |
+| Sad | 994 | 60.26% |
+| Surprised | 711 | 79.89% |
+| Neutral | 915 | 72.56% |
+
+As we can see, Happy and Surprised have the highest percentage of true positives. Looking at the confusion matrix, we can see that:
+- Fear is commonly misclassified as Sad
+- Sad and Angry are commonly misclassified as Neutral
+- And Neutral is commonly misclassified as Sad
+
+Here are some examples of predictions made in test set for every emotion along with their true label:
+
+![angry_ex_b](https://github.com/AmaniN16/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/angry_ex_b.PNG)
+
+![fear_ex_b](https://github.com/AmaniN16/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/Fear_ex_b.PNG)
+
+![happy_ex_b](https://github.com/AmaniN16/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/happy_ex_b.PNG)
+
+![sad_ex_b](https://github.com/AmaniN16/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/sad_ex_b.PNG)
+
+![sur_ex_b](https://github.com/AmaniN16/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/surprised_ex_b.PNG)
+
+![Neutral_ex_b](https://github.com/AmaniN16/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/neutral_ex.PNG)
+
+As we could see, a lot of the images could be interpreted either way, such as the first image in the angry set which is classified as Neutral but predicted as Angry since the man in the image has straight/dark eyebrows and no specific expression, which makes him look angry. This can also be seen in the third image in the Neutral set, which is classified as Angry and predicted as Neutral mainly due to there being no discernible expression in the image, which means the image itself could be misclassified. A lot of these results also align with the confusion matrix, such as angry and neutral being confused for eachother. 
+
+Considering our dataset is over 33k images large, there could have been some misclassifications that we missed, which is something we plan on verifying again. We have seen improvement in training when lowering the complexity of the model and hyper-tuning the neurons in each custom layer, so it's something we will continue to do in attempt to increase the accuracy. Our model is also overfitting significantly, so we plan on modifying the dropout rates and regularization terms in attempt to avoid overfitting. 
 
 ## Pre-Alpha Model: Convolutional Neural Network (CNN)
 
@@ -36,13 +124,14 @@ This value is close to the validation accuracy score, meaning that the model is 
 
 ![test_info](https://github.com/dianas11xx/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/test_performance.PNG)
 
+
 ### Model observations
 
 One of the main observations made during the training of this model was that the accuracy in the training and validation sets was continuously increasing with each epoch, so in the future, we plan to use a slightly higher learning rate and more epochs to see where the model performs the best. Also, when the model was applied to our test sets, the accuracy was 48.30%, which is close to our validation accuracy, meaning that the model is not overfitting, but the parameters still need tuning since the accuracy is low. 
 
 # Alpha Model: Transfer Learning Model 
 
-In our current model, we used the pre-trained MobileNetV2 architecture as our base model with Imagenet set as the weights to perform transfer learning on the datasets. One of the main updates we did during training was using images of size 224x224 instead of 48x48. This allowed our model to be able to identify more patterns in the dataset. 
+In Alpha  model, we used the pre-trained MobileNetV2 architecture as our base model with Imagenet set as the weights to perform transfer learning on the datasets. One of the main updates we did during training was using images of size 224x224 instead of 48x48. This allowed our model to be able to identify more patterns in the dataset. 
 
 We made all the pre-trained weights trainable since our dataset is large and may need to tune some of the weights in order to get a more accurate prediction. We also added self-defined layers to the top and bottom of the model so that it could be more defined to our dataset and problem. In the input layer, we added 2 additional layers that perform data augmentation to the dataset, which would make the data the model is being trained on more distinct, allowing the model to be more adaptive to unique data, such as images taken at an angle. We then pass it through the mobilenet_v2 preprocessing function that scales the pixel values between -1 and 1 for the base model. The hidden layers of the model consist of the MobileNetV2 base model layers, a Global Average Pooling layer, and a Dropout layer of 0.2 intensity to prevent overfitting. Our output layer had 7 neurons, each representing different emotions, with a softmax activation function, since it is a multi-class classification task, and an L2 regularizer with a learning rate of 1e-2 to prevent overfitting. 
 
