@@ -192,7 +192,7 @@ Current pages setup status:
 6. RESULTS PAGE:
 ```
 
-![MicrosoftTeams-image (3)](https://github.com/AmaniN16/Cue-Cetera/assets/44105687/98102289-037b-49b4-a6f0-8c37d6236965)
+![image](https://github.com/AmaniN16/Cue-Cetera/assets/80346555/163c8e6d-c112-44b3-9cfa-404f5fd1c144)
 
 
 
