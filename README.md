@@ -201,5 +201,6 @@ Current pages setup status:
 ```
 
 
-![results_info](https://github.com/AmaniN16/Cue-Cetera/assets/44105687/68c0dd9f-7145-45aa48-b2cf-609f6f5b30dc)
+![results_info](https://github.com/AmaniN16/Cue-Cetera/blob/main/readme_imgs/results_info.png)
+
 
