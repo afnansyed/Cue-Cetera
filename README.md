@@ -192,7 +192,7 @@ Current pages setup status:
 6. RESULTS PAGE:
 ```
 
-![image](https://github.com/AmaniN16/Cue-Cetera/assets/80346555/163c8e6d-c112-44b3-9cfa-404f5fd1c144)
+![image](https://github.com/AmaniN16/Cue-Cetera/blob/55676d1f0f39d99ade8432e1d830682fe238e657/readme_imgs/results_display_new.png)
 
 
 
@@ -201,5 +201,5 @@ Current pages setup status:
 ```
 
 
-![results_info](https://github.com/AmaniN16/Cue-Cetera/assets/44105687/68c0dd9f-7145-4548-b2cf-609f6f5b30dc)
+![results_info](https://github.com/AmaniN16/Cue-Cetera/assets/44105687/68c0dd9f-7145-45aa48-b2cf-609f6f5b30dc)
 
