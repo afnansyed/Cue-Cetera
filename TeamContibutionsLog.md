@@ -110,6 +110,8 @@
 | 10/7 | Diana | Hyper-tuning models in an attempt to increase accuracy, experimenting with the number of hidden layers and conversion of grayscale to rgb | 4.5 hrs
 | 10/8 | Diana | Computed class weights to adjust weights to account for class imbalance, re-ran models, adjusted hidden layers + exported model to tflite file | 2 hrs
 | 10/13 | Diana | Researching emotion datasets and their average thresholds, applied new datasets to model 15 to measure difference in performance | 4 hrs
+| 10/16 | Diana | Wrote script to expand limited CK+ dataset to increase the number of samples while reducing exact duplicates using keras data augmentation techniques + Searched for more accurate datasets for emotion recognition | 4 hrs
+
 (Afnan Syed) Google docs contribution record: https://docs.google.com/document/d/1yr94W63IZH-b98pGuP2m3c1zsexB2Q_fsDCncp7gjkc/edit?usp=sharing
 
 (Shravya Iruvanti) Google docs contribution record: https://docs.google.com/document/d/1XJNYapgp1vnRhuOQV3FieIgHs_3PAEfNM9k7kzJjh1s/edit?usp=sharing  
