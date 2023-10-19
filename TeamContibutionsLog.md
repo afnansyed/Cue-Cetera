@@ -111,6 +111,7 @@
 | 10/8 | Diana | Computed class weights to adjust weights to account for class imbalance, re-ran models, adjusted hidden layers + exported model to tflite file | 2 hrs
 | 10/13 | Diana | Researching emotion datasets and their average thresholds, applied new datasets to model 15 to measure difference in performance | 4 hrs
 | 10/16 | Diana | Wrote script to expand limited CK+ dataset to increase the number of samples while reducing exact duplicates using keras data augmentation techniques + Searched for more accurate datasets for emotion recognition | 4 hrs
+| 10/18 | Diana | Made video demonstrating all emotions for testing, re-ran models with data augmented CK+ and JAFFE, applied 3 different models to frames of video to measure accuracy, started manually configuring dataset/combining CK+ with JAFFE and Fer2013| 5 hrs
 
 (Afnan Syed) Google docs contribution record: https://docs.google.com/document/d/1yr94W63IZH-b98pGuP2m3c1zsexB2Q_fsDCncp7gjkc/edit?usp=sharing
 
