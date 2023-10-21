@@ -42,12 +42,12 @@ class TimestampCard extends StatelessWidget {
     String thumbString = "";
     if (positiveEmotions.contains(emotion)) {
       thumbString = "greenThumb";
-    }
-    else if (negativeEmotions.contains(emotion)) {
-      thumbString = "redThumb";
       if(colorBlind){
         thumbString = "blueThumb";
       }
+    }
+    else if (negativeEmotions.contains(emotion)) {
+      thumbString = "redThumb";
     }
     else {
       thumbString = "neutralThumb";
@@ -72,14 +72,13 @@ class TimestampCard extends StatelessWidget {
   int getBackgroundColor(int emotion) {
 
     if (positiveEmotions.contains(emotion)) {
+      if(colorBlind){
+        return 0xffb3d4ff; // blue
+      }
       return 0xffb9FE19F; //light green
     }
     else if (negativeEmotions.contains(emotion)) {
-      if(colorBlind){
-        return 0xffb3d4ff; // blue
-      }else{
         return 0xffffb3b3; // red
-      }
     }
     else {
       return 0xff808080; // gray

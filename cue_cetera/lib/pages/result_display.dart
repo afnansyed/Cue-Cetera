@@ -176,11 +176,11 @@ class _ResultDisplayState extends State<ResultDisplay> {
     String thumbString = "";
     if (positiveEmotions.contains(emotion)) {
       thumbString = "greenThumb";
-    } else if (negativeEmotions.contains(emotion)) {
-      thumbString = "redThumb";
       if(colorBlind){
         thumbString = "blueThumb";
       }
+    } else if (negativeEmotions.contains(emotion)) {
+      thumbString = "redThumb";
     } else {
       thumbString = "neutralThumb";
     }

@@ -105,7 +105,7 @@ class _InfoRState extends State<InfoResults> {
                   ),
                   child: Row(
                     children: <Widget>[
-                      Image.asset(colorBlind ? 'assets/imgs/thumbs/blueThumb.png': 'assets/imgs/thumbs/redThumb.png', scale: 6),
+                      Image.asset('assets/imgs/thumbs/redThumb.png', scale: 6),
                       const SizedBox(width: 10),
                       Text(
                         'Emotion is negative',
@@ -127,7 +127,7 @@ class _InfoRState extends State<InfoResults> {
                   ),
                   child: Row(
                     children: <Widget>[
-                      Image.asset('assets/imgs/thumbs/greenThumb.png',
+                      Image.asset(colorBlind ? 'assets/imgs/thumbs/blueThumb.png': 'assets/imgs/thumbs/greenThumb.png',
                           scale: 6),
                       const SizedBox(width: 10),
                       Text(
