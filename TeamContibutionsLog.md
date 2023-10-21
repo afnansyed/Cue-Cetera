@@ -113,7 +113,7 @@
 | 10/16 | Diana | Wrote script to expand limited CK+ dataset to increase the number of samples while reducing exact duplicates using keras data augmentation techniques + Searched for more accurate datasets for emotion recognition | 4 hrs
 | 10/18 | Diana | Made video demonstrating all emotions for testing, re-ran models with data augmented CK+ and JAFFE, applied 3 different models to frames of video to measure accuracy, started manually configuring dataset/combining CK+ with JAFFE and Fer2013| 5 hrs
 | 10/19 | Diana | Manually organizing new dataset into emotion categories to prevent mislabeling | 2 hrs
-
+| 10/20 | Diana | Manually organizing new dataset | 2 hrs
 (Afnan Syed) Google docs contribution record: https://docs.google.com/document/d/1yr94W63IZH-b98pGuP2m3c1zsexB2Q_fsDCncp7gjkc/edit?usp=sharing
 
 (Shravya Iruvanti) Google docs contribution record: https://docs.google.com/document/d/1XJNYapgp1vnRhuOQV3FieIgHs_3PAEfNM9k7kzJjh1s/edit?usp=sharing  
