@@ -33,6 +33,7 @@ class _HomeState extends State<Home> {
     flutterTts.stop();
     super.dispose();
   }
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 172, 158, 158),
@@ -41,12 +42,12 @@ class _HomeState extends State<Home> {
           Padding(
             padding: const EdgeInsets.only(right: 25.0),
             child: IconButton(
-              icon: Icon(Icons.volume_up, color: Color.fromARGB(255, 66, 39, 39)),
+              icon:
+                  Icon(Icons.volume_up, color: Color.fromARGB(255, 66, 39, 39)),
               onPressed: () {
                 speak(
-                  'Welcome to Cue-Cetera. Choose an option below to begin your exploration. Upload video or Use Video Camera. For more details, click on the info and settings button.'
-              );
-            },
+                    'Welcome to Cue-Cetera. Choose an option below to begin your exploration. Upload video or Use Video Camera. For more details, click on the info and settings button.');
+              },
               iconSize: 40,
             ),
           )
@@ -84,14 +85,13 @@ class _HomeState extends State<Home> {
             Container(
               alignment: Alignment.center,
               //padding: EdgeInsets.only(top: 80),
-              child: Text(
-                'Choose an Option',
-                style: TextStyle(
-                  fontFamily: 'Lusteria',
-                  color: Color.fromARGB(255, 212, 195, 195),
-                  fontSize: TextSize37,
-                ),
-              ),
+              child: Text('Choose an Option',
+                  style: TextStyle(
+                    fontFamily: 'Lusteria',
+                    color: Color.fromARGB(255, 212, 195, 195),
+                    fontSize: TextSize37,
+                  ),
+                  textAlign: TextAlign.center),
             ),
             const Expanded(
               flex: 1,
@@ -110,6 +110,7 @@ class _HomeState extends State<Home> {
                   fontSize: TextSize15,
                   fontStyle: FontStyle.italic,
                 ),
+                textAlign: TextAlign.center,
               ),
             ),
             const Expanded(
@@ -141,7 +142,10 @@ class _HomeState extends State<Home> {
                   borderRadius: BorderRadius.circular(15),
                 ),
               ),
-              child: const Text("UPLOAD VIDEO"),
+              child: const Text(
+                "UPLOAD VIDEO",
+                textAlign: TextAlign.center,
+              ),
             ),
             const Expanded(
               flex: 4,
@@ -172,7 +176,8 @@ class _HomeState extends State<Home> {
                   borderRadius: BorderRadius.circular(15),
                 ),
               ),
-              child: const Text("USE VIDEO CAMERA"),
+              child:
+                  const Text("USE VIDEO CAMERA", textAlign: TextAlign.center),
             ),
             const Expanded(
               flex: 4,
@@ -216,7 +221,7 @@ class _HomeState extends State<Home> {
                 flutterTts.stop();
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Set()),
+                  MaterialPageRoute(builder: (context) => Set()),
                 );
               },
               backgroundColor: Color.fromARGB(255, 35, 23, 23),
