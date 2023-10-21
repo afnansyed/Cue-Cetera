@@ -163,6 +163,43 @@ class _SetState extends State<Set> {
                     ],
                   ),
                 ),
+                const SizedBox(height: 20),
+
+                Container(
+                  width: 250,
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 212, 195, 195),
+                    borderRadius: BorderRadius.circular(35),
+                  ),
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        child: Text(
+                          'COLOR BLIND MODE',
+                          style: TextStyle(
+                            fontFamily: 'OpenSans',
+                            color: Color.fromARGB(255, 66, 39, 39),
+                            fontSize: TextSize15,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.justify,
+                        ),
+                      ),
+                      Switch(
+                        activeColor: Color.fromARGB(255, 35, 23, 23),
+                        inactiveThumbColor: Color.fromARGB(255, 158, 144, 144),
+                        value: colorBlind,
+                        onChanged: (bool value) {
+                          setState(() {
+                            colorBlind = value;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),

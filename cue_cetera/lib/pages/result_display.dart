@@ -1,3 +1,4 @@
+import 'package:cue_cetera/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -174,9 +175,12 @@ class _ResultDisplayState extends State<ResultDisplay> {
   String getThumbPath(int emotion) {
     String thumbString = "";
     if (positiveEmotions.contains(emotion)) {
-      thumbString = "blueThumb";
+      thumbString = "greenThumb";
     } else if (negativeEmotions.contains(emotion)) {
       thumbString = "redThumb";
+      if(colorBlind){
+        thumbString = "blueThumb";
+      }
     } else {
       thumbString = "neutralThumb";
     }
@@ -391,7 +395,7 @@ class _ResultDisplayState extends State<ResultDisplay> {
                   children: timestamps
                       .map((timestamp) => TimestampCard(
                             timestamp: timestamp,
-                            jump: jump,
+                            jump: jump
                           ))
                       .toList(),
                 ),

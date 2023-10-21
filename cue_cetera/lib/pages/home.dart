@@ -9,6 +9,7 @@ double TextSize15 = 15;
 double TextSize20 = 20;
 double TextSize28 = 28;
 double TextSize37 = 37;
+bool colorBlind = false;
 
 class Home extends StatefulWidget {
   final String title;
