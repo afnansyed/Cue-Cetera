@@ -27,15 +27,29 @@ class _SetState extends State<Set> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 172, 158, 158),
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_rounded),
+          onPressed: () => {
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Home('CUE-CETERA'),
+              ),
+              (route) => false,
+            ),
+          },
+          color: Color.fromARGB(255, 242, 228, 228),
+          iconSize: 40,
+        ),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 25.0),
             child: IconButton(
-              icon: Icon(Icons.volume_up, color: Color.fromARGB(255, 66, 39, 39)),
+              icon:
+                  Icon(Icons.volume_up, color: Color.fromARGB(255, 66, 39, 39)),
               onPressed: () {
                 speak(
-                    'You are on the settings page. Text-to-speech option: Tap on the speaker icon at the top of each page to enable Text-to-Speech. Change Text Size option: adjust the text size for better readability.'
-                );
+                    'You are on the settings page. Text-to-speech option: Tap on the speaker icon at the top of each page to enable Text-to-Speech. Change Text Size option: adjust the text size for better readability.');
               },
               iconSize: 40,
             ),
@@ -65,10 +79,19 @@ class _SetState extends State<Set> {
         alignment: Alignment.center,
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(10.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
+                Text(
+                  '-settings-',
+                  style: TextStyle(
+                    fontFamily: 'Lusteria',
+                    color: Color.fromARGB(255, 210, 188, 188),
+                    fontSize: TextSize20,
+                  ),
+                ),
+                const SizedBox(height: 20),
                 Container(
                   width: 250,
                   padding: const EdgeInsets.all(20),
@@ -92,7 +115,8 @@ class _SetState extends State<Set> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Icon(Icons.volume_up, color: Color.fromARGB(255, 66, 39, 39)),
+                          const Icon(Icons.volume_up,
+                              color: Color.fromARGB(255, 66, 39, 39)),
                           const SizedBox(width: 5),
                           Flexible(
                             child: Text(
@@ -100,7 +124,7 @@ class _SetState extends State<Set> {
                               style: TextStyle(
                                 fontFamily: 'OpenSans',
                                 color: Color.fromARGB(255, 66, 39, 39),
-                                fontSize: TextSize15-3,
+                                fontSize: TextSize15 - 3,
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -111,7 +135,6 @@ class _SetState extends State<Set> {
                   ),
                 ),
                 const SizedBox(height: 20),
-
                 Container(
                   width: 250,
                   alignment: Alignment.center,
@@ -131,13 +154,13 @@ class _SetState extends State<Set> {
                             fontSize: TextSize15,
                             fontWeight: FontWeight.bold,
                           ),
-                          textAlign: TextAlign.justify,
+                          textAlign: TextAlign.center,
                         ),
                       ),
                       Slider(
                         value: TextSize15,
                         min: 10.0,
-                        max: 70.0,
+                        max: 45.0,
                         label: TextSize15.round().toString(),
                         activeColor: Color.fromARGB(255, 81, 48, 48),
                         inactiveColor: Color.fromARGB(255, 158, 144, 144),
@@ -164,7 +187,6 @@ class _SetState extends State<Set> {
                   ),
                 ),
                 const SizedBox(height: 20),
-
                 Container(
                   width: 250,
                   alignment: Alignment.center,
@@ -184,7 +206,7 @@ class _SetState extends State<Set> {
                             fontSize: TextSize15,
                             fontWeight: FontWeight.bold,
                           ),
-                          textAlign: TextAlign.justify,
+                          textAlign: TextAlign.center,
                         ),
                       ),
                       Switch(
