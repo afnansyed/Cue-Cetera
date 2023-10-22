@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/services.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:google_mlkit_commons/google_mlkit_commons.dart';
@@ -14,10 +15,15 @@ import 'package:tflite/tflite.dart';
 Map modelOutput = Map<int, int>();
 
 Future<Map<int, int>> runFirebase(String filePath) async {
+  final userCredential = await FirebaseAuth.instance.signInAnonymously();
+  print("Signed in with temporary account.");
+
   //send file name to db
+  final user = userCredential.user!;
+  final uid = user.uid;
   DatabaseReference ref = FirebaseDatabase.instance.ref("Videos");
 
-  ref.child('paths').push().set({
+  ref.child('paths/$uid').push().set({
     "Path": filePath,
   });
 
@@ -34,18 +40,18 @@ Future<Map<int, int>> runFirebase(String filePath) async {
     throw Exception('Failed to save video');
   }
 
-  await runBackend();
+  await runBackend(user);
 
   Completer<Map<int, int>> completer = Completer();
   completer.complete(modelOutput as FutureOr<Map<int, int>>?);
   return completer.future;
 }
 
-Future<void> runBackend() async {
+Future<void> runBackend(User user) async {
   try {
     final result = await FirebaseFunctions.instance
         .httpsCallable('vid_to_imgs')
-        .call('convert').whenComplete(() => runModelInference());
+        .call('convert').whenComplete(() => runModelInference(user));
   }
   on FirebaseFunctionsException catch (error) {
     print(error.code);
@@ -54,11 +60,12 @@ Future<void> runBackend() async {
   }
 }
 
-Future<void> runModelInference() async {
+Future<void> runModelInference(User user) async {
   // Get images from Firebase
+  final uid = user.uid;
   final storageRef = FirebaseStorage.instance.ref();
   Directory root = await getTemporaryDirectory();
-  final image_query = await FirebaseDatabase.instance.ref("Images/Paths")
+  final image_query = await FirebaseDatabase.instance.ref("Images/Paths/$uid")
       .orderByChild('Path')
       .get();
 
@@ -80,10 +87,13 @@ Future<void> runModelInference() async {
     throw "Could not load TfLite model";
   }
 
+  final options = FaceDetectorOptions();
+  final faceDetector = FaceDetector(options: options);
+
   print("Starting inference run");
 
   for (var value in images.values) {
-    final path = value.toString().substring(7, 31);
+    final path = value.toString().substring(7, 60);
     final pathReference = storageRef.child(path);
     Uint8List? data = Uint8List(0);
 
@@ -102,13 +112,13 @@ Future<void> runModelInference() async {
     final file = await File('${root.path}/image.jpg').writeAsBytes(jpg);
 
     //Convert file path to ms
-    final secondsString = value.toString().substring(22, 24);
+    final secondsString = value.toString().substring(51, 53);
     var secondsConv = int.parse(secondsString) * 1000;
-    final msString = value.toString().substring(25, 27);
+    final msString = value.toString().substring(54, 56);
     var msConv = int.parse(msString);
     final timestamp = secondsConv + msConv;
 
-    if (await detectFace(file)){
+    if (await detectFace(file, faceDetector)){
       print("Face detected");
       if (data!.isNotEmpty) {
         List? output;
@@ -140,12 +150,12 @@ Future<void> runModelInference() async {
       modelOutput.putIfAbsent(timestamp, () => 5);
     }
   }
+
+  faceDetector.close();
 }
 
-Future<bool> detectFace(File file) async {
+Future<bool> detectFace(File file, FaceDetector faceDetector) async {
   final inputImage = InputImage.fromFile(file);
-  final options = FaceDetectorOptions();
-  final faceDetector = FaceDetector(options: options);
   List<Face> faces;
 
   try {
@@ -155,8 +165,6 @@ Future<bool> detectFace(File file) async {
   catch (error){
     throw 'Could not run face detection model.';
   }
-
-  faceDetector.close();
 
   if(faces.isEmpty) {
     return false;
