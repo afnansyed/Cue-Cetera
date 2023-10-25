@@ -117,7 +117,7 @@
 | 10/22 | Diana | Manually organizing new dataset, extracting NHF dataset, and training it on our model to measure performance | 3 hrs
 | 10/23 | Diana | Manually organizing new dataset | 3.5 hrs
 | 10/24 | Diana | Met with Dr.Silva (machine learning professor) to discuss the robustness of emotion recognition, explained our model/approach, and discussed adjustments in training we could make to optimize our model + Finished manually organizing dataset, converted to npy | 5.5 hrs
-| 10/25 | Diana | Combined 'disgust' samples with angry, and deleted contempt due to it having only a small number of samples, converted the images to grayscale for training, re-ran model 15 on new samples, tested/compared using regularizers, increased the accuracy of the model to 91% in validation/testing | 3.5 hrs
+| 10/25 | Diana | Combined 'disgust' samples with angry, and deleted contempt due to it having only a small number of samples, converted the images to grayscale for training, re-ran model 15 on new samples, tested/compared using regularizers, increased the accuracy of the model to 91% in validation/testing | 2 hrs
 (Afnan Syed) Google docs contribution record: https://docs.google.com/document/d/1yr94W63IZH-b98pGuP2m3c1zsexB2Q_fsDCncp7gjkc/edit?usp=sharing
 
 (Shravya Iruvanti) Google docs contribution record: https://docs.google.com/document/d/1XJNYapgp1vnRhuOQV3FieIgHs_3PAEfNM9k7kzJjh1s/edit?usp=sharing  
