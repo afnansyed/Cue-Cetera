@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:cue_cetera/pages/info.dart';
 import 'package:cue_cetera/pages/settings.dart';
 import 'package:cue_cetera/pages/record_video.dart';
-import 'package:cue_cetera/pages/upload_video.dart';
+import 'package:cue_cetera/pages/processing_video.dart';
+import 'package:cue_cetera/pages/result_display.dart';
+import 'package:cue_cetera/services/firebase_services.dart';
 
 double TextSize15 = 15;
 double TextSize20 = 20;
@@ -27,6 +30,32 @@ class _HomeState extends State<Home> {
 
   String title;
   _HomeState(this.title);
+  bool runningFirebase = false;
+  bool videoChosen = false;
+
+  openFilePicker() async {
+    var picked = await FilePicker.platform.pickFiles();
+
+    if (picked != null) {
+      print(picked.files.first.size / (1024 * 1024));
+      if (picked.files.first.size / (1024 * 1024) > 50) {
+        print('File size cannot exceed 50 MB');
+      } else {
+        // we open up the processing_video screen instead, and do all of this in initState();
+        if (context.mounted) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    ProcessingVideo(picked.files.first.path!)),
+          );
+        }
+        else {
+          print("context not mounted which is bad for some reason");
+        }
+      }
+    }
+  }
 
   @override
   void dispose() {
@@ -120,12 +149,9 @@ class _HomeState extends State<Home> {
               ),
             ),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 flutterTts.stop();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const UploadVideo()),
-                );
+                openFilePicker();
               },
               style: ElevatedButton.styleFrom(
                 fixedSize: const Size(250, 100),

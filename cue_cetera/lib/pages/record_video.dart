@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 
-import 'package:cue_cetera/pages/result_display.dart';
+import 'package:cue_cetera/pages/processing_video.dart';
 import 'package:cue_cetera/services/firebase_services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -23,7 +23,6 @@ class _RecordVideoState extends State<RecordVideo> {
   bool startRecordSetup = true;
   bool runningFirebase = false;
   bool startedRecording = false;
-  bool videoRecorded = false;
   bool frontCamera = true;
 
 
@@ -62,20 +61,20 @@ class _RecordVideoState extends State<RecordVideo> {
   recordVideo() async {
     if (!controllers.value.isRecordingVideo) {
       await controllers.startVideoRecording();
-    } else {
+    }
+    else {
       final file = await controllers.stopVideoRecording();
-      runningFirebase = true;
-      setState(() {});
-      var output = await runFirebase(file.path);
-      runningFirebase = false;
-      videoRecorded = false;
-      setState(() {});
-      //Navigator.push(context, MaterialPageRoute(builder: (context) =>  Test(file.path),));
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ResultDisplay(file.path, output),
-          ));
+      if (context.mounted) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ProcessingVideo(file.path),
+            )
+        );
+      }
+      else {
+        print("context not mounted which is bad for some reason");
+      }
     }
   }
 
@@ -107,12 +106,11 @@ class _RecordVideoState extends State<RecordVideo> {
                       child: !startedRecording ? FloatingActionButton(
                         backgroundColor: const Color(0xffc9b6b9),
                         // if the video is recorded, disable the button
-                        onPressed: !videoRecorded ? () => {
+                        onPressed: () => {
                           startedRecording = true,
                           setState(() {}),
                           recordVideo(),
-                        } :
-                        null, // disable button if video is recorded
+                        },
                         child: const Icon(Icons.circle),
                       ) :
                       FloatingActionButton(
@@ -120,7 +118,6 @@ class _RecordVideoState extends State<RecordVideo> {
                         onPressed: () => {
                           recordVideo(),
                           startedRecording = false,
-                          videoRecorded = true,
                           setState(() {}),
                         },
                         child: const Icon(Icons.circle),
@@ -131,10 +128,10 @@ class _RecordVideoState extends State<RecordVideo> {
                       child: FloatingActionButton(
                         backgroundColor: const Color(0xffc9b6b9),
                         // disable the button once we've started recording
-                        onPressed: (!videoRecorded && !startedRecording) ? () => {
+                        onPressed: (!startedRecording) ? () => {
                           switchCamera(),
                         } :
-                        null, // disable button if video is recorded
+                        null,
                         child: const Icon(Icons.cameraswitch),
                       )
                     ),
@@ -142,11 +139,6 @@ class _RecordVideoState extends State<RecordVideo> {
                 ),
               ],
             ),
-            runningFirebase ? const SpinKitFadingCircle(
-                color: Colors.white,
-                size: 50.0
-            ) :
-            const SizedBox.shrink(),
           ],
         ),
       );

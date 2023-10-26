@@ -226,17 +226,16 @@ class _ResultDisplayState extends State<ResultDisplay> {
     return Scaffold(
       backgroundColor: const Color(0xFFAC9E9E),
       appBar: AppBar(
-
-        // TODO: Add a download button to download the video, PREFERABLY with the thumb burned
         backgroundColor: const Color(0xFFAC9E9E),
         toolbarHeight: 75,
         elevation: 0,
-        centerTitle: false,
+        centerTitle: true,
+        automaticallyImplyLeading: false,
         title: const Text(
           "RESULTS",
           style: TextStyle(
             color: Color(0xFF422727),
-            fontSize: 16,
+            fontSize: 24,
             fontFamily: "Lusteria",
             fontWeight: FontWeight.bold,
           ),
