@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:cue_cetera/pages/home.dart';
-import 'package:cue_cetera/pages/result_display.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
 
@@ -128,7 +127,7 @@ class _InfoRState extends State<InfoResults> {
                   ),
                   child: Row(
                     children: <Widget>[
-                      Image.asset('assets/imgs/thumbs/greenThumb.png',
+                      Image.asset(colorBlind ? 'assets/imgs/thumbs/blueThumb.png': 'assets/imgs/thumbs/greenThumb.png',
                           scale: 6),
                       const SizedBox(width: 10),
                       Text(

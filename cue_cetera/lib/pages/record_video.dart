@@ -19,10 +19,13 @@ class RecordVideo extends StatefulWidget {
 //https://stackoverflow.com/questions/64070044/how-to-record-a-video-with-camera-plugin-in-flutter
 class _RecordVideoState extends State<RecordVideo> {
   late CameraController controllers;
+  late List<CameraDescription> cameras;
   bool startRecordSetup = true;
   bool runningFirebase = false;
   bool startedRecording = false;
   bool videoRecorded = false;
+  bool frontCamera = true;
+
 
   @override
   void initState() {
@@ -31,11 +34,29 @@ class _RecordVideoState extends State<RecordVideo> {
   }
 
   cameraSetup() async {
-    final cameras = await availableCameras();
+    cameras = await availableCameras();
     controllers = CameraController(cameras[0], ResolutionPreset.max);
     await controllers.initialize();
 
     setState(() => startRecordSetup = false);
+  }
+
+  switchCamera() async {
+    if (cameras.length > 1) {
+      startRecordSetup = true;
+      setState(() {});
+      if (frontCamera) {
+        controllers = CameraController(cameras[1], ResolutionPreset.max);
+        await controllers.initialize();
+        frontCamera = false;
+      }
+      else {
+        controllers = CameraController(cameras[0], ResolutionPreset.max);
+        await controllers.initialize();
+        frontCamera = true;
+      }
+      setState(() {startRecordSetup = false;});
+    }
   }
 
   recordVideo() async {
@@ -67,28 +88,59 @@ class _RecordVideoState extends State<RecordVideo> {
     } else {
       return Center(
         child: Stack(
-          alignment: Alignment.bottomCenter,
           children: [
-            CameraPreview(controllers),
-            !startedRecording ? FloatingActionButton(
-              backgroundColor: const Color(0xffc9b6b9),
-              onPressed: !videoRecorded ? () => {
-                startedRecording = true,
-                setState(() {}),
-                recordVideo(),
-              } :
-              null, // disable button if video is recorded
-              child: const Icon(Icons.circle),
-            ) :
-            FloatingActionButton(
-              backgroundColor: const Color(0xffff0000),
-              onPressed: () => {
-                recordVideo(),
-                startedRecording = false,
-                videoRecorded = true,
-                setState(() {}),
-              },
-              child: const Icon(Icons.circle),
+            // the camera preview
+            Center(
+              child: CameraPreview(controllers),
+            ),
+            // move our row to the bottom of the screen
+            Column(
+              children: [
+                const Expanded(child: SizedBox()),
+                // contains our record and swap camera buttons
+                Row(
+                  children: [
+                    const Spacer(), // makes it so buttons are center and right
+                    // the record button
+                    Expanded(
+                      // if we've started recording, change button to red
+                      child: !startedRecording ? FloatingActionButton(
+                        backgroundColor: const Color(0xffc9b6b9),
+                        // if the video is recorded, disable the button
+                        onPressed: !videoRecorded ? () => {
+                          startedRecording = true,
+                          setState(() {}),
+                          recordVideo(),
+                        } :
+                        null, // disable button if video is recorded
+                        child: const Icon(Icons.circle),
+                      ) :
+                      FloatingActionButton(
+                        backgroundColor: const Color(0xffff0000),
+                        onPressed: () => {
+                          recordVideo(),
+                          startedRecording = false,
+                          videoRecorded = true,
+                          setState(() {}),
+                        },
+                        child: const Icon(Icons.circle),
+                      ),
+                    ),
+                    // the camera swap button
+                    Expanded(
+                      child: FloatingActionButton(
+                        backgroundColor: const Color(0xffc9b6b9),
+                        // disable the button once we've started recording
+                        onPressed: (!videoRecorded && !startedRecording) ? () => {
+                          switchCamera(),
+                        } :
+                        null, // disable button if video is recorded
+                        child: const Icon(Icons.cameraswitch),
+                      )
+                    ),
+                  ]
+                ),
+              ],
             ),
             runningFirebase ? const SpinKitFadingCircle(
                 color: Colors.white,
