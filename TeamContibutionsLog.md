@@ -109,6 +109,15 @@
 | 10/6 | Diana | Fixed class imbalance and re-ran models using updated dataset | 5 hrs
 | 10/7 | Diana | Hyper-tuning models in an attempt to increase accuracy, experimenting with the number of hidden layers and conversion of grayscale to rgb | 4.5 hrs
 | 10/8 | Diana | Computed class weights to adjust weights to account for class imbalance, re-ran models, adjusted hidden layers + exported model to tflite file | 2 hrs
+| 10/13 | Diana | Researching emotion datasets and their average thresholds, applied new datasets to model 15 to measure difference in performance | 4 hrs
+| 10/16 | Diana | Wrote script to expand limited CK+ dataset to increase the number of samples while reducing exact duplicates using keras data augmentation techniques + Searched for more accurate datasets for emotion recognition | 4 hrs
+| 10/18 | Diana | Made video demonstrating all emotions for testing, re-ran models with data augmented CK+ and JAFFE, applied 3 different models to frames of video to measure accuracy, started manually configuring dataset/combining CK+ with JAFFE and Fer2013| 5 hrs
+| 10/19 | Diana | Manually organizing new dataset into emotion categories to prevent mislabeling | 2 hrs
+| 10/20 | Diana | Manually organizing new dataset | 2 hrs
+| 10/22 | Diana | Manually organizing new dataset, extracting NHF dataset, and training it on our model to measure performance | 3 hrs
+| 10/23 | Diana | Manually organizing new dataset | 3.5 hrs
+| 10/24 | Diana | Met with Dr.Silva (machine learning professor) to discuss the robustness of emotion recognition, explained our model/approach, and discussed adjustments in training we could make to optimize our model + Finished manually organizing dataset, converted to npy | 5.5 hrs
+| 10/25 | Diana | Combined 'disgust' samples with angry, and deleted contempt due to it having only a small number of samples, converted the images to grayscale for training, re-ran models 15, and 11 on new samples, tested/compared using regularizers, increased the accuracy of the model to 92% in validation/testing + created small beta testing dataset to test the performance of the model, applied/recorded observation | 4.5 hrs
 (Afnan Syed) Google docs contribution record: https://docs.google.com/document/d/1yr94W63IZH-b98pGuP2m3c1zsexB2Q_fsDCncp7gjkc/edit?usp=sharing
 
 (Shravya Iruvanti) Google docs contribution record: https://docs.google.com/document/d/1XJNYapgp1vnRhuOQV3FieIgHs_3PAEfNM9k7kzJjh1s/edit?usp=sharing  
