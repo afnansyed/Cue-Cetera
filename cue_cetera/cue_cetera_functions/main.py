@@ -110,7 +110,8 @@ def vid_to_imgs(req: https_fn.CallableRequest):
             img_name = f"frame{timeStamp}.jpg"
             img_path = os.path.join(osPath + '/', img_name)
             image_re = cv2.resize(image, (224, 224), interpolation=cv2.INTER_CUBIC)
-            cv2.imwrite(img_path, image_re)
+            image_re_gray = cv2.cvtColor(image_re, cv2.COLOR_BGR2GRAY)
+            cv2.imwrite(img_path, image_re_gray)
             curr_img = "imgs-{}/".format(uid) + img_name
             upload_img(curr_img, uid)
             curr_step += 1
