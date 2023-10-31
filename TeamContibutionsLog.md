@@ -118,6 +118,7 @@
 | 10/23 | Diana | Manually organizing new dataset | 3.5 hrs
 | 10/24 | Diana | Met with Dr.Silva (machine learning professor) to discuss the robustness of emotion recognition, explained our model/approach, and discussed adjustments in training we could make to optimize our model + Finished manually organizing dataset, converted to npy | 5.5 hrs
 | 10/25 | Diana | Combined 'disgust' samples with angry, and deleted contempt due to it having only a small number of samples, converted the images to grayscale for training, re-ran models 15, and 11 on new samples, tested/compared using regularizers, increased the accuracy of the model to 92% in validation/testing + created small beta testing dataset to test the performance of the model, applied/recorded observation | 4.5 hrs
+| 10/30 | Diana | Fixed zoom range for data augmentation and re-ran models, used Hume AI (emotion recognition software) to compare performance with our model using a sample video, wrote beta test results for model training and prediction section, and re-ran additional models to compare performance  | 3.5 hrs
 (Afnan Syed) Google docs contribution record: https://docs.google.com/document/d/1yr94W63IZH-b98pGuP2m3c1zsexB2Q_fsDCncp7gjkc/edit?usp=sharing
 
 (Shravya Iruvanti) Google docs contribution record: https://docs.google.com/document/d/1XJNYapgp1vnRhuOQV3FieIgHs_3PAEfNM9k7kzJjh1s/edit?usp=sharing  
