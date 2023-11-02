@@ -84,7 +84,7 @@ class _SetState extends State<Set> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  '-settings-',
+                  '- settings -',
                   style: TextStyle(
                     fontFamily: 'Lusteria',
                     color: Color.fromARGB(255, 210, 188, 188),
@@ -160,7 +160,7 @@ class _SetState extends State<Set> {
                       Slider(
                         value: TextSize15,
                         min: 10.0,
-                        max: 45.0,
+                        max: 23.0,
                         label: TextSize15.round().toString(),
                         activeColor: Color.fromARGB(255, 81, 48, 48),
                         inactiveColor: Color.fromARGB(255, 158, 144, 144),
