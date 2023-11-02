@@ -33,6 +33,7 @@ class _ResultDisplayState extends State<ResultDisplay> {
   void dispose() {
     flutterTts.stop();
     super.dispose();
+    videoController?.dispose();
   }
 
   String filePath;

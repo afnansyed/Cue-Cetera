@@ -32,6 +32,7 @@ class _HomeState extends State<Home> {
   _HomeState(this.title);
   bool runningFirebase = false;
   bool videoChosen = false;
+  double buttonSpacing = 18;
 
   openFilePicker() async {
     var picked = await FilePicker.platform.pickFiles();
@@ -129,165 +130,148 @@ class _HomeState extends State<Home> {
                 ),
                 color: Color.fromARGB(255, 172, 158, 158),
               ),
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.only(top: 30, bottom: 5),
-                    alignment: Alignment.center,
-                    //padding: EdgeInsets.only(top: 80),
-                    child: Text('Choose an Option',
-                        style: TextStyle(
-                          fontFamily: 'Lusteria',
-                          color: Color.fromARGB(255, 212, 195, 195),
-                          fontSize: TextSize28,
-                        ),
-                        textAlign: TextAlign.center),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.vertical(
-                        top: Radius.circular(50),
-                      ),
-                      color: Color.fromARGB(255, 66, 39, 39),
+              child: Container(
+                padding: EdgeInsets.only(top: 30, bottom: 5),
+                alignment: Alignment.center,
+                //padding: EdgeInsets.only(top: 80),
+                child: Text('Choose an Option',
+                    style: TextStyle(
+                      fontFamily: 'Lusteria',
+                      color: Color.fromARGB(255, 212, 195, 195),
+                      fontSize: TextSize28,
                     ),
+                    textAlign: TextAlign.center),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(50),
                   ),
-                ],
-              ),
-            ),
-            const Expanded(
-              flex: 1,
-              child: SizedBox(
-                width: double.infinity,
-              ),
-            ),
-            Container(
-              alignment: Alignment.center,
-              padding: const EdgeInsets.only(top: 5),
-              child: Text(
-                'Your feelings, deciphered.',
-                style: TextStyle(
-                  fontFamily: 'OpenSans',
-                  color: Color.fromARGB(255, 172, 158, 158),
-                  fontSize: TextSize15,
-                  fontStyle: FontStyle.italic,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            const Expanded(
-              flex: 2,
-              child: SizedBox(
-                width: double.infinity,
-              ),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                flutterTts.stop();
-                openFilePicker();
-              },
-              style: ElevatedButton.styleFrom(
-                fixedSize: const Size(250, 100),
-                textStyle: TextStyle(
-                  fontFamily: 'OpenSans',
-                  fontSize: TextSize15,
-                  fontWeight: FontWeight.bold,
-                ),
-                backgroundColor: const Color.fromARGB(255, 212, 195, 195),
-                foregroundColor: const Color.fromARGB(255, 66, 39, 39),
-                elevation: 0,
-                shadowColor: const Color.fromARGB(255, 66, 39, 39),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
+                  color: Color.fromARGB(255, 66, 39, 39),
                 ),
               ),
-              child: const Text(
-                "UPLOAD VIDEO",
-                textAlign: TextAlign.center,
-              ),
             ),
-            const Expanded(
-              flex: 2,
-              child: SizedBox(
-                width: double.infinity,
-              ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                flutterTts.stop();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const RecordVideo()),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                fixedSize: const Size(250, 100),
-                textStyle: TextStyle(
-                  fontFamily: 'OpenSans',
-                  fontSize: TextSize15,
-                  fontWeight: FontWeight.bold,
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: <Widget> [
+                    SizedBox(
+                      height: buttonSpacing,
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.only(top: 5),
+                      child: Text(
+                        'Your feelings, deciphered.',
+                        style: TextStyle(
+                          fontFamily: 'OpenSans',
+                          color: Color.fromARGB(255, 172, 158, 158),
+                          fontSize: TextSize15,
+                          fontStyle: FontStyle.italic,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    SizedBox(
+                      height: buttonSpacing * 2,
+                    ),
+                    ElevatedButton(
+                      onPressed: () async {
+                        flutterTts.stop();
+                        openFilePicker();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        fixedSize: const Size(250, 100),
+                        textStyle: TextStyle(
+                          fontFamily: 'OpenSans',
+                          fontSize: TextSize15,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        backgroundColor: const Color.fromARGB(255, 212, 195, 195),
+                        foregroundColor: const Color.fromARGB(255, 66, 39, 39),
+                        elevation: 0,
+                        shadowColor: const Color.fromARGB(255, 66, 39, 39),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                      ),
+                      child: const Text(
+                        "UPLOAD VIDEO",
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    SizedBox(
+                      height: buttonSpacing,
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        flutterTts.stop();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const RecordVideo()),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        fixedSize: const Size(250, 100),
+                        textStyle: TextStyle(
+                          fontFamily: 'OpenSans',
+                          fontSize: TextSize15,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        backgroundColor: const Color.fromARGB(255, 212, 195, 195),
+                        foregroundColor: const Color.fromARGB(255, 66, 39, 39),
+                        elevation: 0,
+                        shadowColor: const Color.fromARGB(255, 66, 39, 39),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                      ),
+                      child:
+                      const Text("USE VIDEO CAMERA", textAlign: TextAlign.center),
+                    ),
+                    SizedBox(
+                      height: buttonSpacing,
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        flutterTts.stop();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const Info()),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        fixedSize: const Size(150, 50),
+                        textStyle: TextStyle(
+                          fontFamily: 'OpenSans',
+                          fontSize: TextSize15,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        backgroundColor: const Color.fromARGB(255, 35, 23, 23),
+                        foregroundColor: const Color.fromARGB(255, 158, 144, 144),
+                        elevation: 0,
+                        shadowColor: const Color.fromARGB(255, 66, 39, 39),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                      ),
+                      child: const Text("INFO"),
+                    ),
+                    SizedBox(
+                      height: buttonSpacing,
+                    ),
+                    FloatingActionButton(
+                      onPressed: () {
+                        flutterTts.stop();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Set()),
+                        );
+                      },
+                      backgroundColor: Color.fromARGB(255, 35, 23, 23),
+                      foregroundColor: Color.fromARGB(255, 158, 144, 144),
+                      child: const Icon(Icons.settings),
+                    ),
+                  ],
                 ),
-                backgroundColor: const Color.fromARGB(255, 212, 195, 195),
-                foregroundColor: const Color.fromARGB(255, 66, 39, 39),
-                elevation: 0,
-                shadowColor: const Color.fromARGB(255, 66, 39, 39),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-              ),
-              child:
-                  const Text("USE VIDEO CAMERA", textAlign: TextAlign.center),
-            ),
-            const Expanded(
-              flex: 2,
-              child: SizedBox(
-                width: double.infinity,
-              ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                flutterTts.stop();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Info()),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                fixedSize: const Size(150, 50),
-                textStyle: TextStyle(
-                  fontFamily: 'OpenSans',
-                  fontSize: TextSize15,
-                  fontWeight: FontWeight.bold,
-                ),
-                backgroundColor: const Color.fromARGB(255, 35, 23, 23),
-                foregroundColor: const Color.fromARGB(255, 158, 144, 144),
-                elevation: 0,
-                shadowColor: const Color.fromARGB(255, 66, 39, 39),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25),
-                ),
-              ),
-              child: const Text("INFO"),
-            ),
-            const Expanded(
-              flex: 2,
-              child: SizedBox(
-                width: double.infinity,
-              ),
-            ),
-            FloatingActionButton(
-              onPressed: () {
-                flutterTts.stop();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Set()),
-                );
-              },
-              backgroundColor: Color.fromARGB(255, 35, 23, 23),
-              foregroundColor: Color.fromARGB(255, 158, 144, 144),
-              child: const Icon(Icons.settings),
-            ),
-            const Expanded(
-              flex: 2,
-              child: SizedBox(
-                width: double.infinity,
               ),
             ),
           ],
