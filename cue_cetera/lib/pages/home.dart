@@ -49,8 +49,7 @@ class _HomeState extends State<Home> {
                 builder: (context) =>
                     ProcessingVideo(picked.files.first.path!)),
           );
-        }
-        else {
+        } else {
           print("context not mounted which is bad for some reason");
         }
       }
@@ -74,53 +73,84 @@ class _HomeState extends State<Home> {
               icon:
                   Icon(Icons.volume_up, color: Color.fromARGB(255, 66, 39, 39)),
               onPressed: () {
-                speak(
-                    'Welcome to Cue-Cetera. Choose an option below to begin your exploration. Upload video or Use Video Camera. For more details, click on the info and settings button.');
+                speak('Welcome to Cue-Cetera. Cue-Cetera is an application that can be used to detect and classify visual facial cues by the means of Machine Learning. Our goal is to have a social impact by giving access to a learning tool and hence, bringing awareness to related communities.' +
+                    'Choose an option below to begin your exploration. Upload video or Use Video Camera. For more details, click on the info and settings button.');
               },
               iconSize: 40,
             ),
           )
         ],
         backgroundColor: const Color.fromARGB(255, 172, 158, 158),
-        centerTitle: true,
-        toolbarHeight: 100,
+        centerTitle: false,
+        toolbarHeight: 50,
         elevation: 0,
         title: Text(
           title,
           style: TextStyle(
             fontFamily: 'Lusteria',
             color: Color.fromARGB(255, 66, 39, 39),
-            fontSize: TextSize20,
+            fontSize: TextSize28,
             fontWeight: FontWeight.bold,
           ),
         ),
       ),
       body: Container(
         decoration: const BoxDecoration(
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(50),
-          ),
           color: Color.fromARGB(255, 66, 39, 39),
         ),
         alignment: Alignment.center,
         child: Column(
           children: <Widget>[
-            const Expanded(
-              flex: 4,
-              child: SizedBox(
-                width: double.infinity,
+            Container(
+              padding: const EdgeInsets.only(right: 20, left: 20, bottom: 30),
+              alignment: Alignment.center,
+              //padding: EdgeInsets.only(top: 80),
+              child: Text(
+                ' is an application that can be used to detect and classify visual facial cues by the means of Machine Learning. Our goal is to have a social impact by giving access to a learning tool and hence, bringing awareness to related communities.',
+                style: TextStyle(
+                  fontFamily: 'OpenSans',
+                  color: Color.fromARGB(255, 66, 39, 39),
+                  fontSize: TextSize15,
+                ),
+                textAlign: TextAlign.justify,
+              ),
+              decoration: BoxDecoration(
+                // borderRadius: BorderRadius.vertical(
+                // bottom: Radius.circular(50),
+                //  ),
+                color: Color.fromARGB(255, 172, 158, 158),
               ),
             ),
             Container(
-              alignment: Alignment.center,
-              //padding: EdgeInsets.only(top: 80),
-              child: Text('Choose an Option',
-                  style: TextStyle(
-                    fontFamily: 'Lusteria',
-                    color: Color.fromARGB(255, 212, 195, 195),
-                    fontSize: TextSize37,
+              decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(
+                      color: Color.fromARGB(255, 172, 158, 158), width: 0.5),
+                ),
+                color: Color.fromARGB(255, 172, 158, 158),
+              ),
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(top: 30, bottom: 5),
+                    alignment: Alignment.center,
+                    //padding: EdgeInsets.only(top: 80),
+                    child: Text('Choose an Option',
+                        style: TextStyle(
+                          fontFamily: 'Lusteria',
+                          color: Color.fromARGB(255, 212, 195, 195),
+                          fontSize: TextSize28,
+                        ),
+                        textAlign: TextAlign.center),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(50),
+                      ),
+                      color: Color.fromARGB(255, 66, 39, 39),
+                    ),
                   ),
-                  textAlign: TextAlign.center),
+                ],
+              ),
             ),
             const Expanded(
               flex: 1,
@@ -130,9 +160,9 @@ class _HomeState extends State<Home> {
             ),
             Container(
               alignment: Alignment.center,
-              padding: const EdgeInsets.only(top: 30),
+              padding: const EdgeInsets.only(top: 5),
               child: Text(
-                'Begin your exploration',
+                'Your feelings, deciphered.',
                 style: TextStyle(
                   fontFamily: 'OpenSans',
                   color: Color.fromARGB(255, 172, 158, 158),
@@ -143,7 +173,7 @@ class _HomeState extends State<Home> {
               ),
             ),
             const Expanded(
-              flex: 4,
+              flex: 2,
               child: SizedBox(
                 width: double.infinity,
               ),
@@ -174,7 +204,7 @@ class _HomeState extends State<Home> {
               ),
             ),
             const Expanded(
-              flex: 4,
+              flex: 2,
               child: SizedBox(
                 width: double.infinity,
               ),
@@ -206,7 +236,7 @@ class _HomeState extends State<Home> {
                   const Text("USE VIDEO CAMERA", textAlign: TextAlign.center),
             ),
             const Expanded(
-              flex: 4,
+              flex: 2,
               child: SizedBox(
                 width: double.infinity,
               ),
@@ -237,7 +267,7 @@ class _HomeState extends State<Home> {
               child: const Text("INFO"),
             ),
             const Expanded(
-              flex: 4,
+              flex: 2,
               child: SizedBox(
                 width: double.infinity,
               ),
@@ -255,7 +285,7 @@ class _HomeState extends State<Home> {
               child: const Icon(Icons.settings),
             ),
             const Expanded(
-              flex: 4,
+              flex: 2,
               child: SizedBox(
                 width: double.infinity,
               ),
