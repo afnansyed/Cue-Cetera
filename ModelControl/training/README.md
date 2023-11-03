@@ -7,12 +7,52 @@ The following structure is used:
 
 ## Pre-requisites to run
 Before running the training folder, make sure you have the train datasets downloaded and put into a folder called `datasets` alongside the Training.ipynb notebook (as shown in the file structure image above):
-- [`X_train_full`](https://drive.google.com/file/d/1B78hoiw3eFcveiJST_C81t735imGFOb3/view?usp=sharing)
-- [`t_train_full`](https://drive.google.com/file/d/1TT18tZFBtXOrJZK7pB5ZYU_G_p2Y9mkO/view?usp=sharing)
+- [`X_train_full`](https://drive.google.com/file/d/1cSCbA5oxufHqkWdI4BlkG9QyJDRqtNEd/view?usp=sharing)
+- [`t_train_full`](https://drive.google.com/file/d/17xcpicJDM1EC7JGOf0ld15DPXqoFVLJV/view?usp=sharing)
 
 The models created will be saved as a tensorflow lite model inside of a folder called `models` alongside the Training.ipynb notebook (as shown in the file structure image above).
 
-Our most current model: ['model_15.tflite'](https://drive.google.com/file/d/17PMx8stCFXg39bdlm7Gmco9RKp8FjLih/view?usp=sharing)
+Our most current model: ['model_15_rr_2.tflite'](https://drive.google.com/file/d/1USh3H_PvOOUPdZ9oBRdYtJangJ0y2vVk/view?usp=sharing)
+
+
+# Release Candidate Model: Transfer Learning Model
+
+One of the biggest updates for our release candidate model was creating our own custom dataset consisting of over 6k 224x224 grayscale images from the FER-2013, CK+, and JAFFE datasets. Our previous datasets had a significant amount of misclassifications and overlapping samples between a lot of the classes. We decided to incorporate other datasets since most of the research done on FER2013 revealed that it had a threshold of accuracy in the mid-70s, which was lower than our intended goal. As a result, our custom dataset has 6 emotions (Angry, Fear, Happy, Sad, Surprised, and Neutral), each with at least 800 samples. Updating our dataset has been something that dramatically increased the performance of the model. 
+
+### Preprocessing
+Previously, we have been applying RGB images directly to the model since most, if not all, transfer learning models expect RGB images. However, all of the images in our dataset are grayscale, and research has shown that deep-learning models that aim to find patterns in facial features and expressions don't need color information to make those distinctions, so we decided to apply only grayscale images to the model and update the preprocessing stage in the backend to incorporate these changes.
+
+### Training
+In our Release Candidate model, we used the pre-trained VGG16 architecture as the base of our model with ImageNet weights, and additional custom layers on top to perform transfer learning on our datasets. VGG16 is a 16-layer deep neural network that consists of a series of 13 2D convolutional layers, 5 max-pooling layers, and 3 fully connected layers. For the purposes of our model, we set all of the VGG16 layers to be trainable so that the weights could be refined to our data. Here is a summary of the model, along with its layers and trainable parameters:
+
+![model_summary](https://github.com/AmaniN16/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/modelSum.PNG)
+The custom layers we added on top of the VGG16 layers include:
+- `Flatten():` To flatten the output of the VGG16 layers into a 1D vector
+- `Dense(128, activation=’relu’, regularizer=L2(1e-2)):` To create a fully connected layer with 128 neurons, relu activation function to mitigate the vanishing gradient problem and increase efficiency, and a ridge regularizer with a learning rate of 1e-2 to prevent overfitting.
+- `BatchNormalization():` To help stabilize training and prevent overfitting.
+- `Dropout(0.6):` To prevent overfitting and help the model learn different representations of the data.
+- `Dense(6, activation=’softmax’):` Output layer with 6 neurons, each representing different emotions, with a softmax activation function since it is a multi-class classification task.
+
+### Training/Validation Performance
+To compile the model, we used Adam as the optimizer and sparse categorical cross-entropy as the loss function. We implemented a learning rate scheduler to dynamically adjust the learning rate of the optimizer whenever it starts to plateau. It monitors the validation loss and reduces the learning rate by a factor of 0.5 whenever the validation loss has no progression for 3 epochs. 
+
+Using 300 epochs, a batch size of 64, the model converged with:
+- 99% accuracy in training
+- 92.50% accuracy in validation
+
+![learning_curve_pre](https://github.com/AmaniN16/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/learning%20curve.PNG)
+
+We applied performance metrics like accuracy, precision, and recall to the validation data. Here is a summary of its performance:
+
+![val_sum](https://github.com/AmaniN16/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/per_met.PNG)
+
+To get a deeper insight into the performance of the model, we used a confusion matrix to evaluate the true positives, true negatives, false positives, and false negatives. Here are the results:
+
+![cm_val](https://github.com/AmaniN16/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/con_mat.PNG)
+
+
+
+### Testing Model Performance
 
 
 
