@@ -278,10 +278,8 @@ class _ResultDisplayState extends State<ResultDisplay> {
           IconButton(
             icon: const Icon(Icons.volume_up),
             onPressed: () {
-              String baseText =
-                  "You're on the results page. Here, you can view the analysis of your video...";
+              String baseText = "You're on the results page. Here, you can view the analysis of your video...";
               String timestampString = constructTimestampText();
-
               speak("$baseText $timestampString");
             },
             color: const Color(0xFF422727),
