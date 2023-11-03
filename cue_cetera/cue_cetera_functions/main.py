@@ -24,11 +24,11 @@ def dbObj():
     cred_obj = credentials.Certificate(authPath)
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = authPath
 
-def pull_from_db():
+def pull_from_db(uid):
     dbObj()
 
     ref = db.reference("Videos")
-    path = ref.child("paths").order_by_key().limit_to_last(1).get()
+    path = ref.child("paths/{}".format(uid)).order_by_key().limit_to_last(1).get()
     path_val = ""
     currPath = ""
     
@@ -54,12 +54,13 @@ def pull_from_db():
 
 @https_fn.on_call()
 def vid_to_imgs(req: https_fn.CallableRequest):
-    delete_img_paths()
-    delete_imgs()
-    file_name=pull_from_db()
+    uid = req.auth.uid
+    delete_img_paths(uid)
+    delete_imgs(uid)
+    file_name=pull_from_db(uid)
 
     # Create imgs folder
-    osPath = os.path.join(os.path.dirname(__file__), "imgs")
+    osPath = os.path.join(os.path.dirname(__file__), "imgs-{}".format(uid))
     if not os.path.isdir(osPath):
         os.mkdir(osPath)
     FPS = 1
@@ -109,25 +110,26 @@ def vid_to_imgs(req: https_fn.CallableRequest):
             img_name = f"frame{timeStamp}.jpg"
             img_path = os.path.join(osPath + '/', img_name)
             image_re = cv2.resize(image, (224, 224), interpolation=cv2.INTER_CUBIC)
-            cv2.imwrite(img_path, image_re)
-            curr_img = "imgs/" + img_name
-            upload_img(curr_img)
+            image_re_gray = cv2.cvtColor(image_re, cv2.COLOR_BGR2GRAY)
+            cv2.imwrite(img_path, image_re_gray)
+            curr_img = "imgs-{}/".format(uid) + img_name
+            upload_img(curr_img, uid)
             curr_step += 1
         cnt += 1
 
     return "Converted video to images."
 
 # adds classification labels to database.
-def add_to_db(file_name):
+def add_to_db(file_name, uid):
     ref = db.reference("Images")
-    ref.child("Paths").push().set({
+    ref.child("Paths/{}/".format(uid)).push().set({
         "Path": file_name,
     })
 
 # Delete image paths before starting new inference run
-def delete_img_paths():
+def delete_img_paths(uid):
     logging.info("Deleting image paths from database.")
-    ref = db.reference("Images/")
+    ref = db.reference("Images/Paths/{}".format(uid))
     data = ref.get()
     if data:
         for key, val in data.items():
@@ -137,18 +139,18 @@ def delete_img_paths():
         logging.warn("Image paths not found.")
 
 # uploads images to the firebase database storage
-def upload_img(file_name):
+def upload_img(file_name, uid):
     bucket = storage.bucket()
     blob = bucket.blob(file_name)
     blob.upload_from_filename(file_name)
-    add_to_db(file_name)
+    add_to_db(file_name, uid)
     return blob
 
 # Delete pre-existing images before starting new inference run
-def delete_imgs():
+def delete_imgs(uid):
     logging.info("Deleting images from Firebase")
     bucket = storage.bucket()
-    blobs = bucket.list_blobs(prefix="imgs/")
+    blobs = bucket.list_blobs(prefix="imgs-{}/".format(uid))
     for blob_item in blobs:
         blob_item.delete()
 

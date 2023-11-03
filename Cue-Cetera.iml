@@ -31,6 +31,12 @@
       <excludeFolder url="file://$MODULE_DIR$/cue_cetera/windows/flutter/ephemeral/.plugin_symlinks/flutter_tts/example/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/cue_cetera/windows/flutter/ephemeral/.plugin_symlinks/flutter_tts/example/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/cue_cetera/windows/flutter/ephemeral/.plugin_symlinks/flutter_tts/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/cue_cetera/windows/flutter/ephemeral/.plugin_symlinks/firebase_auth/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/cue_cetera/windows/flutter/ephemeral/.plugin_symlinks/firebase_auth/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/cue_cetera/windows/flutter/ephemeral/.plugin_symlinks/firebase_auth/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/cue_cetera/windows/flutter/ephemeral/.plugin_symlinks/firebase_auth/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/cue_cetera/windows/flutter/ephemeral/.plugin_symlinks/firebase_auth/build" />
+      <excludeFolder url="file://$MODULE_DIR$/cue_cetera/windows/flutter/ephemeral/.plugin_symlinks/firebase_auth/.pub" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
