@@ -203,7 +203,7 @@ class _ProcessingVideoState extends State<ProcessingVideo> {
               style: TextStyle(
                 color: Color.fromARGB(255, 212, 195, 195),
                 fontFamily: "Lusteria",
-                fontSize: 12,
+                fontSize: 10,
               ),
             ),
             Icon(
@@ -216,7 +216,7 @@ class _ProcessingVideoState extends State<ProcessingVideo> {
               style: TextStyle(
                 color: Color.fromARGB(255, 212, 195, 195),
                 fontFamily: "Lusteria",
-                fontSize: 12,
+                fontSize: 10,
               ),
             ),
           ],
