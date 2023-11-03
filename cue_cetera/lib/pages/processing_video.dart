@@ -120,8 +120,109 @@ class _ProcessingVideoState extends State<ProcessingVideo> {
                 fontSize: 12,
               ),
             ),
+            const SizedBox(height: 20),
+            const Text(
+              "HOW TO READ RESULTS",
+              style: TextStyle(
+                color: Color.fromARGB(255, 212, 195, 195),
+                fontFamily: "Lusteria",
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                "Emotions will be categorized as POSITIVE, NEGATIVE, or NEUTRAL. \n Clicking on the categorized results will show you the video at the specific timestamp.",
+                style: TextStyle(
+                  color: Color.fromARGB(255, 212, 195, 195),
+                  fontFamily: "Lusteria",
+                  fontSize: 12,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Image.asset('assets/imgs/thumbs/redThumb.png', scale: 6),
+                const SizedBox(width: 10),
+                Text(
+                  'Emotion is negative',
+                  style: TextStyle(
+                    fontFamily: 'OpenSans',
+                    color: Color.fromARGB(255, 222, 215, 215),
+                    fontSize: TextSize15,
+                  ),
+                  textAlign: TextAlign.justify,
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Image.asset(colorBlind ? 'assets/imgs/thumbs/blueThumb.png': 'assets/imgs/thumbs/greenThumb.png', scale: 6),
+                const SizedBox(width: 10),
+                Text(
+                  'Emotion is positive',
+                  style: TextStyle(
+                    fontFamily: 'OpenSans',
+                    color: Color.fromARGB(255, 222, 215, 215),
+                    fontSize: TextSize15,
+                  ),
+                  textAlign: TextAlign.justify,
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Image.asset('assets/imgs/thumbs/neutralThumb.png', scale: 6),
+                const SizedBox(width: 10),
+                Text(
+                  'Emotion is neutral',
+                  style: TextStyle(
+                    fontFamily: 'OpenSans',
+                    color: Color.fromARGB(255, 222, 215, 215),
+                    fontSize: TextSize15,
+                  ),
+                  textAlign: TextAlign.justify,
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              "If you want to view this information again, click on",
+              style: TextStyle(
+                color: Color.fromARGB(255, 212, 195, 195),
+                fontFamily: "Lusteria",
+                fontSize: 12,
+              ),
+            ),
+            Icon(
+              Icons.info,
+              color: const Color.fromARGB(255, 212, 195, 195),
+              size: 30,
+            ),
+            const Text(
+              "in the results page",
+              style: TextStyle(
+                color: Color.fromARGB(255, 212, 195, 195),
+                fontFamily: "Lusteria",
+                fontSize: 12,
+              ),
+            ),
+          ],
+        ),
             const Expanded(
-              flex: 3,
+              flex: 2,
               child: SizedBox(width: double.infinity),
             ),
           ],

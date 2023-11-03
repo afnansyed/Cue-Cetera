@@ -49,7 +49,7 @@ class _SetState extends State<Set> {
                   Icon(Icons.volume_up, color: Color.fromARGB(255, 66, 39, 39)),
               onPressed: () {
                 speak(
-                    'You are on the settings page. Text-to-speech option: Tap on the speaker icon at the top of each page to enable Text-to-Speech. Change Text Size option: adjust the text size for better readability.');
+                    'You are on the settings page. Text-to-speech option: Tap on the speaker icon at the top of each page to enable Text-to-Speech. Change Text Size option: adjust the text size for better readability. Colorblind mode: Enable this to adjust the color scheme making it more accessible for those with red-green color blindness');
               },
               iconSize: 40,
             ),
