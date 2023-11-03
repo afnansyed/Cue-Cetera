@@ -36,57 +36,61 @@ Comments / experimentation / failed attempts / difficulties:
 - Emmulator used below: Google Pixel 6
 
 
-Current pages setup status:
----------------	
-```
-1. HOME PAGE:
-```
+## Current App Flow Diagram
+![app_flow_diagram](https://github.com/AmaniN16/Cue-Cetera/blob/main/readme_imgs/app_flow_diagram.png?raw=true)
 
-![homepage](https://github.com/AmaniN16/Cue-Cetera/assets/44105687/1d589536-ceca-4671-84c6-a21efbec21e6)
+<br />
+<br />
 
+## Current pages setup status:
 
-```
-2. ABOUT PAGE:
-```
-
-![MicrosoftTeams-image (1)](https://github.com/AmaniN16/Cue-Cetera/assets/44105687/6e55805d-82fe-45b4-b770-be0a0db5f94e)
+### 1. HOME PAGE:
 
 
-```
-2. SETTINGS PAGE:
-```
+![home_Page](https://raw.githubusercontent.com/AmaniN16/Cue-Cetera/5f7ea7ecb89b470617f62e96521c0d4eabf2ef15/readme_imgs/homepage.png)
 
-![settings_Page](https://github.com/AmaniN16/Cue-Cetera/assets/44105687/d6dc0beb-28fb-4f71-88f3-8cad6ccc3a3c)
+<br />
 
 
+### 2. ABOUT PAGE:
 
-```
-4. UPLOAD VIDEO PAGE:
-```
+![about_Page](https://github.com/AmaniN16/Cue-Cetera/blob/main/readme_imgs/info.png?raw=true)
 
-![MicrosoftTeams-image](https://github.com/AmaniN16/Cue-Cetera/assets/44105687/fe66433c-6e4c-4758-925a-2cf07d774ce7)
+<br />
 
+### 3. SETTINGS PAGE:
 
-
-
-```
-5. PICK VIDEO FROM DEVICE PAGE PAGE:
-```
-
-![34e95a7a-f85b-443a-a5d6-29f24e821038](https://user-images.githubusercontent.com/44105687/228425794-c82b6608-aaf8-4bcd-a638-50ec1a4d5289.jpg)
+![settings_Page](https://github.com/AmaniN16/Cue-Cetera/blob/main/readme_imgs/settings.png?raw=true)
 
 
+<br />
 
-```
-6. RESULTS PAGE:
-```
+### 4. PICK VIDEO FROM DEVICE PAGE PAGE:
 
-![MicrosoftTeams-image (3)](https://github.com/AmaniN16/Cue-Cetera/assets/44105687/98102289-037b-49b4-a6f0-8c37d6236965)
+![video_picker](https://user-images.githubusercontent.com/44105687/228425794-c82b6608-aaf8-4bcd-a638-50ec1a4d5289.jpg)
+
+<br />
 
 
+<br />
 
-```
-7. RESULTS INFO PAGE:
-```
+### 5. RECORD VIDEO PAGE:
 
-![results_info](https://github.com/AmaniN16/Cue-Cetera/assets/44105687/9211e303-f8c0-424e-be29-e6e0f8b852af)
+![record_video](https://github.com/AmaniN16/Cue-Cetera/blob/main/readme_imgs/camera.png?raw=true)
+
+<br />
+
+### 6. PROCESSING PAGE:
+![processing_Page](https://github.com/AmaniN16/Cue-Cetera/blob/main/readme_imgs/processing.png?raw=true)
+
+<br />
+
+### 7. RESULTS PAGE:
+
+![results_Page](https://github.com/AmaniN16/Cue-Cetera/blob/main/readme_imgs/results_display_new.png?raw=true)
+
+<br />
+
+### 8. RESULTS INFO PAGE:
+
+![results_info_Page](https://github.com/AmaniN16/Cue-Cetera/blob/main/readme_imgs/results_info.png?raw=true)
