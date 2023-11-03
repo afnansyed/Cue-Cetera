@@ -8,7 +8,7 @@ The file [`predictLabels.py`](https://github.com/AmaniN16/Cue-Cetera/blob/main/M
 This function takes in the path to the mp4 file and converts it to images at a rate of 1 FPS (which could be changed). The name of each frame is saved with the time stamp in the video from which it was taken from. The directory `imgs/` is created to save each image.
 
 ## predict_emotions(self, img_dir):
-This function takes in the image directory created in the last part in order to convert the set of images as an np array with the shape (-1, 224, 224, 3), so that is ready to be pre-processed for keras. In this function, we also import the model that was created in the [`Training.ipynb`](https://github.com/AmaniN16/Cue-Cetera/blob/main/ModelControl/training/Training.ipynb) file as [`model_15.tflite`](https://drive.google.com/file/d/17PMx8stCFXg39bdlm7Gmco9RKp8FjLih/view?usp=sharing) 
+This function takes in the image directory created in the last part in order to convert the set of images as an np array with the shape (-1, 224, 224, 1), so that is ready to be pre-processed for keras. In this function, we also import the model that was created in the [`Training.ipynb`](https://github.com/dianas11xx/Cue-Cetera/blob/main/ModelControl/training/Training%20.ipynb) file as [`model_15_rr_2.tflite`](https://drive.google.com/file/d/1USh3H_PvOOUPdZ9oBRdYtJangJ0y2vVk/view?usp=sharing) 
 
 For more information about the trained model, please read the documentation for the [`Training Notebook`](https://github.com/AmaniN16/Cue-Cetera/tree/main/ModelControl/training#training-notebook-information).
 
