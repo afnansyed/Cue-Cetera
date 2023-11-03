@@ -214,16 +214,26 @@ class _ResultDisplayState extends State<ResultDisplay> {
       print("Unexplained error, yipee!");
     }
   }
+
   // Convert milliseconds to a time format (MM:SS)
   String msToTime(int ms) {
     int totalSeconds = ms ~/ 1000;
     int minutes = totalSeconds ~/ 60;
     int seconds = totalSeconds % 60;
-    return "${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}";
+
+    return "$minutes minutes and $seconds seconds";
   }
-  // Convert emotion index to its string representation
+
+// Convert emotion index to its string representation
   String emotionFromIndex(int index) {
-    List<String> emotions = ["Angry", "Fearful", "Happy", "Sad", "Surprised", "Neutral"];
+    List<String> emotions = [
+      "Angry",
+      "Fearful",
+      "Happy",
+      "Sad",
+      "Surprised",
+      "Neutral"
+    ];
     return emotions[index];
   }
 
@@ -232,9 +242,10 @@ class _ResultDisplayState extends State<ResultDisplay> {
     for (Timestamp timestamp in timestamps) {
       String timeString = msToTime(timestamp.timeMs as int);
       String emotionString = emotionFromIndex(timestamp.emotion as int);
-      timestampText += "at $timeString $emotionString, ";
+      timestampText += "at $timeString it is $emotionString, ";
     }
-    return timestampText.substring(0, timestampText.length - 2);
+    return timestampText.substring(
+        0, timestampText.length - 2); // Removing the trailing comma and space
   }
 
   @override
@@ -267,8 +278,10 @@ class _ResultDisplayState extends State<ResultDisplay> {
           IconButton(
             icon: const Icon(Icons.volume_up),
             onPressed: () {
-              String baseText = "You're on the results page. Here, you can view the analysis of your video...";
+              String baseText =
+                  "You're on the results page. Here, you can view the analysis of your video...";
               String timestampString = constructTimestampText();
+
               speak("$baseText $timestampString");
             },
             color: const Color(0xFF422727),
