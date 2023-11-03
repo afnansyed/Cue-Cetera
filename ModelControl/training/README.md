@@ -32,7 +32,7 @@ The custom layers we added on top of the VGG16 layers include:
 - `Dense(128, activation=’relu’, regularizer=L2(1e-2)):` To create a fully connected layer with 128 neurons, relu activation function to mitigate the vanishing gradient problem and increase efficiency, and a ridge regularizer with a learning rate of 1e-2 to prevent overfitting.
 - `BatchNormalization():` To help stabilize training and prevent overfitting.
 - `Dropout(0.6):` To prevent overfitting and help the model learn different representations of the data.
-- `Dense(6, activation=’softmax’):` Output layer with 6 neurons, each representing different emotions, with a softmax activation function since it is a multi-class classification task.
+- `Dense(6, activation=’softmax’, regularizer=L2(1e-2)):` Output layer with 6 neurons, each representing different emotions, with a softmax activation function since it is a multi-class classification task. We also included a ridge regularizer to help prevent overfitting.
 
 ### Training/Validation Performance
 To compile the model, we used Adam as the optimizer and sparse categorical cross-entropy as the loss function. We implemented a learning rate scheduler to dynamically adjust the learning rate of the optimizer whenever it starts to plateau. It monitors the validation loss and reduces the learning rate by a factor of 0.5 whenever the validation loss has no progression for 3 epochs. 
@@ -83,8 +83,6 @@ The last image in the Surprised column was misclassified as Fear, which is expec
 The last misclassified sample is the 4th Neutral image being classified as Surprised. The individual in the photo has a fuller set of lips, which the model interpreted as having an open mouth since most of the samples it was trained on had more of a flat mouth shape. This is a common problem in a lot of facial detection software, which is mainly due to the lack of diversity in the datasets the model is being trained on. For example, there have been a couple of times when black individuals using online passport checkers get wrongfully flagged on their photo because they mistake their lips for an open mouth.
 
 One solution to this problem would be to add more samples of other ethnicities so that all groups are equally represented. The problem with this is that we are limited to what images we have rights to use, due to privacy concerns and image copyrights, so we could only use samples from datasets like FER2-13, CK+, and JAFFE, where all the individuals gave rights to use the images for research/projects dealing with facial detection systems.  Aside from that, the accuracy of the model in this test performed similarly to the data during training, which proves the robustness of the model when given data outside of the dataset.
-
-
 
 
 # Beta Model: Transfer Learning Model 
