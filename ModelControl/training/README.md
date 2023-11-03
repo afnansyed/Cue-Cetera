@@ -26,6 +26,7 @@ Previously, we have been applying RGB images directly to the model since most, i
 In our Release Candidate model, we used the pre-trained VGG16 architecture as the base of our model with ImageNet weights, and additional custom layers on top to perform transfer learning on our datasets. VGG16 is a 16-layer deep neural network that consists of a series of 13 2D convolutional layers, 5 max-pooling layers, and 3 fully connected layers. For the purposes of our model, we set all of the VGG16 layers to be trainable so that the weights could be refined to our data. Here is a summary of the model, along with its layers and trainable parameters:
 
 ![model_summary](https://github.com/AmaniN16/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/modelSum.PNG)
+
 The custom layers we added on top of the VGG16 layers include:
 - `Flatten():` To flatten the output of the VGG16 layers into a 1D vector
 - `Dense(128, activation=’relu’, regularizer=L2(1e-2)):` To create a fully connected layer with 128 neurons, relu activation function to mitigate the vanishing gradient problem and increase efficiency, and a ridge regularizer with a learning rate of 1e-2 to prevent overfitting.
@@ -50,9 +51,39 @@ To get a deeper insight into the performance of the model, we used a confusion m
 
 ![cm_val](https://github.com/AmaniN16/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/con_mat.PNG)
 
-
+As we can see, all the emotions had high percentages of true positives. Looking at the confusion matrix, we can see that Fear and Sad are most commonly confused in the model, which is due to the inter-class similarities between the two classes, such as their most prominent features being a frown and inner-brow raise.
 
 ### Testing Model Performance
+To test the robustness of our model, we created a small dataset of size 60, where each emotion had 10 samples. After preprocessing and applying the dataset to the model, it had an accuracy of 93.33%. Below are the performance metrics and confusion matrix of the data:
+
+![per_metr](https://github.com/AmaniN16/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/res1.PNG)
+
+![per_met2](https://github.com/AmaniN16/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/res2.PNG)
+
+As seen above, all samples for Angry and Happy were correctly classified in the dataset, whereas Fear, Sad, Surprised, and Neutral each had 1 misclassification. Below are some examples of the predictions compared to their true label for each emotion:
+
+![ang_b](https://github.com/AmaniN16/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/ang_pre.PNG)
+
+![fear_pre](https://github.com/AmaniN16/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/fear_pre.PNG)
+
+The second image in the row above was misclassified as surprised, which could be due to the individual's open mouth being more rounded and upturned than most of the ‘Fear’ samples in the dataset, which expects more of a downturned open mouth or frown with widened eyes. 
+
+![happy_pre](https://github.com/AmaniN16/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/happy_pre.PNG)
+
+![sad_pre](https://github.com/AmaniN16/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/sad_pre.PNG)
+
+The third image in the Sad row was misclassified as Surprised, which is mainly due to the individual in the image covering their face entirely with their hands, which is a feature present in a lot of the Surprised samples in the dataset. This would be considered an outlier since the application expects the subject's face to be visible since we study the features in their facial expression.
+
+![sur_pre](https://github.com/AmaniN16/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/sur_pre.PNG)
+
+The last image in the Surprised column was misclassified as Fear, which is expected since Fear and Surprised have the most intra-class similarities between all the emotions considering one of the most identifiable features they both have is the subject having an open mouth and widened eyes. The distinction between the two comes to the smallest details in the human face, such as eyebrows and mouth shape (while open). 
+
+![neu_pre](https://github.com/AmaniN16/Cue-Cetera/blob/main/ModelControl/training/readme_imgs/neu_pre.PNG)
+
+The last misclassified sample is the 4th Neutral image being classified as Surprised. The individual in the photo has a fuller set of lips, which the model interpreted as having an open mouth since most of the samples it was trained on had more of a flat mouth shape. This is a common problem in a lot of facial detection software, which is mainly due to the lack of diversity in the datasets the model is being trained on. For example, there have been a couple of times when black individuals using online passport checkers get wrongfully flagged on their photo because they mistake their lips for an open mouth.
+
+One solution to this problem would be to add more samples of other ethnicities so that all groups are equally represented. The problem with this is that we are limited to what images we have rights to use, due to privacy concerns and image copyrights, so we could only use samples from datasets like FER2-13, CK+, and JAFFE, where all the individuals gave rights to use the images for research/projects dealing with facial detection systems.  Aside from that, the accuracy of the model in this test performed similarly to the data during training, which proves the robustness of the model when given data outside of the dataset.
+
 
 
 
