@@ -215,6 +215,39 @@ class _ResultDisplayState extends State<ResultDisplay> {
     }
   }
 
+  // Convert milliseconds to a time format (MM:SS)
+  String msToTime(int ms) {
+    int totalSeconds = ms ~/ 1000;
+    int minutes = totalSeconds ~/ 60;
+    int seconds = totalSeconds % 60;
+
+    return "$minutes minutes and $seconds seconds";
+  }
+
+// Convert emotion index to its string representation
+  String emotionFromIndex(int index) {
+    List<String> emotions = [
+      "Angry",
+      "Fearful",
+      "Happy",
+      "Sad",
+      "Surprised",
+      "Neutral"
+    ];
+    return emotions[index];
+  }
+
+  String constructTimestampText() {
+    String timestampText = "";
+    for (Timestamp timestamp in timestamps) {
+      String timeString = msToTime(timestamp.timeMs as int);
+      String emotionString = emotionFromIndex(timestamp.emotion as int);
+      timestampText += "at $timeString it is $emotionString, ";
+    }
+    return timestampText.substring(
+        0, timestampText.length - 2); // Removing the trailing comma and space
+  }
+
   @override
   void initState() {
     super.initState();
@@ -244,9 +277,11 @@ class _ResultDisplayState extends State<ResultDisplay> {
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.volume_up),
-            onPressed: () => speak(
-                "You're on the results page. Here, you can view the analysis of your video, access information about the results, download the video to your device, or return to the home screen."
-            ),
+            onPressed: () {
+              String baseText = "You're on the results page. Here, you can view the analysis of your video...";
+              String timestampString = constructTimestampText();
+              speak("$baseText $timestampString");
+            },
             color: const Color(0xFF422727),
             iconSize: 40,
           ),
