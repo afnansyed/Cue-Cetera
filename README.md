@@ -143,62 +143,61 @@ Comments / experimentation / failed attempts / difficulties:
 - Emmulator used below: Google Pixel 6
 
 
-Current pages setup status:
----------------	
-```
-1. HOME PAGE:
-```
+## Current App Flow Diagram
+![app_flow_diagram](https://github.com/AmaniN16/Cue-Cetera/blob/main/readme_imgs/app_flow_diagram.png?raw=true)
 
-![homepage](https://github.com/AmaniN16/Cue-Cetera/assets/44105687/e112caf9-1b48-423d-8b9b-4a5f795d7ac7)
+<br />
+<br />
 
+## Current pages setup status:
 
-
-```
-2. ABOUT PAGE:
-```
-
-![info](https://github.com/AmaniN16/Cue-Cetera/assets/44105687/87098ddd-037f-47de-a6cd-2f058caacad8)
+### 1. HOME PAGE:
 
 
+![home_Page](https://raw.githubusercontent.com/AmaniN16/Cue-Cetera/5f7ea7ecb89b470617f62e96521c0d4eabf2ef15/readme_imgs/homepage.png)
 
-```
-3. SETTINGS PAGE:
-```
-
-![settings](https://github.com/AmaniN16/Cue-Cetera/assets/44105687/4ebb6fa4-7725-46e4-a209-a7dca9449704)
+<br />
 
 
+### 2. ABOUT PAGE:
 
-```
-4. UPLOAD VIDEO PAGE:
-```
+![about_Page](https://github.com/AmaniN16/Cue-Cetera/blob/main/readme_imgs/info.png?raw=true)
 
-![upload video](https://github.com/AmaniN16/Cue-Cetera/assets/44105687/7bbf3eda-ee06-44c4-a46f-b099d0cc8b58)
+<br />
 
+### 3. SETTINGS PAGE:
 
-
-
-```
-5. PICK VIDEO FROM DEVICE PAGE PAGE:
-```
-
-![34e95a7a-f85b-443a-a5d6-29f24e821038](https://user-images.githubusercontent.com/44105687/228425794-c82b6608-aaf8-4bcd-a638-50ec1a4d5289.jpg)
+![settings_Page](https://github.com/AmaniN16/Cue-Cetera/blob/main/readme_imgs/settings.png?raw=true)
 
 
+<br />
 
-```
-6. RESULTS PAGE:
-```
+### 4. PICK VIDEO FROM DEVICE PAGE PAGE:
 
-![image](https://github.com/AmaniN16/Cue-Cetera/blob/55676d1f0f39d99ade8432e1d830682fe238e657/readme_imgs/results_display_new.png)
+![video_picker](https://user-images.githubusercontent.com/44105687/228425794-c82b6608-aaf8-4bcd-a638-50ec1a4d5289.jpg)
 
-
-
-```
-7. RESULTS INFO PAGE:
-```
+<br />
 
 
-![results_info](https://github.com/AmaniN16/Cue-Cetera/blob/main/readme_imgs/results_info.png)
+<br />
 
+### 5. RECORD VIDEO PAGE:
 
+![record_video](https://github.com/AmaniN16/Cue-Cetera/blob/main/readme_imgs/camera.png?raw=true)
+
+<br />
+
+### 6. PROCESSING PAGE:
+![processing_Page](https://github.com/AmaniN16/Cue-Cetera/blob/main/readme_imgs/processing.png?raw=true)
+
+<br />
+
+### 7. RESULTS PAGE:
+
+![results_Page](https://github.com/AmaniN16/Cue-Cetera/blob/main/readme_imgs/results_display_new.png?raw=true)
+
+<br />
+
+### 8. RESULTS INFO PAGE:
+
+![results_info_Page](https://github.com/AmaniN16/Cue-Cetera/blob/main/readme_imgs/results_info.png?raw=true)
