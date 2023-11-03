@@ -20,16 +20,16 @@ We logged each of our contributions in the following [table](https://github.com/
 
 ## Datasets
 ----
-The dataset we are using to train our machine learning model was made using datasets from the [FER-2013](https://www.kaggle.com/datasets/msambare/fer2013) and [EMOTIC](https://s3.sunai.uoc.edu/emotic/index.html) datasets. The train and test data files consist of 224x224 images that correspond to the train/test labels, which match each image to an emotion. 
+We created our own custom dataset using images from the [FER-2013](https://www.kaggle.com/datasets/msambare/fer2013), [CK+](https://www.jeffcohn.net/Resources/), and [JAFFE](https://zenodo.org/records/3451524) datasets. The training and validation data files consist of 224x224 grayscale images that correspond to the train/validation labels, which match each image to an emotion.
 
 In total, there are 6 emotions.
 
 ### Shape of data files:
 ```
-t_train_full   :   (26824, 224, 224, 3) 
-t_train_full :   (26824,)
-X_test_full    :   (6707, 224, 224, 3) 
-t_test_full  :   (6707,)
+X_train_full	:   (4665, 224, 224, 1) 
+t_train_full 	:   (4665,)
+X_val_full	:   (2000, 224, 224, 1) 
+t_val_full	:   (2000,)
 ```
 
 
@@ -39,10 +39,8 @@ Our project has the following file structure for the model system:
 ![file_str](https://github.com/AmaniN16/Cue-Cetera/blob/main/readme_imgs/file_str.png)
 
 Download the following datasets and place them in a `datasets` folder as shown in the diagram above:
-- [`X_train_full.npy`](https://drive.google.com/file/d/1B78hoiw3eFcveiJST_C81t735imGFOb3/view?usp=sharing)
-- [`t_train_full.npy`](https://drive.google.com/file/d/1TT18tZFBtXOrJZK7pB5ZYU_G_p2Y9mkO/view?usp=sharing)
-- [`X_test_full.npy`](https://drive.google.com/file/d/1kZbk1QXQne_-btnxJkaLHVMCRxhX7Ksf/view?usp=sharing)
-- [`t_test_full.npy`](https://drive.google.com/file/d/1_1OpHoHfNCb1smVlngen9SKfLF5KU7Cc/view?usp=sharing)
+- [`X_train_full.npy`](https://drive.google.com/file/d/1cSCbA5oxufHqkWdI4BlkG9QyJDRqtNEd/view?usp=sharing)
+- [`t_train_full.npy`](https://drive.google.com/file/d/17xcpicJDM1EC7JGOf0ld15DPXqoFVLJV/view?usp=sharing)
 
 Example of loading data:
 
