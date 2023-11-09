@@ -39,6 +39,8 @@ Future<Map<int, int>> runFirebase(String filePath) async {
   on FirebaseException catch (e) {
     throw Exception('Failed to save video');
   }
+  
+  modelOutput.clear();
 
   await runBackend(user);
 
