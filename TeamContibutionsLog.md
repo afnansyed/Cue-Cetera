@@ -122,6 +122,7 @@
 | 10/31 | Diana | Worked on preliminary report, continued to re-run models with updated data augmented set, and recorded observations for Hume AI comparison| 2 hrs
 | 11/2 | Diana | Got access to CK+ full dataset, preprocessed images with available labels, tested it with combined dataset, worked on preliminary report, finished re-running models/measuring performance, finalized model, updated observations on report | 4 hrs
 | 11/8 | Diana | Started manually adding images to our custom dataset from the full CK+ dataset to increase the number of samples/variations in data for each emotion | 3 hrs
+| 11/9 | Diana | Continued to add more images to the custom dataset from full CK+ data | 2 hrs
 (Afnan Syed) Google docs contribution record: https://docs.google.com/document/d/1yr94W63IZH-b98pGuP2m3c1zsexB2Q_fsDCncp7gjkc/edit?usp=sharing
 
 (Shravya Iruvanti) Google docs contribution record: https://docs.google.com/document/d/1XJNYapgp1vnRhuOQV3FieIgHs_3PAEfNM9k7kzJjh1s/edit?usp=sharing  
