@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:cue_cetera/pages/home.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:cue_cetera/services/user_settings.dart';
 
 
 class InfoResults extends StatefulWidget {
@@ -52,7 +52,7 @@ class _InfoRState extends State<InfoResults> {
           style: TextStyle(
             fontFamily: 'Lusteria',
             color: Color.fromARGB(255, 66, 39, 39),
-            fontSize: TextSize20,
+            fontSize: UserSettings.textSizeMedium,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -76,7 +76,7 @@ class _InfoRState extends State<InfoResults> {
                   style: TextStyle(
                     fontFamily: 'Lusteria',
                     color: Color.fromARGB(255, 134, 109, 109),
-                    fontSize: TextSize28,
+                    fontSize: UserSettings.textSizeLarge,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -92,7 +92,7 @@ class _InfoRState extends State<InfoResults> {
                     style: TextStyle(
                       fontFamily: 'OpenSans',
                       color: Color.fromARGB(255, 222, 215, 215),
-                      fontSize: TextSize15,
+                      fontSize: UserSettings.textSizeSmall,
                     ),
                     textAlign: TextAlign.justify,
                   ),
@@ -112,7 +112,7 @@ class _InfoRState extends State<InfoResults> {
                         style: TextStyle(
                           fontFamily: 'OpenSans',
                           color: Color.fromARGB(255, 222, 215, 215),
-                          fontSize: TextSize15,
+                          fontSize: UserSettings.textSizeSmall,
                         ),
                         textAlign: TextAlign.justify,
                       ),
@@ -127,7 +127,7 @@ class _InfoRState extends State<InfoResults> {
                   ),
                   child: Row(
                     children: <Widget>[
-                      Image.asset(colorBlind ? 'assets/imgs/thumbs/blueThumb.png': 'assets/imgs/thumbs/greenThumb.png',
+                      Image.asset(UserSettings.colorBlind ? 'assets/imgs/thumbs/blueThumb.png': 'assets/imgs/thumbs/greenThumb.png',
                           scale: 6),
                       const SizedBox(width: 10),
                       Text(
@@ -135,7 +135,7 @@ class _InfoRState extends State<InfoResults> {
                         style: TextStyle(
                           fontFamily: 'OpenSans',
                           color: Color.fromARGB(255, 222, 215, 215),
-                          fontSize: TextSize15,
+                          fontSize: UserSettings.textSizeSmall,
                         ),
                         textAlign: TextAlign.justify,
                       ),
@@ -158,7 +158,7 @@ class _InfoRState extends State<InfoResults> {
                         style: TextStyle(
                           fontFamily: 'OpenSans',
                           color: Color.fromARGB(255, 222, 215, 215),
-                          fontSize: TextSize15,
+                          fontSize: UserSettings.textSizeSmall,
                         ),
                         textAlign: TextAlign.justify,
                       ),

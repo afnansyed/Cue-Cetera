@@ -5,9 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="34f2ed93-a068-41e3-b83c-766de9aabb24" name="Changes" comment="Changes">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cue_cetera/assets/model_15.tflite" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cue_cetera/lib/pages/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/cue_cetera/lib/pages/home.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cue_cetera/lib/pages/info.dart" beforeDir="false" afterPath="$PROJECT_DIR$/cue_cetera/lib/pages/info.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cue_cetera/lib/pages/info_results.dart" beforeDir="false" afterPath="$PROJECT_DIR$/cue_cetera/lib/pages/info_results.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cue_cetera/lib/pages/processing_video.dart" beforeDir="false" afterPath="$PROJECT_DIR$/cue_cetera/lib/pages/processing_video.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cue_cetera/lib/pages/record_video.dart" beforeDir="false" afterPath="$PROJECT_DIR$/cue_cetera/lib/pages/record_video.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cue_cetera/lib/pages/result_display.dart" beforeDir="false" afterPath="$PROJECT_DIR$/cue_cetera/lib/pages/result_display.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cue_cetera/lib/pages/settings.dart" beforeDir="false" afterPath="$PROJECT_DIR$/cue_cetera/lib/pages/settings.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cue_cetera/lib/widgets/timestamp_card.dart" beforeDir="false" afterPath="$PROJECT_DIR$/cue_cetera/lib/widgets/timestamp_card.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

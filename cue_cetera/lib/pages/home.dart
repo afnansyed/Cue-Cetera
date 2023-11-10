@@ -5,14 +5,7 @@ import 'package:cue_cetera/pages/info.dart';
 import 'package:cue_cetera/pages/settings.dart';
 import 'package:cue_cetera/pages/record_video.dart';
 import 'package:cue_cetera/pages/processing_video.dart';
-import 'package:cue_cetera/pages/result_display.dart';
-import 'package:cue_cetera/services/firebase_services.dart';
-
-double TextSize15 = 15;
-double TextSize20 = 20;
-double TextSize28 = 28;
-double TextSize37 = 37;
-bool colorBlind = false;
+import 'package:cue_cetera/services/user_settings.dart';
 
 class Home extends StatefulWidget {
   final String title;
@@ -63,6 +56,7 @@ class _HomeState extends State<Home> {
     super.dispose();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 172, 158, 158),
@@ -72,7 +66,7 @@ class _HomeState extends State<Home> {
             padding: const EdgeInsets.only(right: 25.0),
             child: IconButton(
               icon:
-                  Icon(Icons.volume_up, color: Color.fromARGB(255, 66, 39, 39)),
+                  const Icon(Icons.volume_up, color: Color.fromARGB(255, 66, 39, 39)),
               onPressed: () {
                 speak('Welcome to Cue-Cetera. Cue-Cetera is an application that can be used to detect and classify visual facial cues by the means of Machine Learning. Our goal is to have a social impact by giving access to a learning tool and hence, bringing awareness to related communities.' +
                     'Choose an option below to begin your exploration. Upload video or Use Video Camera. For more details, click on the info and settings button.');
@@ -89,8 +83,8 @@ class _HomeState extends State<Home> {
           title,
           style: TextStyle(
             fontFamily: 'Lusteria',
-            color: Color.fromARGB(255, 66, 39, 39),
-            fontSize: TextSize28,
+            color: const Color.fromARGB(255, 66, 39, 39),
+            fontSize: UserSettings.textSizeLarge,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -106,24 +100,24 @@ class _HomeState extends State<Home> {
               padding: const EdgeInsets.only(right: 20, left: 20, bottom: 30),
               alignment: Alignment.center,
               //padding: EdgeInsets.only(top: 80),
-              child: Text(
-                ' is an application that can be used to detect and classify visual facial cues by the means of Machine Learning. Our goal is to have a social impact by giving access to a learning tool and hence, bringing awareness to related communities.',
-                style: TextStyle(
-                  fontFamily: 'OpenSans',
-                  color: Color.fromARGB(255, 66, 39, 39),
-                  fontSize: TextSize15,
-                ),
-                textAlign: TextAlign.justify,
-              ),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 // borderRadius: BorderRadius.vertical(
                 // bottom: Radius.circular(50),
                 //  ),
                 color: Color.fromARGB(255, 172, 158, 158),
               ),
+              child: Text(
+                ' is an application that can be used to detect and classify visual facial cues by the means of Machine Learning. Our goal is to have a social impact by giving access to a learning tool and hence, bringing awareness to related communities.',
+                style: TextStyle(
+                  fontFamily: 'OpenSans',
+                  color: const Color.fromARGB(255, 66, 39, 39),
+                  fontSize: UserSettings.textSizeSmall,
+                ),
+                textAlign: TextAlign.justify,
+              ),
             ),
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 border: Border(
                   top: BorderSide(
                       color: Color.fromARGB(255, 172, 158, 158), width: 0.5),
@@ -131,22 +125,22 @@ class _HomeState extends State<Home> {
                 color: Color.fromARGB(255, 172, 158, 158),
               ),
               child: Container(
-                padding: EdgeInsets.only(top: 30, bottom: 5),
+                padding: const EdgeInsets.only(top: 30, bottom: 5),
                 alignment: Alignment.center,
                 //padding: EdgeInsets.only(top: 80),
-                child: Text('Choose an Option',
-                    style: TextStyle(
-                      fontFamily: 'Lusteria',
-                      color: Color.fromARGB(255, 212, 195, 195),
-                      fontSize: TextSize28,
-                    ),
-                    textAlign: TextAlign.center),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   borderRadius: BorderRadius.vertical(
                     top: Radius.circular(50),
                   ),
                   color: Color.fromARGB(255, 66, 39, 39),
                 ),
+                child: Text('Choose an Option',
+                    style: TextStyle(
+                      fontFamily: 'Lusteria',
+                      color: const Color.fromARGB(255, 212, 195, 195),
+                      fontSize: UserSettings.textSizeLarge,
+                    ),
+                    textAlign: TextAlign.center),
               ),
             ),
             Expanded(
@@ -163,8 +157,8 @@ class _HomeState extends State<Home> {
                         'Your feelings, deciphered.',
                         style: TextStyle(
                           fontFamily: 'OpenSans',
-                          color: Color.fromARGB(255, 172, 158, 158),
-                          fontSize: TextSize15,
+                          color: const Color.fromARGB(255, 172, 158, 158),
+                          fontSize: UserSettings.textSizeSmall,
                           fontStyle: FontStyle.italic,
                         ),
                         textAlign: TextAlign.center,
@@ -182,7 +176,7 @@ class _HomeState extends State<Home> {
                         fixedSize: const Size(250, 100),
                         textStyle: TextStyle(
                           fontFamily: 'OpenSans',
-                          fontSize: TextSize15,
+                          fontSize: UserSettings.textSizeSmall,
                           fontWeight: FontWeight.bold,
                         ),
                         backgroundColor: const Color.fromARGB(255, 212, 195, 195),
@@ -213,7 +207,7 @@ class _HomeState extends State<Home> {
                         fixedSize: const Size(250, 100),
                         textStyle: TextStyle(
                           fontFamily: 'OpenSans',
-                          fontSize: TextSize15,
+                          fontSize: UserSettings.textSizeSmall,
                           fontWeight: FontWeight.bold,
                         ),
                         backgroundColor: const Color.fromARGB(255, 212, 195, 195),
@@ -242,7 +236,7 @@ class _HomeState extends State<Home> {
                         fixedSize: const Size(150, 50),
                         textStyle: TextStyle(
                           fontFamily: 'OpenSans',
-                          fontSize: TextSize15,
+                          fontSize: UserSettings.textSizeSmall,
                           fontWeight: FontWeight.bold,
                         ),
                         backgroundColor: const Color.fromARGB(255, 35, 23, 23),
@@ -266,8 +260,8 @@ class _HomeState extends State<Home> {
                           MaterialPageRoute(builder: (context) => Set()),
                         );
                       },
-                      backgroundColor: Color.fromARGB(255, 35, 23, 23),
-                      foregroundColor: Color.fromARGB(255, 158, 144, 144),
+                      backgroundColor: const Color.fromARGB(255, 35, 23, 23),
+                      foregroundColor: const Color.fromARGB(255, 158, 144, 144),
                       child: const Icon(Icons.settings),
                     ),
                   ],
