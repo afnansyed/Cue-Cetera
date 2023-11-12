@@ -84,6 +84,8 @@ The last misclassified sample is the 4th Neutral image being classified as Surpr
 
 One solution to this problem would be to add more samples of other ethnicities so that all groups are equally represented. The problem with this is that we are limited to what images we have rights to use, due to privacy concerns and image copyrights, so we could only use samples from datasets like FER2-13, CK+, and JAFFE, where all the individuals gave rights to use the images for research/projects dealing with facial detection systems.  Aside from that, the accuracy of the model in this test performed similarly to the data during training, which proves the robustness of the model when given data outside of the dataset.
 
+Additional testing could be found in the Preliminary Report, where we compare our model performance with Hume’s Facial Emotional Expression Model.
+
 
 # Beta Model: Transfer Learning Model 
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cue_cetera/pages/home.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:cue_cetera/services/user_settings.dart';
 
 class Info extends StatefulWidget {
   const Info({Key? key}) : super(key: key);
@@ -48,7 +49,7 @@ class _InfoState extends State<Info> {
           style: TextStyle(
             fontFamily: 'Lusteria',
             color: Color.fromARGB(255, 66, 39, 39),
-            fontSize: TextSize20,
+            fontSize: UserSettings.textSizeMedium,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -71,7 +72,7 @@ class _InfoState extends State<Info> {
                   style: TextStyle(
                     fontFamily: 'Lusteria',
                     color: Color.fromARGB(255, 222, 215, 215),
-                    fontSize: TextSize20,
+                    fontSize: UserSettings.textSizeMedium,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -90,7 +91,7 @@ class _InfoState extends State<Info> {
                     style: TextStyle(
                       fontFamily: 'OpenSans',
                       color: Color.fromARGB(255, 66, 39, 39),
-                      fontSize: TextSize15,
+                      fontSize: UserSettings.textSizeSmall,
                     ),
                     textAlign: TextAlign.justify,
                   ),

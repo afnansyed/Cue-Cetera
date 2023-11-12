@@ -1,6 +1,6 @@
-import 'package:cue_cetera/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:cue_cetera/classes/timestamp.dart';
+import 'package:cue_cetera/services/user_settings.dart';
 
 class TimestampCard extends StatelessWidget {
 
@@ -42,7 +42,7 @@ class TimestampCard extends StatelessWidget {
     String thumbString = "";
     if (positiveEmotions.contains(emotion)) {
       thumbString = "greenThumb";
-      if(colorBlind){
+      if(UserSettings.colorBlind){
         thumbString = "blueThumb";
       }
     }
@@ -72,7 +72,7 @@ class TimestampCard extends StatelessWidget {
   int getBackgroundColor(int emotion) {
 
     if (positiveEmotions.contains(emotion)) {
-      if(colorBlind){
+      if(UserSettings.colorBlind){
         return 0xffb3d4ff; // blue
       }
       return 0xffb9FE19F; //light green

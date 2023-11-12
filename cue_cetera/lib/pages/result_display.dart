@@ -1,4 +1,3 @@
-import 'package:cue_cetera/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -9,6 +8,7 @@ import 'dart:io';
 import 'package:flutter_file_dialog/flutter_file_dialog.dart';
 import 'package:cue_cetera/pages/info_results.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:cue_cetera/services/user_settings.dart';
 
 class ResultDisplay extends StatefulWidget {
   String filePath;
@@ -177,7 +177,7 @@ class _ResultDisplayState extends State<ResultDisplay> {
     String thumbString = "";
     if (positiveEmotions.contains(emotion)) {
       thumbString = "greenThumb";
-      if(colorBlind){
+      if(UserSettings.colorBlind){
         thumbString = "blueThumb";
       }
     } else if (negativeEmotions.contains(emotion)) {
@@ -248,6 +248,52 @@ class _ResultDisplayState extends State<ResultDisplay> {
         0, timestampText.length - 2); // Removing the trailing comma and space
   }
 
+  Future<bool> backConfirmation(BuildContext context) async {
+      bool? confirmation = await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text(
+          "WAIT!",
+          style: TextStyle(
+            //perhaps some stuff here
+          ),
+        ),
+        content: const Text(
+          "Are you sure you want to return home? You will no longer have access to your"
+              " video or classifications within the app. Make sure you've saved your video if you"
+              " would like to access it on your device later.",
+          style: TextStyle(
+            //perhaps some stuff here
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => {
+              // TODO: remove the loaded video from RAM
+              // return the page to home by popping the rest of the stack
+              Navigator.popUntil(context, (route) => route.isFirst)
+            },
+            child: const Text("Return Home"),
+          ),
+          TextButton(
+            onPressed: () => {
+              // cancel the return home request
+              Navigator.of(context).pop(),
+            },
+            child: const Text("Go Back"),
+          ),
+        ],
+      ),
+    );
+    confirmation ??= false;
+    return confirmation;
+  }
+
+  Future<bool> onBack(BuildContext context) async {
+    backConfirmation(context);
+    return Future.value(false);
+  }
+
   @override
   void initState() {
     super.initState();
@@ -257,194 +303,164 @@ class _ResultDisplayState extends State<ResultDisplay> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFAC9E9E),
-      appBar: AppBar(
+    return WillPopScope(
+      //https://www.youtube.com/watch?v=B8gEF1COFVg&ab_channel=TechPoty
+      // helped me figure out how to deal with back button
+      onWillPop: () async => onBack(context),
+      child: Scaffold(
         backgroundColor: const Color(0xFFAC9E9E),
-        toolbarHeight: 75,
-        elevation: 0,
-        centerTitle: true,
-        automaticallyImplyLeading: false,
-        title: const Text(
-          "RESULTS",
-          style: TextStyle(
-            color: Color(0xFF422727),
-            fontSize: 24,
-            fontFamily: "Lusteria",
-            fontWeight: FontWeight.bold,
+        appBar: AppBar(
+          backgroundColor: const Color(0xFFAC9E9E),
+          toolbarHeight: 75,
+          elevation: 0,
+          centerTitle: true,
+          automaticallyImplyLeading: false,
+          title: const Text(
+            "RESULTS",
+            style: TextStyle(
+              color: Color(0xFF422727),
+              fontSize: 24,
+              fontFamily: "Lusteria",
+              fontWeight: FontWeight.bold,
+            ),
           ),
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.volume_up),
+              onPressed: () {
+                String baseText = "You're on the results page. Here, you can view the analysis of your video...";
+                String timestampString = constructTimestampText();
+                speak("$baseText $timestampString");
+              },
+              color: const Color(0xFF422727),
+              iconSize: 40,
+            ),
+            IconButton(
+              icon: const Icon(Icons.info),
+              onPressed: () => {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const InfoResults()),
+                )
+              },
+              color: const Color(0xFF422727),
+              iconSize: 40,
+            ),
+            IconButton(
+              icon: const Icon(Icons.download),
+              onPressed: () => {downloadVideo()},
+              color: const Color(0xFF422727),
+              iconSize: 40,
+            ),
+            IconButton(
+              icon: const Icon(Icons.home),
+              onPressed: () => {
+                // give the user a warning before returning home
+                // used these as sources for alert dialog:
+                // https://www.youtube.com/watch?v=jyEoMHcjdD4&ab_channel=FlutterMapp ,
+                // https://api.flutter.dev/flutter/material/AlertDialog-class.html
+                backConfirmation(context),
+              },
+              color: const Color(0xFF422727),
+              iconSize: 40,
+            ),
+          ],
         ),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.volume_up),
-            onPressed: () {
-              String baseText = "You're on the results page. Here, you can view the analysis of your video...";
-              String timestampString = constructTimestampText();
-              speak("$baseText $timestampString");
-            },
-            color: const Color(0xFF422727),
-            iconSize: 40,
+        body: Container(
+          alignment: Alignment.center,
+          decoration: const BoxDecoration(
+            color: Color(0xFF422727),
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(50),
+            ),
           ),
-          IconButton(
-            icon: const Icon(Icons.info),
-            onPressed: () => {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const InfoResults()),
-              )
-            },
-            color: const Color(0xFF422727),
-            iconSize: 40,
-          ),
-          IconButton(
-            icon: const Icon(Icons.download),
-            onPressed: () => {downloadVideo()},
-            color: const Color(0xFF422727),
-            iconSize: 40,
-          ),
-          IconButton(
-            icon: const Icon(Icons.home),
-            onPressed: () => {
-              // give the user a warning before returning home
-              // used these as sources for alert dialog:
-              // https://www.youtube.com/watch?v=jyEoMHcjdD4&ab_channel=FlutterMapp ,
-              // https://api.flutter.dev/flutter/material/AlertDialog-class.html
-              showDialog(
-                context: context,
-                builder: (context) => AlertDialog(
-                  title: const Text(
-                    "WAIT!",
-                    style: TextStyle(
-                        //perhaps some stuff here
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            // using expanded widgets here so our heights will be properly proportioned
+            // and in bounds
+            children: <Widget>[
+              const Expanded(
+                flex: 1,
+                child: SizedBox(
+                  width: double.infinity,
+                  //height: 40.0,
+                  //height: screenHeight(context) * .05,
+                ),
+              ),
+              Container(
+                width: 320.0,
+                height: 180.0,
+                color: Colors.black,
+                child: Stack(
+                  children: <Widget>[
+                    // will show loading symbol if our chewie controller is null for whatever reason
+                    chewieController != null
+                        ? Chewie(controller: chewieController!)
+                        : const SpinKitFadingCircle(
+                            color: Colors.white, size: 50.0),
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Align(
+                        alignment: Alignment.bottomRight,
+                        child: ValueListenableBuilder(
+                          valueListenable: videoController!,
+                          builder: (context, value, child) {
+                            return Image.asset(
+                              //will have to make this asset depend on the current emotion
+                              // will either be green thumb, red thumb, or no thumb (use a function to return the correct
+                              // asset path
+                              //"assets/imgs/thumbs/greenThumb.png",
+                              updateAndGetThumbPath(),
+                              scale: 6,
+                              // found this trick for image opacity here: https://stackoverflow.com/questions/73490832/change-image-asset-opacity-using-opacity-parameter-in-image-widget
+                              opacity: const AlwaysStoppedAnimation(.75),
+                            );
+                          },
                         ),
-                  ),
-                  content: const Text(
-                    "Are you sure you want to return home? You will no longer have access to your"
-                    " classified video within the app. Make sure you've saved your video if you"
-                    " would like to access it on your device later.",
-                    style: TextStyle(
-                        //perhaps some stuff here
-                        ),
-                  ),
-                  actions: <Widget>[
-                    TextButton(
-                      onPressed: () => {
-                        // TODO: remove the loaded video from RAM
-                        // return the page to home by popping the rest of the stack
-                        Navigator.popUntil(context, (route) => route.isFirst)
-                      },
-                      child: const Text("Return Home"),
-                    ),
-                    TextButton(
-                      onPressed: () => {
-                        // cancel the return home request
-                        Navigator.of(context).pop(),
-                      },
-                      child: const Text("Go Back"),
+                      ),
                     ),
                   ],
                 ),
               ),
-            },
-            color: const Color(0xFF422727),
-            iconSize: 40,
-          ),
-        ],
-      ),
-      body: Container(
-        alignment: Alignment.center,
-        decoration: const BoxDecoration(
-          color: Color(0xFF422727),
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(50),
-          ),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          // using expanded widgets here so our heights will be properly proportioned
-          // and in bounds
-          children: <Widget>[
-            const Expanded(
-              flex: 1,
-              child: SizedBox(
-                width: double.infinity,
-                //height: 40.0,
-                //height: screenHeight(context) * .05,
-              ),
-            ),
-            Container(
-              width: 320.0,
-              height: 180.0,
-              color: Colors.black,
-              child: Stack(
-                children: <Widget>[
-                  // will show loading symbol if our chewie controller is null for whatever reason
-                  chewieController != null
-                      ? Chewie(controller: chewieController!)
-                      : const SpinKitFadingCircle(
-                          color: Colors.white, size: 50.0),
-                  Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: Align(
-                      alignment: Alignment.bottomRight,
-                      child: ValueListenableBuilder(
-                        valueListenable: videoController!,
-                        builder: (context, value, child) {
-                          return Image.asset(
-                            //will have to make this asset depend on the current emotion
-                            // will either be green thumb, red thumb, or no thumb (use a function to return the correct
-                            // asset path
-                            //"assets/imgs/thumbs/greenThumb.png",
-                            updateAndGetThumbPath(),
-                            scale: 6,
-                            // found this trick for image opacity here: https://stackoverflow.com/questions/73490832/change-image-asset-opacity-using-opacity-parameter-in-image-widget
-                            opacity: const AlwaysStoppedAnimation(.75),
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const Expanded(
-              flex: 1,
-              child: SizedBox(
-                width: double.infinity,
-                //height: 40.0,
-                //height: screenHeight(context) * .05,
-              ),
-            ),
-            Container(
-              width: 320.0,
-              height: 370.0,
-              color: const Color(0xFFAC9E9E),
-              // our child is either a loading symbol or our timestamps
-              child: !timestampsReady
-                  ? const SpinKitFadingCircle(
-                  color: Colors.white, size: 50.0)
-                  :
-              SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: timestamps
-                      .map((timestamp) => TimestampCard(
-                            timestamp: timestamp,
-                            jump: jump
-                          ))
-                      .toList(),
+              const Expanded(
+                flex: 1,
+                child: SizedBox(
+                  width: double.infinity,
+                  //height: 40.0,
+                  //height: screenHeight(context) * .05,
                 ),
               ),
-            ),
-            const Expanded(
-              flex: 2,
-              child: SizedBox(
-                width: double.infinity,
-                //height: 40.0,
-                //height: screenHeight(context) * .05,
+              Container(
+                width: 320.0,
+                height: 370.0,
+                color: const Color(0xFFAC9E9E),
+                // our child is either a loading symbol or our timestamps
+                child: !timestampsReady
+                    ? const SpinKitFadingCircle(
+                    color: Colors.white, size: 50.0)
+                    :
+                SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: timestamps
+                        .map((timestamp) => TimestampCard(
+                              timestamp: timestamp,
+                              jump: jump
+                            ))
+                        .toList(),
+                  ),
+                ),
               ),
-            ),
-          ],
+              const Expanded(
+                flex: 2,
+                child: SizedBox(
+                  width: double.infinity,
+                  //height: 40.0,
+                  //height: screenHeight(context) * .05,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

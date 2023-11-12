@@ -30,6 +30,7 @@ class _RecordVideoState extends State<RecordVideo> {
   void initState() {
     cameraSetup();
     super.initState();
+    startedRecording = false;
   }
 
   cameraSetup() async {
@@ -117,7 +118,7 @@ class _RecordVideoState extends State<RecordVideo> {
                         backgroundColor: const Color(0xffff0000),
                         onPressed: () => {
                           recordVideo(),
-                          startedRecording = false,
+                          //startedRecording = false,
                           setState(() {}),
                         },
                         child: const Icon(Icons.circle),
@@ -125,16 +126,16 @@ class _RecordVideoState extends State<RecordVideo> {
                     ),
                     // the camera swap button
                     Expanded(
-                      child: FloatingActionButton(
+                      child: (!startedRecording) ? FloatingActionButton(
                         backgroundColor: const Color(0xffc9b6b9),
                         // disable the button once we've started recording
-                        onPressed: (!startedRecording) ? () => {
+                        onPressed: () => {
                           switchCamera(),
-                        } :
-                        null,
+                        },
                         child: const Icon(Icons.cameraswitch),
-                      )
-                    ),
+                      ) :
+                      const SizedBox.shrink(),
+                    )
                   ]
                 ),
               ],
