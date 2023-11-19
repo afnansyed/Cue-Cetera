@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         //primaryColor: Color(0xff1e133d),
         primaryColor: const Color(0xff1e133d),
       ),
-      home: const StreamVideo(),
+      home: const Home("CUE-CETERA"),
       //home: const ResultDisplay(),
     );
   }

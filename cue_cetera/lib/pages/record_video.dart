@@ -98,45 +98,48 @@ class _RecordVideoState extends State<RecordVideo> {
               children: [
                 const Expanded(child: SizedBox()),
                 // contains our record and swap camera buttons
-                Row(
-                  children: [
-                    const Spacer(), // makes it so buttons are center and right
-                    // the record button
-                    Expanded(
-                      // if we've started recording, change button to red
-                      child: !startedRecording ? FloatingActionButton(
-                        backgroundColor: const Color(0xffc9b6b9),
-                        // if the video is recorded, disable the button
-                        onPressed: () => {
-                          startedRecording = true,
-                          setState(() {}),
-                          recordVideo(),
-                        },
-                        child: const Icon(Icons.circle),
-                      ) :
-                      FloatingActionButton(
-                        backgroundColor: const Color(0xffff0000),
-                        onPressed: () => {
-                          recordVideo(),
-                          //startedRecording = false,
-                          setState(() {}),
-                        },
-                        child: const Icon(Icons.circle),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 30),
+                  child: Row(
+                    children: [
+                      const Spacer(), // makes it so buttons are center and right
+                      // the record button
+                      Expanded(
+                        // if we've started recording, change button to red
+                        child: !startedRecording ? FloatingActionButton(
+                          backgroundColor: const Color(0xffc9b6b9),
+                          // if the video is recorded, disable the button
+                          onPressed: () => {
+                            startedRecording = true,
+                            setState(() {}),
+                            recordVideo(),
+                          },
+                          child: const Icon(Icons.circle),
+                        ) :
+                        FloatingActionButton(
+                          backgroundColor: const Color(0xffff0000),
+                          onPressed: () => {
+                            recordVideo(),
+                            //startedRecording = false,
+                            setState(() {}),
+                          },
+                          child: const Icon(Icons.circle),
+                        ),
                       ),
-                    ),
-                    // the camera swap button
-                    Expanded(
-                      child: (!startedRecording) ? FloatingActionButton(
-                        backgroundColor: const Color(0xffc9b6b9),
-                        // disable the button once we've started recording
-                        onPressed: () => {
-                          switchCamera(),
-                        },
-                        child: const Icon(Icons.cameraswitch),
-                      ) :
-                      const SizedBox.shrink(),
-                    )
-                  ]
+                      // the camera swap button
+                      Expanded(
+                        child: (!startedRecording) ? FloatingActionButton(
+                          backgroundColor: const Color(0xffc9b6b9),
+                          // disable the button once we've started recording
+                          onPressed: () => {
+                            switchCamera(),
+                          },
+                          child: const Icon(Icons.cameraswitch),
+                        ) :
+                        const SizedBox.shrink(),
+                      )
+                    ]
+                  ),
                 ),
               ],
             ),

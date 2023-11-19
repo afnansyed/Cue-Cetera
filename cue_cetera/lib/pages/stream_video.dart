@@ -5,8 +5,6 @@ import 'package:cue_cetera/pages/processing_video.dart';
 import 'package:cue_cetera/services/user_settings.dart';
 import 'package:cue_cetera/services/firebase_services.dart';
 
-
-
 class StreamVideo extends StatefulWidget {
   const StreamVideo({super.key});
   @override
@@ -22,6 +20,7 @@ class _StreamVideoState extends State<StreamVideo> {
   late List<CameraDescription> cameras;
   bool startRecordSetup = true;
   bool frontCamera = true;
+  int currentEmotion = 6;
 
   // there is probably a way to not define these sets three times
   List<int> positiveEmotions = [2, 4];
@@ -30,6 +29,8 @@ class _StreamVideoState extends State<StreamVideo> {
 
   // dont actually need this list with current implementation, but makes it clear
   List<int> neutralEmotions = [5];
+
+  List<int> noFace = [6];
 
   @override
   void initState() {
@@ -108,7 +109,8 @@ class _StreamVideoState extends State<StreamVideo> {
       "Happy",
       "Sad",
       "Surprised",
-      "Neutral"
+      "Neutral",
+      "No Emotion Detected"
     ];
     return emotions[index];
   }
@@ -126,38 +128,68 @@ class _StreamVideoState extends State<StreamVideo> {
           Center(
             child: CameraPreview(controllers),
           ),
-          // move our row to the bottom of the screen
-          Column(
-            children: [
-              const Expanded(child: SizedBox()),
-              // contains our record and swap camera buttons
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          Positioned.fill(
+            child: Row(
                 children: [
-                  Image.asset(
-                    //will have to make this asset depend on the current emotion
-                    // will either be green thumb, red thumb, or no thumb (use a function to return the correct
-                    // asset path
-                    //"assets/imgs/thumbs/greenThumb.png",
-                    getThumbPath(0),
-                    scale: 6,
-                    // found this trick for image opacity here: https://stackoverflow.com/questions/73490832/change-image-asset-opacity-using-opacity-parameter-in-image-widget
-                    opacity: const AlwaysStoppedAnimation(.75),
-                  ), // makes it so buttons are center and right
-                  const Text("Emotion"),
-                  // the camera swap button
-                  FloatingActionButton(
-                    backgroundColor: const Color(0xffc9b6b9),
-                    // disable the button once we've started recording
-                    onPressed: () => {
-                      switchCamera(),
-                    },
-                    child: const Icon(Icons.cameraswitch),
-                  )
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(10, 0, 0, 30),
+                        child: Row(
+                          children: [
+                            Image.asset(
+                              //will have to make this asset depend on the current emotion
+                              // will either be green thumb, red thumb, or no thumb (use a function to return the correct
+                              // asset path
+                              //"assets/imgs/thumbs/greenThumb.png",
+                              getThumbPath(currentEmotion),
+                              scale: 4.5,
+                              // found this trick for image opacity here: https://stackoverflow.com/questions/73490832/change-image-asset-opacity-using-opacity-parameter-in-image-widget
+                              opacity: const AlwaysStoppedAnimation(.75),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 20),
+                              child: DefaultTextStyle(
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: UserSettings.textSizeSmall,
+                                  fontFamily: "Lusteria",
+                                  color: const Color(0xFF422727),
+                                  // background style from https://stackoverflow.com/questions/69307788/set-rounded-color-background-to-text-in-textfield-flutter
+                                  background: Paint()
+                                    ..color = const Color(0xFFAC9E9E)
+                                    ..strokeWidth = UserSettings.textSizeSmall + 5
+                                    ..strokeJoin = StrokeJoin.round
+                                    ..strokeCap = StrokeCap.round
+                                    ..style = PaintingStyle.stroke
+                                ),
+                                child: Text(
+                                  emotionFromIndex(currentEmotion),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 10, 30),
+                      child: FloatingActionButton(
+                        backgroundColor: const Color(0xffc9b6b9),
+                        // disable the button once we've started recording
+                        onPressed: () => {
+                          switchCamera(),
+                        },
+                        child: const Icon(Icons.cameraswitch),
+                      ),
+                    ),
+                  ),
                 ]
-              ),
-              const SizedBox(height: 30),
-            ],
+            ),
           ),
         ],
       );
