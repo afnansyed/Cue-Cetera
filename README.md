@@ -154,7 +154,7 @@ Comments / experimentation / failed attempts / difficulties:
 ### 1. HOME PAGE:
 
 
-![home_Page](https://raw.githubusercontent.com/AmaniN16/Cue-Cetera/5f7ea7ecb89b470617f62e96521c0d4eabf2ef15/readme_imgs/homepage.png)
+![home](https://github.com/AmaniN16/Cue-Cetera/assets/44105687/ba11195f-84cf-477d-b84e-af870636ae4c)
 
 <br />
 
