@@ -6,6 +6,9 @@ import 'package:cue_cetera/pages/settings.dart';
 import 'package:cue_cetera/pages/record_video.dart';
 import 'package:cue_cetera/pages/processing_video.dart';
 import 'package:cue_cetera/services/user_settings.dart';
+import 'package:cue_cetera/pages/stream_video.dart';
+
+//MARK-TODO: tts would have to be updated for the new option
 
 class Home extends StatefulWidget {
   final String title;
@@ -165,7 +168,7 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     SizedBox(
-                      height: buttonSpacing * 2,
+                      height: buttonSpacing,
                     ),
                     ElevatedButton(
                       onPressed: () async {
@@ -173,7 +176,7 @@ class _HomeState extends State<Home> {
                         openFilePicker();
                       },
                       style: ElevatedButton.styleFrom(
-                        fixedSize: const Size(250, 100),
+                        fixedSize: const Size(250, 70),
                         textStyle: TextStyle(
                           fontFamily: 'OpenSans',
                           fontSize: UserSettings.textSizeSmall,
@@ -204,7 +207,7 @@ class _HomeState extends State<Home> {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        fixedSize: const Size(250, 100),
+                        fixedSize: const Size(250, 70),
                         textStyle: TextStyle(
                           fontFamily: 'OpenSans',
                           fontSize: UserSettings.textSizeSmall,
@@ -219,7 +222,36 @@ class _HomeState extends State<Home> {
                         ),
                       ),
                       child:
-                      const Text("USE VIDEO CAMERA", textAlign: TextAlign.center),
+                      const Text("RECORD VIDEO", textAlign: TextAlign.center),
+                    ),
+                    SizedBox(
+                      height: buttonSpacing,
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        flutterTts.stop();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const StreamVideo()),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        fixedSize: const Size(250, 70),
+                        textStyle: TextStyle(
+                          fontFamily: 'OpenSans',
+                          fontSize: UserSettings.textSizeSmall,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        backgroundColor: const Color.fromARGB(255, 212, 195, 195),
+                        foregroundColor: const Color.fromARGB(255, 66, 39, 39),
+                        elevation: 0,
+                        shadowColor: const Color.fromARGB(255, 66, 39, 39),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                      ),
+                      child:
+                      const Text("REAL TIME CAMERA", textAlign: TextAlign.center),
                     ),
                     SizedBox(
                       height: buttonSpacing,
