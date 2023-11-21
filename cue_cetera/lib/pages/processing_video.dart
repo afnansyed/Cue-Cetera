@@ -17,7 +17,6 @@ class ProcessingVideo extends StatefulWidget {
 //https://stackoverflow.com/questions/57869422/how-to-upload-a-video-from-gallery-in-flutter
 //https://pub.dev/packages/file_picker
 class _ProcessingVideoState extends State<ProcessingVideo> {
-
   FlutterTts flutterTts = FlutterTts();
 
   String filePath;
@@ -36,11 +35,9 @@ class _ProcessingVideoState extends State<ProcessingVideo> {
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) =>
-                ResultDisplay(filePath, output)),
+            builder: (context) => ResultDisplay(filePath, output)),
       );
-    }
-    else {
+    } else {
       print("context not mounted which is bad for some reason");
     }
   }
@@ -65,6 +62,20 @@ class _ProcessingVideoState extends State<ProcessingVideo> {
       child: Scaffold(
         backgroundColor: const Color.fromARGB(255, 172, 158, 158),
         appBar: AppBar(
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 25.0),
+              child: IconButton(
+                icon: Icon(Icons.volume_up,
+                    color: Color.fromARGB(255, 66, 39, 39)),
+                onPressed: () {
+                  speak('Processing Video. Please be patient while we analyze these emotions. Emotions will be categorized as POSITIVE, NEGATIVE, or NEUTRAL. Clicking on the categorized results will show you the video at the specific timestamp.' +
+                      'Red thumbs down means emotion is negative. Green thumbsup means emotion is positive. Grey dash means emotion is neutral. If you want to view this information again, click on i icon on the results page.');
+                },
+                iconSize: 40,
+              ),
+            )
+          ],
           backgroundColor: const Color.fromARGB(255, 172, 158, 158),
           centerTitle: true,
           toolbarHeight: 100,
@@ -104,12 +115,9 @@ class _ProcessingVideoState extends State<ProcessingVideo> {
                   ),
                 ),
                 SizedBox(height: buttonSpacing + 12),
-                const SpinKitFadingCircle(
-                    color: Colors.white,
-                    size: 50.0
-                ),
+                const SpinKitFadingCircle(color: Colors.white, size: 50.0),
                 SizedBox(height: buttonSpacing * 2),
-                 Text(
+                Text(
                   "Please be patient while we analyze these emotions!",
                   style: TextStyle(
                     color: Color.fromARGB(255, 212, 195, 195),
@@ -118,17 +126,17 @@ class _ProcessingVideoState extends State<ProcessingVideo> {
                   ),
                 ),
                 SizedBox(height: buttonSpacing),
-                 Text(
+                Text(
                   "HOW TO READ RESULTS",
                   style: TextStyle(
                     color: Color.fromARGB(255, 212, 195, 195),
                     fontFamily: "Lusteria",
-                    fontSize:UserSettings.textSizeMedium,
+                    fontSize: UserSettings.textSizeMedium,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 const SizedBox(height: 10),
-                 Padding(
+                Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
                     "Emotions will be categorized as POSITIVE, NEGATIVE, or NEUTRAL. \n Clicking on the categorized results will show you the video at the specific timestamp.",
@@ -161,7 +169,11 @@ class _ProcessingVideoState extends State<ProcessingVideo> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Image.asset(UserSettings.colorBlind ? 'assets/imgs/thumbs/blueThumb.png': 'assets/imgs/thumbs/greenThumb.png', scale: 6),
+                    Image.asset(
+                        UserSettings.colorBlind
+                            ? 'assets/imgs/thumbs/blueThumb.png'
+                            : 'assets/imgs/thumbs/greenThumb.png',
+                        scale: 6),
                     const SizedBox(width: 10),
                     Text(
                       'Emotion is positive',
@@ -178,7 +190,8 @@ class _ProcessingVideoState extends State<ProcessingVideo> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Image.asset('assets/imgs/thumbs/neutralThumb.png', scale: 6),
+                    Image.asset('assets/imgs/thumbs/neutralThumb.png',
+                        scale: 6),
                     const SizedBox(width: 10),
                     Text(
                       'Emotion is neutral',
@@ -208,7 +221,8 @@ class _ProcessingVideoState extends State<ProcessingVideo> {
                             ),
                             children: <InlineSpan>[
                               TextSpan(
-                                text: "If you want to view this information again, click on ",
+                                text:
+                                    "If you want to view this information again, click on ",
                               ),
                               WidgetSpan(
                                 child: Icon(
@@ -227,7 +241,6 @@ class _ProcessingVideoState extends State<ProcessingVideo> {
                     ],
                   ),
                 ),
-
                 SizedBox(width: buttonSpacing),
               ],
             ),

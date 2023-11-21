@@ -68,11 +68,11 @@ class _HomeState extends State<Home> {
           Padding(
             padding: const EdgeInsets.only(right: 25.0),
             child: IconButton(
-              icon:
-                  const Icon(Icons.volume_up, color: Color.fromARGB(255, 66, 39, 39)),
+              icon: const Icon(Icons.volume_up,
+                  color: Color.fromARGB(255, 66, 39, 39)),
               onPressed: () {
                 speak('Welcome to Cue-Cetera. Cue-Cetera is an application that can be used to detect and classify visual facial cues by the means of Machine Learning. Our goal is to have a social impact by giving access to a learning tool and hence, bringing awareness to related communities.' +
-                    'Choose an option below to begin your exploration. Upload video or Use Video Camera. For more details, click on the info and settings button.');
+                    'Choose an option below to begin your exploration. Upload video, Use Video Camera, Or Real time camera. For more details, click on the info and settings button.');
               },
               iconSize: 40,
             ),
@@ -149,7 +149,7 @@ class _HomeState extends State<Home> {
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
-                  children: <Widget> [
+                  children: <Widget>[
                     SizedBox(
                       height: buttonSpacing,
                     ),
@@ -182,7 +182,8 @@ class _HomeState extends State<Home> {
                           fontSize: UserSettings.textSizeSmall,
                           fontWeight: FontWeight.bold,
                         ),
-                        backgroundColor: const Color.fromARGB(255, 212, 195, 195),
+                        backgroundColor:
+                            const Color.fromARGB(255, 212, 195, 195),
                         foregroundColor: const Color.fromARGB(255, 66, 39, 39),
                         elevation: 0,
                         shadowColor: const Color.fromARGB(255, 66, 39, 39),
@@ -203,7 +204,8 @@ class _HomeState extends State<Home> {
                         flutterTts.stop();
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const RecordVideo()),
+                          MaterialPageRoute(
+                              builder: (context) => const RecordVideo()),
                         );
                       },
                       style: ElevatedButton.styleFrom(
@@ -213,7 +215,8 @@ class _HomeState extends State<Home> {
                           fontSize: UserSettings.textSizeSmall,
                           fontWeight: FontWeight.bold,
                         ),
-                        backgroundColor: const Color.fromARGB(255, 212, 195, 195),
+                        backgroundColor:
+                            const Color.fromARGB(255, 212, 195, 195),
                         foregroundColor: const Color.fromARGB(255, 66, 39, 39),
                         elevation: 0,
                         shadowColor: const Color.fromARGB(255, 66, 39, 39),
@@ -221,8 +224,8 @@ class _HomeState extends State<Home> {
                           borderRadius: BorderRadius.circular(15),
                         ),
                       ),
-                      child:
-                      const Text("RECORD VIDEO", textAlign: TextAlign.center),
+                      child: const Text("RECORD VIDEO",
+                          textAlign: TextAlign.center),
                     ),
                     SizedBox(
                       height: buttonSpacing,
@@ -232,7 +235,8 @@ class _HomeState extends State<Home> {
                         flutterTts.stop();
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const StreamVideo()),
+                          MaterialPageRoute(
+                              builder: (context) => const StreamVideo()),
                         );
                       },
                       style: ElevatedButton.styleFrom(
@@ -242,7 +246,8 @@ class _HomeState extends State<Home> {
                           fontSize: UserSettings.textSizeSmall,
                           fontWeight: FontWeight.bold,
                         ),
-                        backgroundColor: const Color.fromARGB(255, 212, 195, 195),
+                        backgroundColor:
+                            const Color.fromARGB(255, 212, 195, 195),
                         foregroundColor: const Color.fromARGB(255, 66, 39, 39),
                         elevation: 0,
                         shadowColor: const Color.fromARGB(255, 66, 39, 39),
@@ -250,8 +255,8 @@ class _HomeState extends State<Home> {
                           borderRadius: BorderRadius.circular(15),
                         ),
                       ),
-                      child:
-                      const Text("REAL TIME CAMERA", textAlign: TextAlign.center),
+                      child: const Text("REAL TIME CAMERA",
+                          textAlign: TextAlign.center),
                     ),
                     SizedBox(
                       height: buttonSpacing,
@@ -272,7 +277,8 @@ class _HomeState extends State<Home> {
                           fontWeight: FontWeight.bold,
                         ),
                         backgroundColor: const Color.fromARGB(255, 35, 23, 23),
-                        foregroundColor: const Color.fromARGB(255, 158, 144, 144),
+                        foregroundColor:
+                            const Color.fromARGB(255, 158, 144, 144),
                         elevation: 0,
                         shadowColor: const Color.fromARGB(255, 66, 39, 39),
                         shape: RoundedRectangleBorder(
