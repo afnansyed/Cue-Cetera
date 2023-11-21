@@ -109,33 +109,33 @@ class _ProcessingVideoState extends State<ProcessingVideo> {
                     size: 50.0
                 ),
                 SizedBox(height: buttonSpacing * 2),
-                const Text(
+                 Text(
                   "Please be patient while we analyze these emotions!",
                   style: TextStyle(
                     color: Color.fromARGB(255, 212, 195, 195),
                     fontFamily: "Lusteria",
-                    fontSize: 12,
+                    fontSize: UserSettings.textSizeSmall,
                   ),
                 ),
                 SizedBox(height: buttonSpacing),
-                const Text(
+                 Text(
                   "HOW TO READ RESULTS",
                   style: TextStyle(
                     color: Color.fromARGB(255, 212, 195, 195),
                     fontFamily: "Lusteria",
-                    fontSize: 14,
+                    fontSize:UserSettings.textSizeMedium,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 const SizedBox(height: 10),
-                const Padding(
+                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
                     "Emotions will be categorized as POSITIVE, NEGATIVE, or NEUTRAL. \n Clicking on the categorized results will show you the video at the specific timestamp.",
                     style: TextStyle(
                       color: Color.fromARGB(255, 212, 195, 195),
                       fontFamily: "Lusteria",
-                      fontSize: 12,
+                      fontSize: UserSettings.textSizeSmall,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -192,32 +192,42 @@ class _ProcessingVideoState extends State<ProcessingVideo> {
                   ],
                 ),
                 const SizedBox(height: 20),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "If you want to view this information again, click on",
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 212, 195, 195),
-                    fontFamily: "Lusteria",
-                    fontSize: 10,
+                Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Flexible(
+                        child: RichText(
+                          textAlign: TextAlign.center,
+                          text: TextSpan(
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 212, 195, 195),
+                              fontFamily: "Lusteria",
+                              fontSize: UserSettings.textSizeSmall,
+                            ),
+                            children: <InlineSpan>[
+                              TextSpan(
+                                text: "If you want to view this information again, click on ",
+                              ),
+                              WidgetSpan(
+                                child: Icon(
+                                  Icons.info,
+                                  color: Color.fromARGB(255, 212, 195, 195),
+                                  size: 30,
+                                ),
+                              ),
+                              TextSpan(
+                                text: " in the results page",
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                Icon(
-                  Icons.info,
-                  color: const Color.fromARGB(255, 212, 195, 195),
-                  size: 30,
-                ),
-                Text(
-                  "in the results page",
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 212, 195, 195),
-                    fontFamily: "Lusteria",
-                    fontSize: 10,
-                  ),
-                ),
-              ],
-            ),
+
                 SizedBox(width: buttonSpacing),
               ],
             ),
