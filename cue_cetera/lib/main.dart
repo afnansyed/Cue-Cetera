@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-import 'package:cue_cetera/pages/stream_video.dart';
 
 import 'package:cue_cetera/pages/home.dart';
 
