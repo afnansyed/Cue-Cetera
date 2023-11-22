@@ -188,7 +188,8 @@ Comments / experimentation / failed attempts / difficulties:
 <br />
 
 ### 6. PROCESSING PAGE:
-![processing_Page](https://github.com/AmaniN16/Cue-Cetera/blob/main/readme_imgs/processing.png?raw=true)
+![processing page](https://github.com/AmaniN16/Cue-Cetera/assets/44105687/12c522cc-263d-425a-beea-01b1a9ef12f6)
+
 
 <br />
 
