@@ -154,7 +154,7 @@ Comments / experimentation / failed attempts / difficulties:
 ### 1. HOME PAGE:
 
 
-![home_Page](https://raw.githubusercontent.com/AmaniN16/Cue-Cetera/5f7ea7ecb89b470617f62e96521c0d4eabf2ef15/readme_imgs/homepage.png)
+![home](https://github.com/AmaniN16/Cue-Cetera/assets/44105687/b6272a17-dab2-4721-9db3-cf0b8ae9bfb1)
 
 <br />
 
@@ -188,7 +188,8 @@ Comments / experimentation / failed attempts / difficulties:
 <br />
 
 ### 6. PROCESSING PAGE:
-![processing_Page](https://github.com/AmaniN16/Cue-Cetera/blob/main/readme_imgs/processing.png?raw=true)
+![processing page](https://github.com/AmaniN16/Cue-Cetera/assets/44105687/12c522cc-263d-425a-beea-01b1a9ef12f6)
+
 
 <br />
 
